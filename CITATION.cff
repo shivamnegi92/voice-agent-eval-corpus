@@ -32,6 +32,14 @@ preferred-citation:
       given-names: Shivam
       email: negi.sh@northeastern.edu
       affiliation: Northeastern University
+    - family-names: Rawat
+      given-names: Arpit
+      email: rawat.a@northeastern.edu
+      affiliation: Northeastern University
+    - family-names: Jain
+      given-names: Rashi
+      email: rxj210013@utdallas.edu
+      affiliation: University of Texas at Dallas
   year: 2026
   notes: "Unpublished manuscript; not yet peer reviewed."
 license: CC-BY-4.0
