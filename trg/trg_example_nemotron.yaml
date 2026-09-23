@@ -1,0 +1,52 @@
+# Worked TRG example, populated from published figures for NemotronLabs
+# VoiceChat as reported in the survey (arXiv:2609.21967).
+#
+# Purpose: demonstrate that TRG is satisfiable by a real system, not just an
+# aspiration. This system was chosen precisely because it already reports on
+# all three required axes, which is what makes it the strongest evidence in
+# the corpus for the reporting convention TRG proposes.
+#
+# Check it with:
+#     python3 validate_trg.py trg_example_nemotron.yaml
+
+system:
+  name: "NemotronLabs VoiceChat"
+  architecture: "end_to_end"
+  version: "as reported, arXiv:2609.21967"
+
+timing:
+  metric: "streaming speech encoder to TTS decoder, parallel output streams"
+  value: "not separately reported as a latency figure in the surveyed text"
+  statistic: "mean"
+  conditions: "full-duplex operation with agent and structured-function streams"
+  tail_reported: false
+
+recovery:
+  disruption_types:
+    - "false_pause"
+    - "interruption"
+    - "backchannel"
+  metric: "correct-takeover rate following genuine user interruption; and
+           resumption rate following backchannel"
+  value: "100% correct takeover on genuine interruption (FDB v1.0);
+          93% resumption after backchannels (FDB v1.5)"
+  baseline_undisrupted: "lowest false-takeover rate during pauses among
+                         open-weight systems tested"
+  notes: "Reports takeover behaviour separately for genuine interruptions
+          versus mere pauses, which is the distinction that makes the number
+          interpretable."
+
+grounded_outcome:
+  verification_method: "tool-selection correctness scored against expected
+                        tool calls under natural disfluency (FDB v3)"
+  state_source: "Full-Duplex-Bench v3 tool-use harness"
+  metric: "tool-selection F1"
+  value: "82.5%"
+  self_report_excluded: true
+
+multiparty:
+  applicable: false
+  justification: "Evaluated in dyadic user-agent settings; the benchmarks
+                  applied (Full-Duplex-Bench family) are two-participant, so
+                  a multiparty appropriateness measure would have nothing to
+                  score against."

@@ -1,0 +1,46 @@
+# Manually verified filename -> bibtex key pairings.
+#
+# The fuzzy matcher in build_join.py proposes pairings; every one that did not
+# auto-accept was checked by reading page 1 of the actual PDF. This file
+# records those human decisions so the join is reproducible and never silently
+# re-derived. A wrong pairing here puts the wrong paper in the corpus, which is
+# the exact failure this project already caught once (2602.05105 turned out to
+# be a robotics paper, not Full-Duplex-Bench-v3).
+#
+# Verified 2026-09-23 against page-1 text of each PDF.
+
+overrides:
+  # Scored 0.000: filename is an author-year slug, not a title slug, so token
+  # containment had nothing to work with. Page 1 reads "Recent Advances in
+  # Speech Language Models: A Survey".
+  cui2024-speechlm-survey.pdf: cui2024speechlm
+
+  # Below auto-accept only because filenames are truncated/abbreviated forms
+  # of longer titles. All confirmed on page 1.
+  triadic-multiparty-vap-turn-taking.pdf: elmers2025triadic
+  benchmarking-responsiveness-open-source-tts-mdpi.pdf: dinh2025tts
+  sensor-augmented-vap-turn-taking-sigdial2026.pdf: hamanaka2026sensor
+  gupta2024-direct-s2st-survey.pdf: gupta2024s2st
+  mtr-duplexbench-multiround-eval.pdf: zhang2026mtrduplex
+  realtime-continuous-vap-turn-taking.pdf: inoue2024realtime
+  vap-multimodal-encoders.pdf: vapmultimodal2025
+
+# Bib entries intentionally NOT backed by a corpus PDF.
+not_in_corpus:
+  sahoo2024prompt: >-
+    Reference paper (Sahoo et al., prompt engineering survey). Cited for
+    methodology/structure only; stored at repo root as reference_paper.pdf,
+    not part of the voice-agent corpus.
+
+# Sources present in the corpus but cited for POSITIONING or METHOD rather
+# than counted among the 38 primary taxonomy sources. Recorded explicitly so
+# the published counts reconcile: 38 primary + 3 = 41 PDFs.
+corpus_roles:
+  cui2024speechlm: positioning      # closest related survey (SpeechLM)
+  gupta2024s2st: positioning        # closest related survey (direct S2ST)
+  pedinotti2026structsurvey: method # cited in the methodological note
+
+# Identifiers for sources that predate sources.yaml and carry no arXiv id on
+# page 1 (so the PDF-text fallback cannot recover them).
+identifiers:
+  hamanaka2026sensor: "aclanthology:2026.sigdial-1.12"

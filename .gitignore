@@ -1,0 +1,8 @@
+# Never commit papers. Of 41 corpus sources only 1 is redistributable,
+# so this is a hard guard, not a tidiness preference.
+*.pdf
+pdfs/
+
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "Voice Agent Evaluation Corpus and the TRG Reporting Standard"
+message: "If you use this corpus or the TRG standard, please cite it."
+type: dataset
+authors:
+  - family-names: Negi
+    given-names: Shivam
+    email: negi.sh@northeastern.edu
+    affiliation: Northeastern University
+abstract: >-
+  A verified metadata corpus of 41 sources on real-time voice agents,
+  covering end-to-end speech-to-speech architectures, cascaded pipelines,
+  turn-taking and voice activity projection, conversational benchmarks,
+  agentic evaluation, and streaming synthesis. Ships metadata and SHA-256
+  hashes rather than PDFs, so the corpus is auditable without redistributing
+  copyrighted material. Includes TRG (Timing-Recovery-Grounded), a minimum
+  reporting standard for real-time voice agent evaluation, with a fillable
+  template and a compliance validator.
+keywords:
+  - voice agents
+  - spoken dialogue systems
+  - full-duplex dialogue
+  - evaluation methodology
+  - benchmarking
+  - turn-taking
+  - speech-to-speech
+license: CC-BY-4.0
+version: 1.0.0
+date-released: "2026-09-23"
