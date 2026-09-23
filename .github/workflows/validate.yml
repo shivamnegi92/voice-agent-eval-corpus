@@ -1,0 +1,77 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      # Hard guard. Only 1 of 41 sources is provably redistributable, so a
+      # committed PDF is a licensing problem, not an untidy repo.
+      - name: No PDFs may be committed
+        run: |
+          found=$(git ls-files '*.pdf' | wc -l | tr -d ' ')
+          echo "tracked PDFs: $found"
+          if [ "$found" -ne 0 ]; then
+            echo "::error::PDFs must never be committed to this repository."
+            git ls-files '*.pdf'
+            exit 1
+          fi
+
+      - name: Corpus integrity
+        run: |
+          python3 - <<'PY'
+          import csv, json, sys
+
+          rows = list(csv.DictReader(open("corpus/voice_agent_corpus.csv")))
+          data = json.load(open("corpus/voice_agent_corpus.json"))
+          fail = []
+
+          if len(rows) != len(data):
+              fail.append(f"csv/json length mismatch: {len(rows)} vs {len(data)}")
+
+          primary = sum(1 for r in rows if r["corpus_role"] == "primary")
+          if primary != 38:
+              fail.append(f"expected 38 primary sources, found {primary}")
+
+          ids = [r["paper_id"] for r in rows]
+          if len(set(ids)) != len(ids):
+              fail.append("duplicate paper_id values")
+
+          hashes = [r["pdf_sha256"] for r in rows]
+          if len(set(hashes)) != len(hashes):
+              fail.append("duplicate pdf_sha256 values")
+
+          prefixes = ("arXiv:", "doi:", "aclanthology:")
+          bad = [r["paper_id"] for r in rows
+                 if not r["identifier"].startswith(prefixes)]
+          if bad:
+              fail.append(f"unresolvable identifiers: {bad}")
+
+          for f in fail:
+              print(f"ERROR: {f}")
+          print(f"checked {len(rows)} rows, {primary} primary")
+          sys.exit(1 if fail else 0)
+          PY
+
+      - name: TRG validator behaves correctly
+        run: |
+          # blank template must be rejected
+          if python3 scripts/validate_trg.py trg/trg_report_template.yaml >/dev/null 2>&1; then
+            echo "::error::blank template should NOT validate"
+            exit 1
+          fi
+          # worked example must pass
+          python3 scripts/validate_trg.py trg/trg_example_nemotron.yaml
+          echo "TRG validator OK in both directions"

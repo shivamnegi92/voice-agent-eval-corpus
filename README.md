@@ -124,16 +124,22 @@ matching alone would have propagated that error into the corpus.
 
 ## Citing
 
-If you use this corpus or TRG, please cite the paper:
+**Status:** the companion paper is an unpublished manuscript, not yet peer
+reviewed or accepted anywhere. Please cite it as such; this entry will be
+updated if and when it appears in a venue.
 
 ```bibtex
-@article{negi2026voiceagents,
-  title   = {Evaluating Real-Time Voice Agents: From Component Quality
-             to Grounded Outcomes},
-  author  = {Negi, Shivam},
-  year    = {2026}
+@unpublished{negi2026voiceagents,
+  title  = {Evaluating Real-Time Voice Agents: From Component Quality
+            to Grounded Outcomes},
+  author = {Negi, Shivam},
+  year   = {2026},
+  note   = {Unpublished manuscript}
 }
 ```
+
+To cite the corpus or TRG tooling specifically, use the metadata in
+`CITATION.cff` (GitHub's "Cite this repository" button renders it for you).
 
 ## Licence
 

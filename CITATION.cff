@@ -24,6 +24,16 @@ keywords:
   - benchmarking
   - turn-taking
   - speech-to-speech
+preferred-citation:
+  type: unpublished
+  title: "Evaluating Real-Time Voice Agents: From Component Quality to Grounded Outcomes"
+  authors:
+    - family-names: Negi
+      given-names: Shivam
+      email: negi.sh@northeastern.edu
+      affiliation: Northeastern University
+  year: 2026
+  notes: "Unpublished manuscript; not yet peer reviewed."
 license: CC-BY-4.0
 version: 1.0.0
 date-released: "2026-09-23"
