@@ -110,6 +110,4 @@ The template failing is correct behaviour: a blank report is not compliant.
   package via pip, so the Space has no external install dependency at
   runtime. If the validator logic changes, copy it into `hf_space/` too and
   re-push with `huggingface_hub`.
-- **Proxy needed on networks that block direct external DNS:**
-  `export HTTPS_PROXY=http://<your-corporate-proxy>:8080`, and
-  `export GH_HOST=github.com` for `gh` if it defaults to an internal GHE host.
+- **`export GH_HOST=github.com` for `gh`** if it defaults to an internal GHE host.
