@@ -15,10 +15,9 @@ Interactive demo for the TRG minimum reporting standard, from
 Outcomes*](https://arxiv.org/abs/2609.30798).
 
 This Space runs entirely in your browser via
-[Gradio-Lite](https://www.gradio.app/guides/gradio-lite) (Pyodide/WebAssembly)
-- no server, no cold starts, free on the `static` Space tier. The first load
-takes a few seconds while the Python runtime downloads; after that it's
-instant.
+[Pyodide](https://pyodide.org) (Python on WebAssembly): no server, no cold
+starts, free on the `static` Space tier. The first load takes a few seconds
+while the Python runtime downloads.
 
 - **Validate a report** - paste or upload a TRG YAML report and see which
   axes are compliant.
@@ -28,14 +27,13 @@ instant.
 Full corpus, pipeline source, and CLI tooling:
 https://github.com/shivamnegi92/voice-agent-eval-corpus
 
-`index.html` inlines a copy of `app.py` / `validator.py` / `leaderboard.py`
-for Gradio-Lite's virtual filesystem. The GitHub repo's `trg_eval/` package
-is the canonical source - if the two ever disagree, GitHub wins. Regenerate
-`index.html` with `python3 hf_space/build_index.py` after touching any
-`.py`/`.yaml` file in this folder rather than hand-editing the embedded copies.
+`index.html` is generated: `build_index.py` takes the UI in `template.html`
+and embeds `core.py` / `validator.py` / `leaderboard.py` / `examples/*.yaml`,
+which the page loads into Pyodide at startup. The GitHub repo's `trg_eval/`
+package is the canonical source; if the two ever disagree, GitHub wins.
+Regenerate with `python3 hf_space/build_index.py` instead of hand-editing
+`index.html`.
 
-Want a server-backed version instead (e.g. for heavier processing later)?
-The original `app.py` here also runs standalone: `pip install gradio pyyaml
-&& python app.py`, or deploy it to a Space with `sdk: gradio` if you have a
-Hugging Face PRO plan (required for free-tier Gradio/Docker Spaces as of
-this writing).
+Want a server-backed version instead? `app.py` is a Gradio UI over the same
+`core.py`: `pip install gradio pyyaml && python app.py`, or deploy it to a
+Space with `sdk: gradio` (needs Hugging Face PRO as of this writing).

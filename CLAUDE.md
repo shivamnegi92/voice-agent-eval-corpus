@@ -50,7 +50,7 @@ trg/       trg_report_template.yaml            fillable
            trg_example_openai_realtime.yaml    worked example, tau-Voice-benchmarked
            trg_example_gemini_live.yaml        worked example, tau-Voice-benchmarked
            trg_example_grok_voice.yaml         worked example, tau-Voice-benchmarked
-hf_space/  app.py, requirements.txt            mirrored to the live HF Space
+hf_space/  core.py, template.html, build_index.py  -> index.html (live HF Space)
 ```
 
 The three tau-Voice-benchmarked examples share one source paper
@@ -105,9 +105,13 @@ The template failing is correct behaviour: a blank report is not compliant.
 - **`corpus/leaderboard.md`/`.csv` are generated files.** Edit the
   `trg/trg_example_*.yaml` sources and rerun `trg-leaderboard`, not the
   generated files directly.
-- **`hf_space/` must stay in sync with the live Space.** It vendors a copy of
-  `trg_eval/validator.py` and `leaderboard.py` rather than depending on this
-  package via pip, so the Space has no external install dependency at
-  runtime. If the validator logic changes, copy it into `hf_space/` too and
-  re-push with `huggingface_hub`.
+- **`hf_space/` must stay in sync with the live Space.** The Space is a
+  static page running plain Pyodide (NOT Gradio-Lite: every Lite build
+  crashed on `import gradio` in Sept 2026 via huggingface-hub -> filelock ->
+  `os.link`). `core.py` holds the UI-agnostic logic; `template.html` is the
+  UI; `build_index.py` embeds the .py/.yaml files into `index.html`. It
+  vendors copies of `trg_eval/validator.py`/`leaderboard.py`. After changing
+  either, copy into `hf_space/`, run `python3 hf_space/build_index.py`, and
+  re-push `index.html` with `huggingface_hub`. `app.py` is an optional
+  server-backed Gradio UI over the same `core.py`; the Space does not use it.
 - **`export GH_HOST=github.com` for `gh`** if it defaults to an internal GHE host.

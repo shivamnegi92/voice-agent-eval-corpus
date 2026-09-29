@@ -82,22 +82,17 @@ def to_csv(rows: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _cell(text: str, max_len: int = 70) -> str:
-    """Escape, truncate, and keep the full text as a hover tooltip."""
-    text = str(text)
-    escaped_full = html.escape(text, quote=True)
-    short = text if len(text) <= max_len else text[: max_len - 1] + "\u2026"
-    escaped_short = html.escape(short, quote=False)
-    return f'<td title="{escaped_full}">{escaped_short}</td>'
+def _cell(text: str) -> str:
+    return f"<td>{html.escape(str(text), quote=False)}</td>"
 
 
 def to_html(rows: list[dict]) -> str:
-    """Styled table for the web UI. Long cells truncate with a hover tooltip
-    showing the full text, since these reports carry real qualifying context
-    that a bare number would flatten."""
+    """Styled table for the web UI. Cells wrap rather than truncate: these
+    reports carry qualifying context a bare number would flatten, and
+    hover-only tooltips are unreadable on keyboard and touch."""
     headers = [
         "System", "Architecture", "Timing (T)", "Recovery (R)",
-        "Grounded Outcome (G)", "TRG", "Warnings", "Source",
+        "Grounded Outcome (G)", "TRG", "Warnings",
     ]
     header_html = "".join(f"<th>{h}</th>" for h in headers)
 
@@ -109,14 +104,14 @@ def to_html(rows: list[dict]) -> str:
             badge = '<span style="color:#dc2626;font-weight:700;">&#10007; fail</span>'
         body_rows.append(
             "<tr>"
-            + _cell(r["system"], 42)
-            + _cell(r["architecture"], 20)
-            + _cell(r["timing"], 50)
-            + _cell(r["recovery"], 65)
-            + _cell(r["grounded_outcome"], 20)
-            + f"<td>{badge}</td>"
+            + f'<td><strong>{html.escape(str(r["system"]))}</strong><br>'
+            f'<code style="font-size:11.5px;color:#4b5563;">{html.escape(r["file"])}</code></td>'
+            + _cell(r["architecture"])
+            + _cell(r["timing"])
+            + _cell(r["recovery"])
+            + _cell(r["grounded_outcome"])
+            + f'<td style="white-space:nowrap;">{badge}</td>'
             + f'<td style="text-align:center;">{r["warnings"]}</td>'
-            + f'<td><code style="font-size:12px;">{html.escape(r["file"])}</code></td>'
             + "</tr>"
         )
 
@@ -127,15 +122,13 @@ def to_html(rows: list[dict]) -> str:
         ".trg-board th{text-align:left;padding:9px 10px;background:#f3f4f6;"
         "border-bottom:2px solid #d1d5db;white-space:nowrap;}"
         ".trg-board td{padding:9px 10px;border-bottom:1px solid #e5e7eb;"
-        "max-width:240px;overflow:hidden;text-overflow:ellipsis;"
-        "white-space:nowrap;vertical-align:top;}"
+        "vertical-align:top;overflow-wrap:anywhere;}"
+        ".trg-board td:first-child{min-width:220px;overflow-wrap:normal;}"
         ".trg-board tr:hover td{background:#f9fafb;}"
         "</style>"
     )
     return (
         style
-        + '<p style="color:#6b7280;font-size:13px;margin:0 0 8px 0;">'
-        "Cells are truncated. Hover any cell to read the full value.</p>"
-        f'<table class="trg-board"><thead><tr>{header_html}</tr></thead>'
+        + f'<table class="trg-board"><thead><tr>{header_html}</tr></thead>'
         f"<tbody>{''.join(body_rows)}</tbody></table>"
     )

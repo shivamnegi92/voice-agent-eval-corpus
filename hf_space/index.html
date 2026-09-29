@@ -1,849 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TRG Voice Agent Evaluation</title>
-  <!-- Gradio's own maintainer-provided patched build, NOT jsdelivr/npm:
-       @gradio/lite (any released npm version, including pinned 5.45.0)
-       bundles a broken internal huggingface-hub constraint that has no
-       resolvable wasm wheel (github.com/gradio-app/gradio/issues/12262).
-       A `huggingface_hub==X` pin in gradio-lite-requirements does NOT fix
-       this - it's baked into Lite's own manifest, not a normal pip
-       constraint. This S3 URL is the exact patched build the Gradio team
-       pointed to in that issue. If it ever 404s, re-check the issue for a
-       replacement, or check whether a newer npm @gradio/lite release has
-       absorbed the fix (PR #12162) before falling back to this pin. -->
-  <script type="module" src="https://gradio-lite-previews.s3.amazonaws.com/PINNED_HF_HUB/dist/lite.js"></script>
-  <link rel="stylesheet" href="https://gradio-lite-previews.s3.amazonaws.com/PINNED_HF_HUB/dist/lite.css" />
+  <!-- Plain Pyodide, deliberately NOT Gradio-Lite: every Lite build we tried
+       (npm 5.45.0 and the PINNED_HF_HUB preview) crashes on `import gradio`
+       via huggingface-hub -> filelock -> os.link(follow_symlinks=...).
+       This app only needs pyyaml, so it skips that dependency tree. -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"></script>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; }
-    gradio-lite { display: block; min-height: 100vh; }
+    :root { --fg:#111827; --muted:#4b5563; --line:#d1d5db; --accent:#1d4ed8; --bg:#f9fafb; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--fg); background:var(--bg); }
+    main { max-width:1180px; margin:0 auto; padding:24px 20px 48px; }
+    h1 { margin:0 0 6px; font-size:26px; }
+    .lede { margin:0 0 12px; color:var(--muted); }
+    .badges { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+    .badges a { text-decoration:none; color:#fff; padding:4px 12px; border-radius:999px; font-size:13px; font-weight:600; }
+    .badges a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible,
+    [role=tab]:focus-visible { outline:3px solid #f59e0b; outline-offset:2px; }
+    [role=tablist] { display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; }
+    [role=tab] { font:inherit; background:none; border:1px solid transparent; border-bottom:none; padding:8px 16px;
+      border-radius:8px 8px 0 0; cursor:pointer; color:var(--muted); min-height:44px; }
+    [role=tab][aria-selected=true] { background:#fff; border-color:var(--line); color:var(--fg); font-weight:600; margin-bottom:-1px; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width: 820px) { .grid { grid-template-columns:1fr; } }
+    label { display:block; font-weight:600; margin:10px 0 4px; }
+    select, textarea, input[type=file] { width:100%; font:inherit; border:1px solid #9ca3af; border-radius:6px; padding:8px; background:#fff; color:var(--fg); }
+    textarea { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; min-height:460px; resize:vertical; }
+    button.primary { margin-top:12px; font:inherit; font-weight:600; background:var(--accent); color:#fff; border:0;
+      border-radius:6px; padding:10px 18px; cursor:pointer; min-height:44px; }
+    button.primary:disabled { background:#6b7280; cursor:wait; }
+    #status { padding:12px 14px; border-radius:8px; background:#eff6ff; color:#1e3a8a; margin-bottom:16px; }
+    #status.error { background:#fef2f2; color:#991b1b; white-space:pre-wrap; font-family:ui-monospace,monospace; font-size:12.5px; }
+    .table-wrap { overflow-x:auto; }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
   </style>
 </head>
 <body>
-  <gradio-lite>
-    <gradio-lite-requirements>
-pyyaml
-huggingface_hub==0.33.5
-    </gradio-lite-requirements>
-    <gradio-lite-file name="app.py" entrypoint>
-"""TRG (Timing-Recovery-Grounded) evaluation pipeline - Hugging Face Space.
+<main>
+  <h1>TRG: Timing &middot; Recovery &middot; Grounded</h1>
+  <p class="lede">A minimum reporting standard for real-time voice agents: a report cannot claim
+    compliance while staying silent on an axis its deployment actually exercises.</p>
+  <nav class="badges" aria-label="Project links">
+    <a href="https://arxiv.org/abs/2609.30798" target="_blank" rel="noopener" style="background:#b31b1b">arXiv:2609.30798</a>
+    <a href="https://github.com/shivamnegi92/voice-agent-eval-corpus" target="_blank" rel="noopener" style="background:#1f2328">GitHub repo</a>
+    <a href="https://github.com/shivamnegi92/voice-agent-eval-corpus/blob/main/corpus/leaderboard.md" target="_blank" rel="noopener" style="background:#1d4ed8">Full leaderboard on GitHub</a>
+  </nav>
 
-Companion demo for *Evaluating Real-Time Voice Agents: From Component
-Quality to Grounded Outcomes* (arXiv:2609.30798) and the corpus repo:
-https://github.com/shivamnegi92/voice-agent-eval-corpus
+  <div id="status" role="status" aria-live="polite">Loading the Python runtime in your browser (first visit takes a few seconds)&hellip;</div>
 
-Two tabs:
-1. Validate a TRG report you paste, upload, or load from an example - no
-   invented scoring, just a compliance check against the four axes.
-2. Baseline leaderboard - four systems, one worked example self-reported and
-   three benchmarked side-by-side by a single third party (tau-Voice).
-"""
+  <div role="tablist" aria-label="Views">
+    <button role="tab" id="tab-validate" aria-selected="true" aria-controls="panel-validate" tabindex="0">Validate a report</button>
+    <button role="tab" id="tab-board" aria-selected="false" aria-controls="panel-board" tabindex="-1">Baseline leaderboard</button>
+  </div>
 
-from __future__ import annotations
+  <section class="panel" id="panel-validate" role="tabpanel" aria-labelledby="tab-validate">
+    <p style="margin-top:0">Paste a filled-in TRG YAML report, upload one, or load a worked example. This checks
+      <em>coverage</em>, not quality: it won't tell you your numbers are good, only that you reported each axis honestly.</p>
+    <div class="grid">
+      <div>
+        <label for="example">Load an example</label>
+        <select id="example" disabled></select>
+        <label for="yaml">TRG report (YAML)</label>
+        <textarea id="yaml" spellcheck="false" disabled></textarea>
+        <label for="upload">&hellip;or upload a .yaml file</label>
+        <input type="file" id="upload" accept=".yaml,.yml" disabled />
+        <button class="primary" id="run" disabled>Validate</button>
+      </div>
+      <div>
+        <h2 style="font-size:16px;margin:10px 0 4px">Result</h2>
+        <div id="result" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
 
-from pathlib import Path
+  <section class="panel" id="panel-board" role="tabpanel" aria-labelledby="tab-board" hidden>
+    <div id="board" class="table-wrap"></div>
+  </section>
+</main>
 
-import gradio as gr
-import yaml
+<script type="application/json" id="trg-files">{"core.py": "\"\"\"UI-agnostic logic shared by the static Space (index.html, via Pyodide) and\nthe optional server-backed Gradio app (app.py). No gradio import here - the\nstatic page must not depend on it.\"\"\"\n\nfrom __future__ import annotations\n\nfrom pathlib import Path\n\nimport yaml\n\nfrom leaderboard import load_reports, to_html\nfrom validator import format_report_html, validate_data\n\n# Under Pyodide / exec() there is no __file__; files sit relative to the cwd.\nHERE = Path(__file__).parent if \"__file__\" in globals() else Path.cwd()\nEXAMPLES_DIR = HERE / \"examples\"\n\nEXAMPLE_FILES = {\n    \"Blank template\": \"trg_report_template.yaml\",\n    \"OpenAI gpt-realtime-1.5 (tau-Voice benchmark)\": \"trg_example_openai_realtime.yaml\",\n    \"Google gemini-live-2.5-flash (tau-Voice benchmark)\": \"trg_example_gemini_live.yaml\",\n    \"xAI grok-voice-agent (tau-Voice benchmark)\": \"trg_example_grok_voice.yaml\",\n    \"NemotronLabs VoiceChat (self-reported)\": \"trg_example_nemotron.yaml\",\n}\n\nLEADERBOARD_INTRO = \"\"\"\n<p style=\"color:#374151;\">\nThree of these four systems (OpenAI, Google, xAI) were benchmarked by a\nsingle third party &mdash;\n<a href=\"https://arxiv.org/abs/2603.13686\" target=\"_blank\">tau-Voice<\/a>\n&mdash; under identical conditions, with task success verified against\nfinal database state. TRG does not rank them into one score; it reports\nwhich axes are covered so you can compare like-for-like.\n<\/p>\n\"\"\"\n\n\ndef load_example(choice: str) -> str:\n    filename = EXAMPLE_FILES.get(choice, \"trg_report_template.yaml\")\n    return (EXAMPLES_DIR / filename).read_text(encoding=\"utf-8\")\n\n\ndef validate_text(yaml_text: str) -> str:\n    \"\"\"Validate a TRG report given as YAML text; return an HTML result.\"\"\"\n    if not yaml_text or not yaml_text.strip():\n        return '<p style=\"color:#6b7280;\">Paste a TRG report, upload one, or load an example above.<\/p>'\n    try:\n        data = yaml.safe_load(yaml_text) or {}\n    except yaml.YAMLError as exc:\n        return f'<p style=\"color:#dc2626;\">Could not parse YAML: {exc}<\/p>'\n    if not isinstance(data, dict):\n        return '<p style=\"color:#dc2626;\">A TRG report must be a YAML mapping at the top level.<\/p>'\n    return format_report_html(validate_data(data))\n\n\ndef build_leaderboard_html() -> str:\n    return LEADERBOARD_INTRO + to_html(load_reports(EXAMPLES_DIR))\n", "validator.py": "\"\"\"Core TRG compliance checks.\n\nTRG prescribes which AXES must be reported, not which metric to use on\neach. This module checks that each applicable axis is populated and\ninternally coherent - it does NOT judge whether the numbers are good,\nwhich is the reader's job, not a linter's.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport html\nfrom pathlib import Path\nfrom typing import Any\n\nimport yaml\n\nSTATISTICS = {\"mean\", \"median\", \"p95\", \"p99\", \"max\", \"min\"}\n\n\nclass Report:\n    \"\"\"Accumulates errors (non-compliant) and warnings (compliant but weak).\"\"\"\n\n    def __init__(self) -> None:\n        self.errors: list[str] = []\n        self.warnings: list[str] = []\n        self.system_name: str = \"<unnamed system>\"\n\n    def error(self, axis: str, msg: str) -> None:\n        self.errors.append(f\"[{axis}] {msg}\")\n\n    def warn(self, axis: str, msg: str) -> None:\n        self.warnings.append(f\"[{axis}] {msg}\")\n\n    @property\n    def compliant(self) -> bool:\n        return not self.errors\n\n    def as_dict(self) -> dict[str, Any]:\n        return {\n            \"system_name\": self.system_name,\n            \"compliant\": self.compliant,\n            \"errors\": list(self.errors),\n            \"warnings\": list(self.warnings),\n        }\n\n\ndef blank(value: Any) -> bool:\n    return (\n        value is None\n        or (isinstance(value, str) and not value.strip())\n        or (isinstance(value, list) and not value)\n    )\n\n\ndef check_timing(data: dict, r: Report) -> None:\n    t = data.get(\"timing\") or {}\n    for field in (\"metric\", \"value\", \"conditions\"):\n        if blank(t.get(field)):\n            r.error(\"T\", f\"timing.{field} is required\")\n\n    stat = (t.get(\"statistic\") or \"\").strip().lower()\n    if blank(stat):\n        r.error(\"T\", \"timing.statistic is required (mean/median/p95/...)\")\n    elif stat not in STATISTICS:\n        r.warn(\n            \"T\",\n            f\"timing.statistic '{stat}' is unusual; expected one of \"\n            f\"{sorted(STATISTICS)}\",\n        )\n\n    # A mean alone hides the worst case users actually notice.\n    if not t.get(\"tail_reported\") and stat in {\"mean\", \"median\"}:\n        r.warn(\n            \"T\",\n            \"only a central statistic is reported. Tail latency \"\n            \"(p95/p99) is where users experience the worst case\",\n        )\n\n\ndef check_recovery(data: dict, r: Report) -> None:\n    rec = data.get(\"recovery\") or {}\n    if blank(rec.get(\"disruption_types\")):\n        r.error(\n            \"R\",\n            \"recovery.disruption_types must list at least one \"\n            \"disruption (interruption/backchannel/false_pause/...)\",\n        )\n    for field in (\"metric\", \"value\"):\n        if blank(rec.get(field)):\n            r.error(\"R\", f\"recovery.{field} is required\")\n\n    # The axis exists to separate disrupted from undisturbed behaviour.\n    if blank(rec.get(\"baseline_undisrupted\")):\n        r.warn(\n            \"R\",\n            \"no undisrupted baseline given, so the cost of disruption \"\n            \"cannot be read from this report\",\n        )\n\n\ndef check_grounded(data: dict, r: Report) -> None:\n    g = data.get(\"grounded_outcome\") or {}\n    for field in (\"verification_method\", \"state_source\", \"metric\", \"value\"):\n        if blank(g.get(field)):\n            r.error(\"G\", f\"grounded_outcome.{field} is required\")\n\n    # This is the axis's whole point: external state, not self-report.\n    if not g.get(\"self_report_excluded\"):\n        r.error(\n            \"G\",\n            \"self_report_excluded is false. The G axis requires \"\n            \"success judged from external state, not the agent's \"\n            \"own account of what it did\",\n        )\n\n\ndef check_multiparty(data: dict, r: Report) -> None:\n    m = data.get(\"multiparty\") or {}\n    if not m.get(\"applicable\"):\n        if blank(m.get(\"justification\")):\n            r.warn(\n                \"M\",\n                \"marked not applicable without justification. State \"\n                \"why the deployment admits only two speakers\",\n            )\n        return\n\n    for field in (\"silence_metric\", \"silence_value\", \"authority_metric\", \"authority_value\"):\n        if blank(m.get(field)):\n            r.error(\"M\", f\"multiparty.{field} is required when applicable\")\n\n\ndef validate_data(data: dict) -> Report:\n    \"\"\"Run all TRG checks against an already-parsed report dict.\"\"\"\n    r = Report()\n    r.system_name = ((data.get(\"system\") or {}).get(\"name\") or \"<unnamed system>\")\n    check_timing(data, r)\n    check_recovery(data, r)\n    check_grounded(data, r)\n    check_multiparty(data, r)\n    return r\n\n\ndef validate_file(path: str | Path) -> Report:\n    \"\"\"Parse a TRG YAML report and run all checks against it.\"\"\"\n    path = Path(path)\n    data = yaml.safe_load(path.read_text(encoding=\"utf-8\")) or {}\n    return validate_data(data)\n\n\ndef format_report(r: Report) -> str:\n    lines = [f\"TRG compliance check: {r.system_name}\\n\"]\n    if r.errors:\n        lines.append(f\"NOT COMPLIANT ({len(r.errors)} error{'s' if len(r.errors) != 1 else ''})\")\n        for e in r.errors:\n            lines.append(f\"  ERROR   {e}\")\n    else:\n        lines.append(\"COMPLIANT: all applicable TRG axes are reported\")\n\n    for w in r.warnings:\n        lines.append(f\"  WARNING {w}\")\n\n    if not r.errors and not r.warnings:\n        lines.append(\"  (no warnings)\")\n\n    return \"\\n\".join(lines)\n\n\ndef format_report_html(r: Report) -> str:\n    \"\"\"Same information as format_report, styled for the web UI.\"\"\"\n    if r.compliant:\n        badge = (\n            '<span style=\"background:#16a34a;color:#fff;padding:4px 12px;'\n            'border-radius:999px;font-weight:600;font-size:13px;\">'\n            \"&#10003; COMPLIANT<\/span>\"\n        )\n    else:\n        n = len(r.errors)\n        badge = (\n            '<span style=\"background:#dc2626;color:#fff;padding:4px 12px;'\n            'border-radius:999px;font-weight:600;font-size:13px;\">'\n            f\"&#10007; NOT COMPLIANT &middot; {n} error{'s' if n != 1 else ''}<\/span>\"\n        )\n\n    parts = [\n        '<div style=\"font-family:system-ui,-apple-system,sans-serif;line-height:1.5;\">',\n        f'<h3 style=\"margin:0 0 10px 0;\">{html.escape(r.system_name)}<\/h3>',\n        badge,\n    ]\n\n    if r.errors:\n        parts.append('<p style=\"margin:14px 0 4px 0;font-weight:600;color:#991b1b;\">Errors<\/p>')\n        parts.append('<ul style=\"margin:0;padding-left:20px;color:#991b1b;\">')\n        parts += [f\"<li>{html.escape(e)}<\/li>\" for e in r.errors]\n        parts.append(\"<\/ul>\")\n\n    if r.warnings:\n        parts.append('<p style=\"margin:14px 0 4px 0;font-weight:600;color:#92400e;\">Warnings<\/p>')\n        parts.append('<ul style=\"margin:0;padding-left:20px;color:#92400e;\">')\n        parts += [f\"<li>{html.escape(w)}<\/li>\" for w in r.warnings]\n        parts.append(\"<\/ul>\")\n\n    if not r.errors and not r.warnings:\n        parts.append('<p style=\"margin:14px 0 0 0;color:#6b7280;\">No warnings.<\/p>')\n\n    parts.append(\"<\/div>\")\n    return \"\".join(parts)\n", "leaderboard.py": "\"\"\"Build a TRG leaderboard from a directory of report YAMLs.\n\nVendored copy for the Hugging Face Space, kept dependency-free at runtime.\nCanonical source: https://github.com/shivamnegi92/voice-agent-eval-corpus/blob/main/trg_eval/leaderboard.py\n\nDeliberately does not rank systems by a single score - TRG is a reporting\nstandard, not a scoring function. What this produces is a side-by-side\ncomparability table: which axes each system reports, and with what values,\nso a reader can compare like-for-like instead of trusting whichever axis a\nvendor chose to publish.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport html\nfrom pathlib import Path\nfrom typing import Any\n\nimport yaml\n\nfrom validator import validate_data\n\n\ndef _axis_summary(data: dict, axis: str, fields: list[str]) -> str:\n    block = data.get(axis) or {}\n    parts = [str(block[f]) for f in fields if not _blank(block.get(f))]\n    return \" / \".join(parts) if parts else \"-\"\n\n\ndef _blank(value: Any) -> bool:\n    return value is None or (isinstance(value, str) and not value.strip())\n\n\ndef load_reports(examples_dir: str | Path) -> list[dict]:\n    \"\"\"Load every trg_example_*.yaml in a directory into row dicts.\"\"\"\n    rows: list[dict] = []\n    for path in sorted(Path(examples_dir).glob(\"trg_example_*.yaml\")):\n        data = yaml.safe_load(path.read_text(encoding=\"utf-8\")) or {}\n        report = validate_data(data)\n        system = data.get(\"system\") or {}\n        rows.append(\n            {\n                \"file\": path.name,\n                \"system\": system.get(\"name\", \"<unnamed>\"),\n                \"architecture\": system.get(\"architecture\", \"-\"),\n                \"version\": system.get(\"version\", \"-\"),\n                \"timing\": _axis_summary(data, \"timing\", [\"value\", \"statistic\"]),\n                \"recovery\": _axis_summary(data, \"recovery\", [\"value\"]),\n                \"grounded_outcome\": _axis_summary(data, \"grounded_outcome\", [\"value\"]),\n                \"compliant\": report.compliant,\n                \"warnings\": len(report.warnings),\n                \"errors\": len(report.errors),\n            }\n        )\n    return rows\n\n\ndef to_markdown(rows: list[dict]) -> str:\n    header = (\n        \"| System | Architecture | Timing (T) | Recovery (R) | Grounded Outcome (G) \"\n        \"| TRG Compliant | Warnings | Source |\\n\"\n        \"|---|---|---|---|---|---|---|---|\\n\"\n    )\n    lines = []\n    for r in rows:\n        compliant = \"yes\" if r[\"compliant\"] else \"no\"\n        source = f\"`{r['file']}`\"\n        lines.append(\n            f\"| {r['system']} | {r['architecture']} | {r['timing']} | {r['recovery']} \"\n            f\"| {r['grounded_outcome']} | {compliant} | {r['warnings']} | {source} |\"\n        )\n    return header + \"\\n\".join(lines) + \"\\n\"\n\n\ndef to_csv(rows: list[dict]) -> str:\n    if not rows:\n        return \"\"\n    fields = list(rows[0].keys())\n    lines = [\",\".join(fields)]\n    for r in rows:\n        lines.append(\",\".join(str(r[f]).replace(\",\", \";\") for f in fields))\n    return \"\\n\".join(lines) + \"\\n\"\n\n\ndef _cell(text: str) -> str:\n    return f\"<td>{html.escape(str(text), quote=False)}<\/td>\"\n\n\ndef to_html(rows: list[dict]) -> str:\n    \"\"\"Styled table for the web UI. Cells wrap rather than truncate: these\n    reports carry qualifying context a bare number would flatten, and\n    hover-only tooltips are unreadable on keyboard and touch.\"\"\"\n    headers = [\n        \"System\", \"Architecture\", \"Timing (T)\", \"Recovery (R)\",\n        \"Grounded Outcome (G)\", \"TRG\", \"Warnings\",\n    ]\n    header_html = \"\".join(f\"<th>{h}<\/th>\" for h in headers)\n\n    body_rows = []\n    for r in rows:\n        if r[\"compliant\"]:\n            badge = '<span style=\"color:#16a34a;font-weight:700;\">&#10003; pass<\/span>'\n        else:\n            badge = '<span style=\"color:#dc2626;font-weight:700;\">&#10007; fail<\/span>'\n        body_rows.append(\n            \"<tr>\"\n            + f'<td><strong>{html.escape(str(r[\"system\"]))}<\/strong><br>'\n            f'<code style=\"font-size:11.5px;color:#4b5563;\">{html.escape(r[\"file\"])}<\/code><\/td>'\n            + _cell(r[\"architecture\"])\n            + _cell(r[\"timing\"])\n            + _cell(r[\"recovery\"])\n            + _cell(r[\"grounded_outcome\"])\n            + f'<td style=\"white-space:nowrap;\">{badge}<\/td>'\n            + f'<td style=\"text-align:center;\">{r[\"warnings\"]}<\/td>'\n            + \"<\/tr>\"\n        )\n\n    style = (\n        \"<style>\"\n        \".trg-board{border-collapse:collapse;width:100%;font-family:system-ui,\"\n        \"-apple-system,sans-serif;font-size:13.5px;}\"\n        \".trg-board th{text-align:left;padding:9px 10px;background:#f3f4f6;\"\n        \"border-bottom:2px solid #d1d5db;white-space:nowrap;}\"\n        \".trg-board td{padding:9px 10px;border-bottom:1px solid #e5e7eb;\"\n        \"vertical-align:top;overflow-wrap:anywhere;}\"\n        \".trg-board td:first-child{min-width:220px;overflow-wrap:normal;}\"\n        \".trg-board tr:hover td{background:#f9fafb;}\"\n        \"<\/style>\"\n    )\n    return (\n        style\n        + f'<table class=\"trg-board\"><thead><tr>{header_html}<\/tr><\/thead>'\n        f\"<tbody>{''.join(body_rows)}<\/tbody><\/table>\"\n    )\n", "examples/trg_example_gemini_live.yaml": "# Worked TRG example, populated from published figures for Google's\n# gemini-live-2.5-flash-native-audio as evaluated (not self-reported) by\n# tau-Voice (arXiv:2603.13686), Table 3, Table 6, and Table 8.\n#\n# See trg_example_openai_realtime.yaml for the rationale behind using one\n# third-party benchmark to compare three systems rather than three vendors'\n# self-reported numbers.\n#\n# Check it with:\n#     python3 scripts/validate_trg.py trg/trg_example_gemini_live.yaml\n\nsystem:\n  name: \"Google gemini-live-2.5-flash-native-audio\"\n  architecture: \"end_to_end\"\n  version: \"as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025\"\n\ntiming:\n  metric: \"Latency = avg(Response Latency, Yield Latency), Realistic condition,\n           aggregated across Retail/Airline/Telecom domains\"\n  value: \"1.14s\"\n  statistic: \"mean\"\n  conditions: \"Realistic speech complexity: diverse accents, background noise,\n               frame drops, muffling, LLM-driven interruptions and\n               backchannels, G.711 mu-law 8kHz telephony channel\"\n  tail_reported: false\n\nrecovery:\n  disruption_types:\n    - \"interruption\"\n    - \"backchannel\"\n    - \"false_pause\"\n  metric: \"Responsiveness (avg of Response Rate and Yield Rate within 2s of\n           interruption); Interrupt Rate and Selectivity reported alongside\"\n  value: \"Responsiveness 69%; Interrupt Rate 21%; Selectivity 54%\"\n  baseline_undisrupted: \"not separately reported for these interaction-quality\n                         metrics under Clean conditions (see the note in the\n                         OpenAI sibling file: the undisturbed comparison\n                         exists only for the G axis in this paper)\"\n  notes: \"Lowest interrupt rate and smallest Clean-to-Realistic degradation of\n          the three providers (tau-Voice section 5.1.2), but also the lowest\n          responsiveness: it fails to respond to close to a third of user\n          turns. Robust but under-responsive, which is the opposite failure\n          mode from OpenAI's over-responsive, low-selectivity profile.\"\n\ngrounded_outcome:\n  verification_method: \"task completion scored by comparing the final\n                        environment state (e.g. database records) to a gold\n                        standard, following the tau-2-bench protocol; reported\n                        as pass@1\"\n  state_source: \"tau-Voice benchmark's seeded task environments across\n                Retail, Airline, and Telecom domains\"\n  metric: \"pass@1 task completion, Realistic condition, aggregated across all\n           three domains\"\n  value: \"26%\"\n  self_report_excluded: true\n\nmultiparty:\n  applicable: false\n  justification: \"tau-Voice evaluates single-user, phone-style customer\n                  service calls (retail/airline/telecom); no multiparty\n                  condition is tested.\"\n", "examples/trg_example_grok_voice.yaml": "# Worked TRG example, populated from published figures for xAI's\n# grok-voice-agent as evaluated (not self-reported) by tau-Voice\n# (arXiv:2603.13686), Table 3, Table 6, and Table 8.\n#\n# See trg_example_openai_realtime.yaml for the rationale behind using one\n# third-party benchmark to compare three systems rather than three vendors'\n# self-reported numbers.\n#\n# Check it with:\n#     python3 scripts/validate_trg.py trg/trg_example_grok_voice.yaml\n\nsystem:\n  name: \"xAI grok-voice-agent\"\n  architecture: \"end_to_end\"\n  version: \"as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025\"\n\ntiming:\n  metric: \"Latency = avg(Response Latency, Yield Latency), Realistic condition,\n           aggregated across Retail/Airline/Telecom domains\"\n  value: \"1.15s\"\n  statistic: \"mean\"\n  conditions: \"Realistic speech complexity: diverse accents, background noise,\n               frame drops, muffling, LLM-driven interruptions and\n               backchannels, G.711 mu-law 8kHz telephony channel\"\n  tail_reported: false\n\nrecovery:\n  disruption_types:\n    - \"interruption\"\n    - \"backchannel\"\n    - \"false_pause\"\n  metric: \"Responsiveness (avg of Response Rate and Yield Rate within 2s of\n           interruption); Interrupt Rate and Selectivity reported alongside\"\n  value: \"Responsiveness 83%; Interrupt Rate 84% (highest in the benchmark -\n          interrupting users nearly once per turn); Selectivity 57% (best in\n          the benchmark)\"\n  baseline_undisrupted: \"not separately reported for these interaction-quality\n                         metrics under Clean conditions (see the note in the\n                         OpenAI sibling file: the undisturbed comparison\n                         exists only for the G axis in this paper)\"\n  notes: \"Best selectivity of the three providers, but by far the highest\n          interrupt rate. tau-Voice's own framing: 'no current system\n          achieves both reliable responsiveness and appropriate restraint' -\n          this system illustrates the responsiveness side of that trade-off\n          taken to an extreme.\"\n\ngrounded_outcome:\n  verification_method: \"task completion scored by comparing the final\n                        environment state (e.g. database records) to a gold\n                        standard, following the tau-2-bench protocol; reported\n                        as pass@1\"\n  state_source: \"tau-Voice benchmark's seeded task environments across\n                Retail, Airline, and Telecom domains\"\n  metric: \"pass@1 task completion, Realistic condition, aggregated across all\n           three domains\"\n  value: \"38%\"\n  self_report_excluded: true\n\nmultiparty:\n  applicable: false\n  justification: \"tau-Voice evaluates single-user, phone-style customer\n                  service calls (retail/airline/telecom); no multiparty\n                  condition is tested.\"\n", "examples/trg_example_nemotron.yaml": "# Worked TRG example, populated from published figures for NemotronLabs\n# VoiceChat as reported in the survey (arXiv:2609.21967).\n#\n# Purpose: demonstrate that TRG is satisfiable by a real system, not just an\n# aspiration. This system was chosen precisely because it already reports on\n# all three required axes, which is what makes it the strongest evidence in\n# the corpus for the reporting convention TRG proposes.\n#\n# Check it with:\n#     python3 validate_trg.py trg_example_nemotron.yaml\n\nsystem:\n  name: \"NemotronLabs VoiceChat\"\n  architecture: \"end_to_end\"\n  version: \"as reported, arXiv:2609.21967\"\n\ntiming:\n  metric: \"streaming speech encoder to TTS decoder, parallel output streams\"\n  value: \"not separately reported as a latency figure in the surveyed text\"\n  statistic: \"mean\"\n  conditions: \"full-duplex operation with agent and structured-function streams\"\n  tail_reported: false\n\nrecovery:\n  disruption_types:\n    - \"false_pause\"\n    - \"interruption\"\n    - \"backchannel\"\n  metric: \"correct-takeover rate following genuine user interruption; and\n           resumption rate following backchannel\"\n  value: \"100% correct takeover on genuine interruption (FDB v1.0);\n          93% resumption after backchannels (FDB v1.5)\"\n  baseline_undisrupted: \"lowest false-takeover rate during pauses among\n                         open-weight systems tested\"\n  notes: \"Reports takeover behaviour separately for genuine interruptions\n          versus mere pauses, which is the distinction that makes the number\n          interpretable.\"\n\ngrounded_outcome:\n  verification_method: \"tool-selection correctness scored against expected\n                        tool calls under natural disfluency (FDB v3)\"\n  state_source: \"Full-Duplex-Bench v3 tool-use harness\"\n  metric: \"tool-selection F1\"\n  value: \"82.5%\"\n  self_report_excluded: true\n\nmultiparty:\n  applicable: false\n  justification: \"Evaluated in dyadic user-agent settings; the benchmarks\n                  applied (Full-Duplex-Bench family) are two-participant, so\n                  a multiparty appropriateness measure would have nothing to\n                  score against.\"\n", "examples/trg_example_openai_realtime.yaml": "# Worked TRG example, populated from published figures for OpenAI's\n# gpt-realtime-1.5 as evaluated (not self-reported) by tau-Voice\n# (arXiv:2603.13686), Table 3, Table 6, and Table 8.\n#\n# Purpose: this and its two sibling files (gemini_live, grok_voice) form a\n# same-benchmark baseline comparison. All three systems were tested by the\n# same third party, under the same conditions, in the same paper - which is\n# a stronger comparison than stitching together three vendors' own reported\n# numbers, each measured a different way.\n#\n# Check it with:\n#     python3 scripts/validate_trg.py trg/trg_example_openai_realtime.yaml\n\nsystem:\n  name: \"OpenAI gpt-realtime-1.5\"\n  architecture: \"end_to_end\"\n  version: \"as evaluated by tau-Voice, arXiv:2603.13686, released Feb 2026\"\n\ntiming:\n  metric: \"Latency = avg(Response Latency, Yield Latency), Realistic condition,\n           aggregated across Retail/Airline/Telecom domains\"\n  value: \"0.90s\"\n  statistic: \"mean\"\n  conditions: \"Realistic speech complexity: diverse accents, background noise,\n               frame drops, muffling, LLM-driven interruptions and\n               backchannels, G.711 mu-law 8kHz telephony channel\"\n  tail_reported: false\n\nrecovery:\n  disruption_types:\n    - \"interruption\"\n    - \"backchannel\"\n    - \"false_pause\"\n  metric: \"Responsiveness (avg of Response Rate and Yield Rate within 2s of\n           interruption); Interrupt Rate and Selectivity reported alongside\"\n  value: \"Responsiveness 100%; Interrupt Rate 14% (turns where the agent\n          speaks before the user finishes); Selectivity 6% (correctly\n          ignoring backchannels/vocal tics/non-directed speech)\"\n  baseline_undisrupted: \"not separately reported for these interaction-quality\n                         metrics; tau-Voice reports pass@1 (not\n                         responsiveness/interrupt/selectivity) under the Clean\n                         condition, so the undisturbed comparison exists only\n                         for the G axis, not this one\"\n  notes: \"Best-in-benchmark on latency, responsiveness, and interrupt rate,\n          but worst-in-benchmark on selectivity: it responds to nearly every\n          backchannel, vocal tic, and non-directed utterance as if it were a\n          turn-taking cue. The four numbers together show a real trade-off\n          that any single metric would hide.\"\n\ngrounded_outcome:\n  verification_method: \"task completion scored by comparing the final\n                        environment state (e.g. database records) to a gold\n                        standard, following the tau-2-bench protocol; reported\n                        as pass@1\"\n  state_source: \"tau-Voice benchmark's seeded task environments across\n                Retail, Airline, and Telecom domains\"\n  metric: \"pass@1 task completion, Realistic condition, aggregated across all\n           three domains\"\n  value: \"35%\"\n  self_report_excluded: true\n\nmultiparty:\n  applicable: false\n  justification: \"tau-Voice evaluates single-user, phone-style customer\n                  service calls (retail/airline/telecom); no multiparty\n                  condition is tested.\"\n", "examples/trg_report_template.yaml": "# TRG reporting template (Timing - Recovery - Grounded)\n#\n# Fill this in alongside a real-time voice agent evaluation, then check it:\n#     python3 validate_trg.py trg_report.yaml\n#\n# TRG prescribes which AXES must be reported, not which metric to use on each.\n# Any metric is acceptable provided you say what it measures and how it was\n# obtained. A report silent on an applicable axis leaves the system\n# uncharacterised, however strong its remaining numbers are.\n\nsystem:\n  name: \"\"                  # system under evaluation\n  architecture: \"\"          # end_to_end | cascaded | hybrid\n  version: \"\"               # optional, but aids reproduction\n\n# ---------------------------------------------------------------------------\n# T - TIMING (required)\n# At least one latency measure under intended deployment conditions.\n# ---------------------------------------------------------------------------\ntiming:\n  metric: \"\"                # e.g. \"time to first audio\"\n  value: \"\"                 # e.g. \"755 ms\"\n  statistic: \"\"             # mean | median | p95 | p99 | max\n  conditions: \"\"            # hardware, self-hosted vs API, load, audio setup\n  # Tail latency matters wherever users experience the worst case, not the\n  # average one. If you report only a mean, say why that is the right choice.\n  tail_reported: false\n\n# ---------------------------------------------------------------------------\n# R - RECOVERY (required)\n# Behaviour AFTER disruption, reported separately from undisturbed runs.\n# Recovery is empirically a distinct capability axis, not a corollary of\n# general quality, so an undisturbed-only number does not satisfy this axis.\n# ---------------------------------------------------------------------------\nrecovery:\n  disruption_types: []      # interruption | backchannel | false_pause | noise\n  metric: \"\"                # e.g. \"resumes at correct workflow step\"\n  value: \"\"                 # e.g. \"93%\"\n  baseline_undisrupted: \"\"  # same metric without disruption, for contrast\n  notes: \"\"\n\n# ---------------------------------------------------------------------------\n# G - GROUNDED OUTCOME (required)\n# Task success verified against EXTERNAL STATE, not the agent's self-report.\n# A fluent agent confidently describing an action it never performed is the\n# failure mode this axis exists to catch.\n# ---------------------------------------------------------------------------\ngrounded_outcome:\n  verification_method: \"\"   # e.g. \"assert database rows after each episode\"\n  state_source: \"\"          # e.g. \"seeded PostgreSQL backend\"\n  metric: \"\"                # e.g. \"task completion with correct side effects\"\n  value: \"\"                 # e.g. \"62%\"\n  # Set true ONLY if success is judged from external state. Grading a\n  # transcript, or asking a model whether the task succeeded, is self-report.\n  self_report_excluded: false\n\n# ---------------------------------------------------------------------------\n# M - MULTIPARTY APPROPRIATENESS (conditional)\n# Required only where the deployment admits more than two legitimate speakers.\n# A strictly dyadic system is not penalised for lacking a capability its\n# deployment never exercises - set applicable: false and say why.\n# ---------------------------------------------------------------------------\nmultiparty:\n  applicable: false\n  justification: \"\"         # required when applicable is false\n  silence_metric: \"\"        # correctly declining to speak\n  silence_value: \"\"\n  authority_metric: \"\"      # who may be told what\n  authority_value: \"\"\n"}</script>
+<script>
+const $ = (id) => document.getElementById(id);
+const status = (msg, isError = false) => { $("status").textContent = msg; $("status").className = isError ? "error" : ""; $("status").hidden = !msg; };
 
-from leaderboard import load_reports, to_html
-from validator import format_report_html, validate_data
-
-# Gradio-Lite exec()s this file with no __file__; its virtual FS puts the
-# inlined files relative to the cwd instead.
-_HERE = Path(__file__).parent if "__file__" in globals() else Path.cwd()
-EXAMPLES_DIR = _HERE / "examples"
-
-EXAMPLE_FILES = {
-    "Blank template": "trg_report_template.yaml",
-    "OpenAI gpt-realtime-1.5 (tau-Voice benchmark)": "trg_example_openai_realtime.yaml",
-    "Google gemini-live-2.5-flash (tau-Voice benchmark)": "trg_example_gemini_live.yaml",
-    "xAI grok-voice-agent (tau-Voice benchmark)": "trg_example_grok_voice.yaml",
-    "NemotronLabs VoiceChat (self-reported)": "trg_example_nemotron.yaml",
+// Accessible tabs (WAI-ARIA pattern: arrow keys move between tabs).
+const tabs = [...document.querySelectorAll('[role=tab]')];
+function selectTab(tab) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+    $(t.getAttribute("aria-controls")).hidden = !on;
+  });
+  tab.focus();
 }
-TEMPLATE_TEXT = (EXAMPLES_DIR / "trg_report_template.yaml").read_text(encoding="utf-8")
-
-HEADER_HTML = """
-&lt;div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px;"&gt;
-  &lt;h1 style="margin:0;font-size:26px;"&gt;TRG: Timing &amp;middot; Recovery &amp;middot; Grounded&lt;/h1&gt;
-&lt;/div&gt;
-&lt;p style="margin:0 0 10px 0;color:#4b5563;"&gt;
-  A minimum reporting standard for real-time voice agents &amp;mdash; a report
-  cannot claim compliance while staying silent on an axis its deployment
-  actually exercises.
-&lt;/p&gt;
-&lt;div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;"&gt;
-  &lt;a href="https://arxiv.org/abs/2609.30798" target="_blank" style="text-decoration:none;"&gt;
-    &lt;span style="background:#b31b1b;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;arXiv:2609.30798&lt;/span&gt;
-  &lt;/a&gt;
-  &lt;a href="https://github.com/shivamnegi92/voice-agent-eval-corpus" target="_blank" style="text-decoration:none;"&gt;
-    &lt;span style="background:#1f2328;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;GitHub repo&lt;/span&gt;
-  &lt;/a&gt;
-  &lt;a href="https://github.com/shivamnegi92/voice-agent-eval-corpus/blob/main/corpus/leaderboard.md" target="_blank" style="text-decoration:none;"&gt;
-    &lt;span style="background:#2563eb;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;Full leaderboard on GitHub&lt;/span&gt;
-  &lt;/a&gt;
-&lt;/div&gt;
-"""
-
-LEADERBOARD_INTRO = """
-&lt;p style="color:#374151;"&gt;
-Three of these four systems (OpenAI, Google, xAI) were benchmarked by a
-single third party &amp;mdash;
-&lt;a href="https://arxiv.org/abs/2603.13686" target="_blank"&gt;tau-Voice&lt;/a&gt;
-&amp;mdash; under identical conditions, with task success verified against
-final database state. TRG does not rank them into one score; it reports
-which axes are covered so you can compare like-for-like.
-&lt;/p&gt;
-"""
-
-
-def load_example(choice: str) -&gt; str:
-    filename = EXAMPLE_FILES.get(choice, "trg_report_template.yaml")
-    return (EXAMPLES_DIR / filename).read_text(encoding="utf-8")
-
-
-def validate(yaml_text: str, uploaded_file) -&gt; str:
-    if uploaded_file is not None:
-        yaml_text = Path(uploaded_file.name).read_text(encoding="utf-8")
-
-    if not yaml_text or not yaml_text.strip():
-        return '&lt;p style="color:#6b7280;"&gt;Paste a TRG report, upload one, or load an example above.&lt;/p&gt;'
-
-    try:
-        data = yaml.safe_load(yaml_text) or {}
-    except yaml.YAMLError as exc:
-        return f'&lt;p style="color:#dc2626;"&gt;Could not parse YAML: {exc}&lt;/p&gt;'
-
-    report = validate_data(data)
-    return format_report_html(report)
-
-
-def build_leaderboard_html() -&gt; str:
-    rows = load_reports(EXAMPLES_DIR)
-    return LEADERBOARD_INTRO + to_html(rows)
-
-
-with gr.Blocks(title="TRG Voice Agent Evaluation", theme=gr.themes.Soft(primary_hue="blue")) as demo:
-    gr.HTML(HEADER_HTML)
-
-    with gr.Tab("Validate a report"):
-        gr.Markdown(
-            "Paste a filled-in TRG YAML report, upload one, or load a "
-            "worked example below. This checks *coverage*, not quality - "
-            "it will not tell you your numbers are good, only that you "
-            "reported the axis honestly."
-        )
-        example_picker = gr.Dropdown(
-            choices=list(EXAMPLE_FILES),
-            value="Blank template",
-            label="Load an example",
-        )
-        with gr.Row():
-            with gr.Column():
-                yaml_input = gr.Textbox(
-                    label="TRG report (YAML)",
-                    value=TEMPLATE_TEXT,
-                    lines=26,
-                    max_lines=40,
-                )
-                file_input = gr.File(label="...or upload a .yaml file", file_types=[".yaml", ".yml"])
-                run_btn = gr.Button("Validate", variant="primary")
-            with gr.Column():
-                gr.Markdown("**Result**")
-                result = gr.HTML()
-
-        example_picker.change(load_example, inputs=example_picker, outputs=yaml_input)
-        run_btn.click(validate, inputs=[yaml_input, file_input], outputs=result)
-
-    with gr.Tab("Baseline leaderboard"):
-        gr.HTML(build_leaderboard_html())
-
-if __name__ == "__main__":
-    demo.launch()
-
-    </gradio-lite-file>
-    <gradio-lite-file name="validator.py">
-"""Core TRG compliance checks.
-
-TRG prescribes which AXES must be reported, not which metric to use on
-each. This module checks that each applicable axis is populated and
-internally coherent - it does NOT judge whether the numbers are good,
-which is the reader's job, not a linter's.
-"""
-
-from __future__ import annotations
-
-import html
-from pathlib import Path
-from typing import Any
-
-import yaml
-
-STATISTICS = {"mean", "median", "p95", "p99", "max", "min"}
-
-
-class Report:
-    """Accumulates errors (non-compliant) and warnings (compliant but weak)."""
-
-    def __init__(self) -&gt; None:
-        self.errors: list[str] = []
-        self.warnings: list[str] = []
-        self.system_name: str = "&lt;unnamed system&gt;"
-
-    def error(self, axis: str, msg: str) -&gt; None:
-        self.errors.append(f"[{axis}] {msg}")
-
-    def warn(self, axis: str, msg: str) -&gt; None:
-        self.warnings.append(f"[{axis}] {msg}")
-
-    @property
-    def compliant(self) -&gt; bool:
-        return not self.errors
-
-    def as_dict(self) -&gt; dict[str, Any]:
-        return {
-            "system_name": self.system_name,
-            "compliant": self.compliant,
-            "errors": list(self.errors),
-            "warnings": list(self.warnings),
-        }
-
-
-def blank(value: Any) -&gt; bool:
-    return (
-        value is None
-        or (isinstance(value, str) and not value.strip())
-        or (isinstance(value, list) and not value)
-    )
-
-
-def check_timing(data: dict, r: Report) -&gt; None:
-    t = data.get("timing") or {}
-    for field in ("metric", "value", "conditions"):
-        if blank(t.get(field)):
-            r.error("T", f"timing.{field} is required")
-
-    stat = (t.get("statistic") or "").strip().lower()
-    if blank(stat):
-        r.error("T", "timing.statistic is required (mean/median/p95/...)")
-    elif stat not in STATISTICS:
-        r.warn(
-            "T",
-            f"timing.statistic '{stat}' is unusual; expected one of "
-            f"{sorted(STATISTICS)}",
-        )
-
-    # A mean alone hides the worst case users actually notice.
-    if not t.get("tail_reported") and stat in {"mean", "median"}:
-        r.warn(
-            "T",
-            "only a central statistic is reported. Tail latency "
-            "(p95/p99) is where users experience the worst case",
-        )
-
-
-def check_recovery(data: dict, r: Report) -&gt; None:
-    rec = data.get("recovery") or {}
-    if blank(rec.get("disruption_types")):
-        r.error(
-            "R",
-            "recovery.disruption_types must list at least one "
-            "disruption (interruption/backchannel/false_pause/...)",
-        )
-    for field in ("metric", "value"):
-        if blank(rec.get(field)):
-            r.error("R", f"recovery.{field} is required")
-
-    # The axis exists to separate disrupted from undisturbed behaviour.
-    if blank(rec.get("baseline_undisrupted")):
-        r.warn(
-            "R",
-            "no undisrupted baseline given, so the cost of disruption "
-            "cannot be read from this report",
-        )
-
-
-def check_grounded(data: dict, r: Report) -&gt; None:
-    g = data.get("grounded_outcome") or {}
-    for field in ("verification_method", "state_source", "metric", "value"):
-        if blank(g.get(field)):
-            r.error("G", f"grounded_outcome.{field} is required")
-
-    # This is the axis's whole point: external state, not self-report.
-    if not g.get("self_report_excluded"):
-        r.error(
-            "G",
-            "self_report_excluded is false. The G axis requires "
-            "success judged from external state, not the agent's "
-            "own account of what it did",
-        )
-
-
-def check_multiparty(data: dict, r: Report) -&gt; None:
-    m = data.get("multiparty") or {}
-    if not m.get("applicable"):
-        if blank(m.get("justification")):
-            r.warn(
-                "M",
-                "marked not applicable without justification. State "
-                "why the deployment admits only two speakers",
-            )
-        return
-
-    for field in ("silence_metric", "silence_value", "authority_metric", "authority_value"):
-        if blank(m.get(field)):
-            r.error("M", f"multiparty.{field} is required when applicable")
-
-
-def validate_data(data: dict) -&gt; Report:
-    """Run all TRG checks against an already-parsed report dict."""
-    r = Report()
-    r.system_name = ((data.get("system") or {}).get("name") or "&lt;unnamed system&gt;")
-    check_timing(data, r)
-    check_recovery(data, r)
-    check_grounded(data, r)
-    check_multiparty(data, r)
-    return r
-
-
-def validate_file(path: str | Path) -&gt; Report:
-    """Parse a TRG YAML report and run all checks against it."""
-    path = Path(path)
-    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    return validate_data(data)
-
-
-def format_report(r: Report) -&gt; str:
-    lines = [f"TRG compliance check: {r.system_name}\n"]
-    if r.errors:
-        lines.append(f"NOT COMPLIANT ({len(r.errors)} error{'s' if len(r.errors) != 1 else ''})")
-        for e in r.errors:
-            lines.append(f"  ERROR   {e}")
-    else:
-        lines.append("COMPLIANT: all applicable TRG axes are reported")
-
-    for w in r.warnings:
-        lines.append(f"  WARNING {w}")
-
-    if not r.errors and not r.warnings:
-        lines.append("  (no warnings)")
-
-    return "\n".join(lines)
-
-
-def format_report_html(r: Report) -&gt; str:
-    """Same information as format_report, styled for the web UI."""
-    if r.compliant:
-        badge = (
-            '&lt;span style="background:#16a34a;color:#fff;padding:4px 12px;'
-            'border-radius:999px;font-weight:600;font-size:13px;"&gt;'
-            "&amp;#10003; COMPLIANT&lt;/span&gt;"
-        )
-    else:
-        n = len(r.errors)
-        badge = (
-            '&lt;span style="background:#dc2626;color:#fff;padding:4px 12px;'
-            'border-radius:999px;font-weight:600;font-size:13px;"&gt;'
-            f"&amp;#10007; NOT COMPLIANT &amp;middot; {n} error{'s' if n != 1 else ''}&lt;/span&gt;"
-        )
-
-    parts = [
-        '&lt;div style="font-family:system-ui,-apple-system,sans-serif;line-height:1.5;"&gt;',
-        f'&lt;h3 style="margin:0 0 10px 0;"&gt;{html.escape(r.system_name)}&lt;/h3&gt;',
-        badge,
-    ]
-
-    if r.errors:
-        parts.append('&lt;p style="margin:14px 0 4px 0;font-weight:600;color:#991b1b;"&gt;Errors&lt;/p&gt;')
-        parts.append('&lt;ul style="margin:0;padding-left:20px;color:#991b1b;"&gt;')
-        parts += [f"&lt;li&gt;{html.escape(e)}&lt;/li&gt;" for e in r.errors]
-        parts.append("&lt;/ul&gt;")
-
-    if r.warnings:
-        parts.append('&lt;p style="margin:14px 0 4px 0;font-weight:600;color:#92400e;"&gt;Warnings&lt;/p&gt;')
-        parts.append('&lt;ul style="margin:0;padding-left:20px;color:#92400e;"&gt;')
-        parts += [f"&lt;li&gt;{html.escape(w)}&lt;/li&gt;" for w in r.warnings]
-        parts.append("&lt;/ul&gt;")
-
-    if not r.errors and not r.warnings:
-        parts.append('&lt;p style="margin:14px 0 0 0;color:#6b7280;"&gt;No warnings.&lt;/p&gt;')
-
-    parts.append("&lt;/div&gt;")
-    return "".join(parts)
-
-    </gradio-lite-file>
-    <gradio-lite-file name="leaderboard.py">
-"""Build a TRG leaderboard from a directory of report YAMLs.
-
-Vendored copy for the Hugging Face Space, kept dependency-free at runtime.
-Canonical source: https://github.com/shivamnegi92/voice-agent-eval-corpus/blob/main/trg_eval/leaderboard.py
-
-Deliberately does not rank systems by a single score - TRG is a reporting
-standard, not a scoring function. What this produces is a side-by-side
-comparability table: which axes each system reports, and with what values,
-so a reader can compare like-for-like instead of trusting whichever axis a
-vendor chose to publish.
-"""
-
-from __future__ import annotations
-
-import html
-from pathlib import Path
-from typing import Any
-
-import yaml
-
-from validator import validate_data
-
-
-def _axis_summary(data: dict, axis: str, fields: list[str]) -&gt; str:
-    block = data.get(axis) or {}
-    parts = [str(block[f]) for f in fields if not _blank(block.get(f))]
-    return " / ".join(parts) if parts else "-"
-
-
-def _blank(value: Any) -&gt; bool:
-    return value is None or (isinstance(value, str) and not value.strip())
-
-
-def load_reports(examples_dir: str | Path) -&gt; list[dict]:
-    """Load every trg_example_*.yaml in a directory into row dicts."""
-    rows: list[dict] = []
-    for path in sorted(Path(examples_dir).glob("trg_example_*.yaml")):
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        report = validate_data(data)
-        system = data.get("system") or {}
-        rows.append(
-            {
-                "file": path.name,
-                "system": system.get("name", "&lt;unnamed&gt;"),
-                "architecture": system.get("architecture", "-"),
-                "version": system.get("version", "-"),
-                "timing": _axis_summary(data, "timing", ["value", "statistic"]),
-                "recovery": _axis_summary(data, "recovery", ["value"]),
-                "grounded_outcome": _axis_summary(data, "grounded_outcome", ["value"]),
-                "compliant": report.compliant,
-                "warnings": len(report.warnings),
-                "errors": len(report.errors),
-            }
-        )
-    return rows
-
-
-def to_markdown(rows: list[dict]) -&gt; str:
-    header = (
-        "| System | Architecture | Timing (T) | Recovery (R) | Grounded Outcome (G) "
-        "| TRG Compliant | Warnings | Source |\n"
-        "|---|---|---|---|---|---|---|---|\n"
-    )
-    lines = []
-    for r in rows:
-        compliant = "yes" if r["compliant"] else "no"
-        source = f"`{r['file']}`"
-        lines.append(
-            f"| {r['system']} | {r['architecture']} | {r['timing']} | {r['recovery']} "
-            f"| {r['grounded_outcome']} | {compliant} | {r['warnings']} | {source} |"
-        )
-    return header + "\n".join(lines) + "\n"
-
-
-def to_csv(rows: list[dict]) -&gt; str:
-    if not rows:
-        return ""
-    fields = list(rows[0].keys())
-    lines = [",".join(fields)]
-    for r in rows:
-        lines.append(",".join(str(r[f]).replace(",", ";") for f in fields))
-    return "\n".join(lines) + "\n"
-
-
-def _cell(text: str, max_len: int = 70) -&gt; str:
-    """Escape, truncate, and keep the full text as a hover tooltip."""
-    text = str(text)
-    escaped_full = html.escape(text, quote=True)
-    short = text if len(text) &lt;= max_len else text[: max_len - 1] + "\u2026"
-    escaped_short = html.escape(short, quote=False)
-    return f'&lt;td title="{escaped_full}"&gt;{escaped_short}&lt;/td&gt;'
-
-
-def to_html(rows: list[dict]) -&gt; str:
-    """Styled table for the web UI. Long cells truncate with a hover tooltip
-    showing the full text, since these reports carry real qualifying context
-    that a bare number would flatten."""
-    headers = [
-        "System", "Architecture", "Timing (T)", "Recovery (R)",
-        "Grounded Outcome (G)", "TRG", "Warnings", "Source",
-    ]
-    header_html = "".join(f"&lt;th&gt;{h}&lt;/th&gt;" for h in headers)
-
-    body_rows = []
-    for r in rows:
-        if r["compliant"]:
-            badge = '&lt;span style="color:#16a34a;font-weight:700;"&gt;&amp;#10003; pass&lt;/span&gt;'
-        else:
-            badge = '&lt;span style="color:#dc2626;font-weight:700;"&gt;&amp;#10007; fail&lt;/span&gt;'
-        body_rows.append(
-            "&lt;tr&gt;"
-            + _cell(r["system"], 42)
-            + _cell(r["architecture"], 20)
-            + _cell(r["timing"], 50)
-            + _cell(r["recovery"], 65)
-            + _cell(r["grounded_outcome"], 20)
-            + f"&lt;td&gt;{badge}&lt;/td&gt;"
-            + f'&lt;td style="text-align:center;"&gt;{r["warnings"]}&lt;/td&gt;'
-            + f'&lt;td&gt;&lt;code style="font-size:12px;"&gt;{html.escape(r["file"])}&lt;/code&gt;&lt;/td&gt;'
-            + "&lt;/tr&gt;"
-        )
-
-    style = (
-        "&lt;style&gt;"
-        ".trg-board{border-collapse:collapse;width:100%;font-family:system-ui,"
-        "-apple-system,sans-serif;font-size:13.5px;}"
-        ".trg-board th{text-align:left;padding:9px 10px;background:#f3f4f6;"
-        "border-bottom:2px solid #d1d5db;white-space:nowrap;}"
-        ".trg-board td{padding:9px 10px;border-bottom:1px solid #e5e7eb;"
-        "max-width:240px;overflow:hidden;text-overflow:ellipsis;"
-        "white-space:nowrap;vertical-align:top;}"
-        ".trg-board tr:hover td{background:#f9fafb;}"
-        "&lt;/style&gt;"
-    )
-    return (
-        style
-        + '&lt;p style="color:#6b7280;font-size:13px;margin:0 0 8px 0;"&gt;'
-        "Cells are truncated. Hover any cell to read the full value.&lt;/p&gt;"
-        f'&lt;table class="trg-board"&gt;&lt;thead&gt;&lt;tr&gt;{header_html}&lt;/tr&gt;&lt;/thead&gt;'
-        f"&lt;tbody&gt;{''.join(body_rows)}&lt;/tbody&gt;&lt;/table&gt;"
-    )
-
-    </gradio-lite-file>
-    <gradio-lite-file name="examples/trg_example_gemini_live.yaml">
-# Worked TRG example, populated from published figures for Google's
-# gemini-live-2.5-flash-native-audio as evaluated (not self-reported) by
-# tau-Voice (arXiv:2603.13686), Table 3, Table 6, and Table 8.
-#
-# See trg_example_openai_realtime.yaml for the rationale behind using one
-# third-party benchmark to compare three systems rather than three vendors'
-# self-reported numbers.
-#
-# Check it with:
-#     python3 scripts/validate_trg.py trg/trg_example_gemini_live.yaml
-
-system:
-  name: "Google gemini-live-2.5-flash-native-audio"
-  architecture: "end_to_end"
-  version: "as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025"
-
-timing:
-  metric: "Latency = avg(Response Latency, Yield Latency), Realistic condition,
-           aggregated across Retail/Airline/Telecom domains"
-  value: "1.14s"
-  statistic: "mean"
-  conditions: "Realistic speech complexity: diverse accents, background noise,
-               frame drops, muffling, LLM-driven interruptions and
-               backchannels, G.711 mu-law 8kHz telephony channel"
-  tail_reported: false
-
-recovery:
-  disruption_types:
-    - "interruption"
-    - "backchannel"
-    - "false_pause"
-  metric: "Responsiveness (avg of Response Rate and Yield Rate within 2s of
-           interruption); Interrupt Rate and Selectivity reported alongside"
-  value: "Responsiveness 69%; Interrupt Rate 21%; Selectivity 54%"
-  baseline_undisrupted: "not separately reported for these interaction-quality
-                         metrics under Clean conditions (see the note in the
-                         OpenAI sibling file: the undisturbed comparison
-                         exists only for the G axis in this paper)"
-  notes: "Lowest interrupt rate and smallest Clean-to-Realistic degradation of
-          the three providers (tau-Voice section 5.1.2), but also the lowest
-          responsiveness: it fails to respond to close to a third of user
-          turns. Robust but under-responsive, which is the opposite failure
-          mode from OpenAI's over-responsive, low-selectivity profile."
-
-grounded_outcome:
-  verification_method: "task completion scored by comparing the final
-                        environment state (e.g. database records) to a gold
-                        standard, following the tau-2-bench protocol; reported
-                        as pass@1"
-  state_source: "tau-Voice benchmark's seeded task environments across
-                Retail, Airline, and Telecom domains"
-  metric: "pass@1 task completion, Realistic condition, aggregated across all
-           three domains"
-  value: "26%"
-  self_report_excluded: true
-
-multiparty:
-  applicable: false
-  justification: "tau-Voice evaluates single-user, phone-style customer
-                  service calls (retail/airline/telecom); no multiparty
-                  condition is tested."
-
-    </gradio-lite-file>
-    <gradio-lite-file name="examples/trg_example_grok_voice.yaml">
-# Worked TRG example, populated from published figures for xAI's
-# grok-voice-agent as evaluated (not self-reported) by tau-Voice
-# (arXiv:2603.13686), Table 3, Table 6, and Table 8.
-#
-# See trg_example_openai_realtime.yaml for the rationale behind using one
-# third-party benchmark to compare three systems rather than three vendors'
-# self-reported numbers.
-#
-# Check it with:
-#     python3 scripts/validate_trg.py trg/trg_example_grok_voice.yaml
-
-system:
-  name: "xAI grok-voice-agent"
-  architecture: "end_to_end"
-  version: "as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025"
-
-timing:
-  metric: "Latency = avg(Response Latency, Yield Latency), Realistic condition,
-           aggregated across Retail/Airline/Telecom domains"
-  value: "1.15s"
-  statistic: "mean"
-  conditions: "Realistic speech complexity: diverse accents, background noise,
-               frame drops, muffling, LLM-driven interruptions and
-               backchannels, G.711 mu-law 8kHz telephony channel"
-  tail_reported: false
-
-recovery:
-  disruption_types:
-    - "interruption"
-    - "backchannel"
-    - "false_pause"
-  metric: "Responsiveness (avg of Response Rate and Yield Rate within 2s of
-           interruption); Interrupt Rate and Selectivity reported alongside"
-  value: "Responsiveness 83%; Interrupt Rate 84% (highest in the benchmark -
-          interrupting users nearly once per turn); Selectivity 57% (best in
-          the benchmark)"
-  baseline_undisrupted: "not separately reported for these interaction-quality
-                         metrics under Clean conditions (see the note in the
-                         OpenAI sibling file: the undisturbed comparison
-                         exists only for the G axis in this paper)"
-  notes: "Best selectivity of the three providers, but by far the highest
-          interrupt rate. tau-Voice's own framing: 'no current system
-          achieves both reliable responsiveness and appropriate restraint' -
-          this system illustrates the responsiveness side of that trade-off
-          taken to an extreme."
-
-grounded_outcome:
-  verification_method: "task completion scored by comparing the final
-                        environment state (e.g. database records) to a gold
-                        standard, following the tau-2-bench protocol; reported
-                        as pass@1"
-  state_source: "tau-Voice benchmark's seeded task environments across
-                Retail, Airline, and Telecom domains"
-  metric: "pass@1 task completion, Realistic condition, aggregated across all
-           three domains"
-  value: "38%"
-  self_report_excluded: true
-
-multiparty:
-  applicable: false
-  justification: "tau-Voice evaluates single-user, phone-style customer
-                  service calls (retail/airline/telecom); no multiparty
-                  condition is tested."
-
-    </gradio-lite-file>
-    <gradio-lite-file name="examples/trg_example_nemotron.yaml">
-# Worked TRG example, populated from published figures for NemotronLabs
-# VoiceChat as reported in the survey (arXiv:2609.21967).
-#
-# Purpose: demonstrate that TRG is satisfiable by a real system, not just an
-# aspiration. This system was chosen precisely because it already reports on
-# all three required axes, which is what makes it the strongest evidence in
-# the corpus for the reporting convention TRG proposes.
-#
-# Check it with:
-#     python3 validate_trg.py trg_example_nemotron.yaml
-
-system:
-  name: "NemotronLabs VoiceChat"
-  architecture: "end_to_end"
-  version: "as reported, arXiv:2609.21967"
-
-timing:
-  metric: "streaming speech encoder to TTS decoder, parallel output streams"
-  value: "not separately reported as a latency figure in the surveyed text"
-  statistic: "mean"
-  conditions: "full-duplex operation with agent and structured-function streams"
-  tail_reported: false
-
-recovery:
-  disruption_types:
-    - "false_pause"
-    - "interruption"
-    - "backchannel"
-  metric: "correct-takeover rate following genuine user interruption; and
-           resumption rate following backchannel"
-  value: "100% correct takeover on genuine interruption (FDB v1.0);
-          93% resumption after backchannels (FDB v1.5)"
-  baseline_undisrupted: "lowest false-takeover rate during pauses among
-                         open-weight systems tested"
-  notes: "Reports takeover behaviour separately for genuine interruptions
-          versus mere pauses, which is the distinction that makes the number
-          interpretable."
-
-grounded_outcome:
-  verification_method: "tool-selection correctness scored against expected
-                        tool calls under natural disfluency (FDB v3)"
-  state_source: "Full-Duplex-Bench v3 tool-use harness"
-  metric: "tool-selection F1"
-  value: "82.5%"
-  self_report_excluded: true
-
-multiparty:
-  applicable: false
-  justification: "Evaluated in dyadic user-agent settings; the benchmarks
-                  applied (Full-Duplex-Bench family) are two-participant, so
-                  a multiparty appropriateness measure would have nothing to
-                  score against."
-
-    </gradio-lite-file>
-    <gradio-lite-file name="examples/trg_example_openai_realtime.yaml">
-# Worked TRG example, populated from published figures for OpenAI's
-# gpt-realtime-1.5 as evaluated (not self-reported) by tau-Voice
-# (arXiv:2603.13686), Table 3, Table 6, and Table 8.
-#
-# Purpose: this and its two sibling files (gemini_live, grok_voice) form a
-# same-benchmark baseline comparison. All three systems were tested by the
-# same third party, under the same conditions, in the same paper - which is
-# a stronger comparison than stitching together three vendors' own reported
-# numbers, each measured a different way.
-#
-# Check it with:
-#     python3 scripts/validate_trg.py trg/trg_example_openai_realtime.yaml
-
-system:
-  name: "OpenAI gpt-realtime-1.5"
-  architecture: "end_to_end"
-  version: "as evaluated by tau-Voice, arXiv:2603.13686, released Feb 2026"
-
-timing:
-  metric: "Latency = avg(Response Latency, Yield Latency), Realistic condition,
-           aggregated across Retail/Airline/Telecom domains"
-  value: "0.90s"
-  statistic: "mean"
-  conditions: "Realistic speech complexity: diverse accents, background noise,
-               frame drops, muffling, LLM-driven interruptions and
-               backchannels, G.711 mu-law 8kHz telephony channel"
-  tail_reported: false
-
-recovery:
-  disruption_types:
-    - "interruption"
-    - "backchannel"
-    - "false_pause"
-  metric: "Responsiveness (avg of Response Rate and Yield Rate within 2s of
-           interruption); Interrupt Rate and Selectivity reported alongside"
-  value: "Responsiveness 100%; Interrupt Rate 14% (turns where the agent
-          speaks before the user finishes); Selectivity 6% (correctly
-          ignoring backchannels/vocal tics/non-directed speech)"
-  baseline_undisrupted: "not separately reported for these interaction-quality
-                         metrics; tau-Voice reports pass@1 (not
-                         responsiveness/interrupt/selectivity) under the Clean
-                         condition, so the undisturbed comparison exists only
-                         for the G axis, not this one"
-  notes: "Best-in-benchmark on latency, responsiveness, and interrupt rate,
-          but worst-in-benchmark on selectivity: it responds to nearly every
-          backchannel, vocal tic, and non-directed utterance as if it were a
-          turn-taking cue. The four numbers together show a real trade-off
-          that any single metric would hide."
-
-grounded_outcome:
-  verification_method: "task completion scored by comparing the final
-                        environment state (e.g. database records) to a gold
-                        standard, following the tau-2-bench protocol; reported
-                        as pass@1"
-  state_source: "tau-Voice benchmark's seeded task environments across
-                Retail, Airline, and Telecom domains"
-  metric: "pass@1 task completion, Realistic condition, aggregated across all
-           three domains"
-  value: "35%"
-  self_report_excluded: true
-
-multiparty:
-  applicable: false
-  justification: "tau-Voice evaluates single-user, phone-style customer
-                  service calls (retail/airline/telecom); no multiparty
-                  condition is tested."
-
-    </gradio-lite-file>
-    <gradio-lite-file name="examples/trg_report_template.yaml">
-# TRG reporting template (Timing - Recovery - Grounded)
-#
-# Fill this in alongside a real-time voice agent evaluation, then check it:
-#     python3 validate_trg.py trg_report.yaml
-#
-# TRG prescribes which AXES must be reported, not which metric to use on each.
-# Any metric is acceptable provided you say what it measures and how it was
-# obtained. A report silent on an applicable axis leaves the system
-# uncharacterised, however strong its remaining numbers are.
-
-system:
-  name: ""                  # system under evaluation
-  architecture: ""          # end_to_end | cascaded | hybrid
-  version: ""               # optional, but aids reproduction
-
-# ---------------------------------------------------------------------------
-# T - TIMING (required)
-# At least one latency measure under intended deployment conditions.
-# ---------------------------------------------------------------------------
-timing:
-  metric: ""                # e.g. "time to first audio"
-  value: ""                 # e.g. "755 ms"
-  statistic: ""             # mean | median | p95 | p99 | max
-  conditions: ""            # hardware, self-hosted vs API, load, audio setup
-  # Tail latency matters wherever users experience the worst case, not the
-  # average one. If you report only a mean, say why that is the right choice.
-  tail_reported: false
-
-# ---------------------------------------------------------------------------
-# R - RECOVERY (required)
-# Behaviour AFTER disruption, reported separately from undisturbed runs.
-# Recovery is empirically a distinct capability axis, not a corollary of
-# general quality, so an undisturbed-only number does not satisfy this axis.
-# ---------------------------------------------------------------------------
-recovery:
-  disruption_types: []      # interruption | backchannel | false_pause | noise
-  metric: ""                # e.g. "resumes at correct workflow step"
-  value: ""                 # e.g. "93%"
-  baseline_undisrupted: ""  # same metric without disruption, for contrast
-  notes: ""
-
-# ---------------------------------------------------------------------------
-# G - GROUNDED OUTCOME (required)
-# Task success verified against EXTERNAL STATE, not the agent's self-report.
-# A fluent agent confidently describing an action it never performed is the
-# failure mode this axis exists to catch.
-# ---------------------------------------------------------------------------
-grounded_outcome:
-  verification_method: ""   # e.g. "assert database rows after each episode"
-  state_source: ""          # e.g. "seeded PostgreSQL backend"
-  metric: ""                # e.g. "task completion with correct side effects"
-  value: ""                 # e.g. "62%"
-  # Set true ONLY if success is judged from external state. Grading a
-  # transcript, or asking a model whether the task succeeded, is self-report.
-  self_report_excluded: false
-
-# ---------------------------------------------------------------------------
-# M - MULTIPARTY APPROPRIATENESS (conditional)
-# Required only where the deployment admits more than two legitimate speakers.
-# A strictly dyadic system is not penalised for lacking a capability its
-# deployment never exercises - set applicable: false and say why.
-# ---------------------------------------------------------------------------
-multiparty:
-  applicable: false
-  justification: ""         # required when applicable is false
-  silence_metric: ""        # correctly declining to speak
-  silence_value: ""
-  authority_metric: ""      # who may be told what
-  authority_value: ""
-
-    </gradio-lite-file>
-  </gradio-lite>
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => selectTab(t));
+  t.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") selectTab(tabs[(i + 1) % tabs.length]);
+    if (e.key === "ArrowLeft") selectTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+  });
+});
+
+async function boot() {
+  const pyodide = await loadPyodide();
+  await pyodide.loadPackage("pyyaml");
+  const files = JSON.parse($("trg-files").textContent);
+  pyodide.FS.mkdirTree("/home/pyodide/examples");
+  for (const [name, text] of Object.entries(files)) pyodide.FS.writeFile(`/home/pyodide/${name}`, text);
+  pyodide.runPython("import os, sys; os.chdir('/home/pyodide'); sys.path.insert(0, '/home/pyodide')");
+  const core = pyodide.pyimport("core");
+
+  const picker = $("example");
+  for (const name of core.EXAMPLE_FILES.toJs().keys()) picker.add(new Option(name, name));
+  const load = () => { $("yaml").value = core.load_example(picker.value); $("result").innerHTML = ""; };
+  picker.addEventListener("change", load);
+  load();
+
+  $("upload").addEventListener("change", async e => {
+    const f = e.target.files[0]; if (f) { $("yaml").value = await f.text(); $("run").click(); }
+  });
+  $("run").addEventListener("click", () => { $("result").innerHTML = core.validate_text($("yaml").value); });
+  $("board").innerHTML = core.build_leaderboard_html();
+
+  ["example", "yaml", "upload", "run"].forEach(id => $(id).disabled = false);
+  status("");
+}
+
+boot().catch(err => status("Failed to start: " + err, true));
+</script>
 </body>
 </html>

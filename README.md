@@ -51,7 +51,7 @@ trg/
   trg_example_openai_realtime.yaml worked example, third-party benchmarked
   trg_example_gemini_live.yaml     worked example, third-party benchmarked
   trg_example_grok_voice.yaml      worked example, third-party benchmarked
-hf_space/                    Gradio app mirrored to the Hugging Face Space
+hf_space/                    Static Pyodide page mirrored to the Hugging Face Space
 assets/                      demo.gif + demo.tape (the VHS script that recorded it)
 pyproject.toml              pip-installable package (trg-validate, trg-leaderboard)
 ```

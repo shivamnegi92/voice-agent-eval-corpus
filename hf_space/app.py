@@ -1,4 +1,6 @@
-"""TRG (Timing-Recovery-Grounded) evaluation pipeline - Hugging Face Space.
+"""TRG (Timing-Recovery-Grounded) evaluation pipeline - optional server-backed
+Gradio app. The deployed static Space does NOT use this file; it runs core.py
+directly on Pyodide (see build_index.py). Run locally: `python app.py`.
 
 Companion demo for *Evaluating Real-Time Voice Agents: From Component
 Quality to Grounded Outcomes* (arXiv:2609.30798) and the corpus repo:
@@ -16,24 +18,10 @@ from __future__ import annotations
 from pathlib import Path
 
 import gradio as gr
-import yaml
 
-from leaderboard import load_reports, to_html
-from validator import format_report_html, validate_data
+from core import EXAMPLE_FILES, build_leaderboard_html, load_example, validate_text
 
-# Gradio-Lite exec()s this file with no __file__; its virtual FS puts the
-# inlined files relative to the cwd instead.
-_HERE = Path(__file__).parent if "__file__" in globals() else Path.cwd()
-EXAMPLES_DIR = _HERE / "examples"
-
-EXAMPLE_FILES = {
-    "Blank template": "trg_report_template.yaml",
-    "OpenAI gpt-realtime-1.5 (tau-Voice benchmark)": "trg_example_openai_realtime.yaml",
-    "Google gemini-live-2.5-flash (tau-Voice benchmark)": "trg_example_gemini_live.yaml",
-    "xAI grok-voice-agent (tau-Voice benchmark)": "trg_example_grok_voice.yaml",
-    "NemotronLabs VoiceChat (self-reported)": "trg_example_nemotron.yaml",
-}
-TEMPLATE_TEXT = (EXAMPLES_DIR / "trg_report_template.yaml").read_text(encoding="utf-8")
+TEMPLATE_TEXT = load_example("Blank template")
 
 HEADER_HTML = """
 <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
@@ -57,42 +45,10 @@ HEADER_HTML = """
 </div>
 """
 
-LEADERBOARD_INTRO = """
-<p style="color:#374151;">
-Three of these four systems (OpenAI, Google, xAI) were benchmarked by a
-single third party &mdash;
-<a href="https://arxiv.org/abs/2603.13686" target="_blank">tau-Voice</a>
-&mdash; under identical conditions, with task success verified against
-final database state. TRG does not rank them into one score; it reports
-which axes are covered so you can compare like-for-like.
-</p>
-"""
-
-
-def load_example(choice: str) -> str:
-    filename = EXAMPLE_FILES.get(choice, "trg_report_template.yaml")
-    return (EXAMPLES_DIR / filename).read_text(encoding="utf-8")
-
-
 def validate(yaml_text: str, uploaded_file) -> str:
     if uploaded_file is not None:
         yaml_text = Path(uploaded_file.name).read_text(encoding="utf-8")
-
-    if not yaml_text or not yaml_text.strip():
-        return '<p style="color:#6b7280;">Paste a TRG report, upload one, or load an example above.</p>'
-
-    try:
-        data = yaml.safe_load(yaml_text) or {}
-    except yaml.YAMLError as exc:
-        return f'<p style="color:#dc2626;">Could not parse YAML: {exc}</p>'
-
-    report = validate_data(data)
-    return format_report_html(report)
-
-
-def build_leaderboard_html() -> str:
-    rows = load_reports(EXAMPLES_DIR)
-    return LEADERBOARD_INTRO + to_html(rows)
+    return validate_text(yaml_text)
 
 
 with gr.Blocks(title="TRG Voice Agent Evaluation", theme=gr.themes.Soft(primary_hue="blue")) as demo:
