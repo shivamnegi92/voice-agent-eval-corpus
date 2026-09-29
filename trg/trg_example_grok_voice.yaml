@@ -1,0 +1,63 @@
+# Worked TRG example, populated from published figures for xAI's
+# grok-voice-agent as evaluated (not self-reported) by tau-Voice
+# (arXiv:2603.13686), Table 3, Table 6, and Table 8.
+#
+# See trg_example_openai_realtime.yaml for the rationale behind using one
+# third-party benchmark to compare three systems rather than three vendors'
+# self-reported numbers.
+#
+# Check it with:
+#     python3 scripts/validate_trg.py trg/trg_example_grok_voice.yaml
+
+system:
+  name: "xAI grok-voice-agent"
+  architecture: "end_to_end"
+  version: "as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025"
+
+timing:
+  metric: "Latency = avg(Response Latency, Yield Latency), Realistic condition,
+           aggregated across Retail/Airline/Telecom domains"
+  value: "1.15s"
+  statistic: "mean"
+  conditions: "Realistic speech complexity: diverse accents, background noise,
+               frame drops, muffling, LLM-driven interruptions and
+               backchannels, G.711 mu-law 8kHz telephony channel"
+  tail_reported: false
+
+recovery:
+  disruption_types:
+    - "interruption"
+    - "backchannel"
+    - "false_pause"
+  metric: "Responsiveness (avg of Response Rate and Yield Rate within 2s of
+           interruption); Interrupt Rate and Selectivity reported alongside"
+  value: "Responsiveness 83%; Interrupt Rate 84% (highest in the benchmark -
+          interrupting users nearly once per turn); Selectivity 57% (best in
+          the benchmark)"
+  baseline_undisrupted: "not separately reported for these interaction-quality
+                         metrics under Clean conditions (see the note in the
+                         OpenAI sibling file: the undisturbed comparison
+                         exists only for the G axis in this paper)"
+  notes: "Best selectivity of the three providers, but by far the highest
+          interrupt rate. tau-Voice's own framing: 'no current system
+          achieves both reliable responsiveness and appropriate restraint' -
+          this system illustrates the responsiveness side of that trade-off
+          taken to an extreme."
+
+grounded_outcome:
+  verification_method: "task completion scored by comparing the final
+                        environment state (e.g. database records) to a gold
+                        standard, following the tau-2-bench protocol; reported
+                        as pass@1"
+  state_source: "tau-Voice benchmark's seeded task environments across
+                Retail, Airline, and Telecom domains"
+  metric: "pass@1 task completion, Realistic condition, aggregated across all
+           three domains"
+  value: "38%"
+  self_report_excluded: true
+
+multiparty:
+  applicable: false
+  justification: "tau-Voice evaluates single-user, phone-style customer
+                  service calls (retail/airline/telecom); no multiparty
+                  condition is tested."

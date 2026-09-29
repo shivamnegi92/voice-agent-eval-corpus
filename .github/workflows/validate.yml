@@ -72,6 +72,15 @@ jobs:
             echo "::error::blank template should NOT validate"
             exit 1
           fi
-          # worked example must pass
-          python3 scripts/validate_trg.py trg/trg_example_nemotron.yaml
+          # every worked example must pass
+          for f in trg/trg_example_*.yaml; do
+            echo "--- $f ---"
+            python3 scripts/validate_trg.py "$f"
+          done
           echo "TRG validator OK in both directions"
+
+      - name: Leaderboard regenerates cleanly
+        run: |
+          python3 scripts/build_leaderboard.py
+          git diff --exit-code corpus/leaderboard.md corpus/leaderboard.csv || \
+            (echo "::error::corpus/leaderboard.{md,csv} is stale - run scripts/build_leaderboard.py and commit the result" && exit 1)

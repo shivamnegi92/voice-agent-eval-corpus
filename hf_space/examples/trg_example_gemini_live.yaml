@@ -1,0 +1,61 @@
+# Worked TRG example, populated from published figures for Google's
+# gemini-live-2.5-flash-native-audio as evaluated (not self-reported) by
+# tau-Voice (arXiv:2603.13686), Table 3, Table 6, and Table 8.
+#
+# See trg_example_openai_realtime.yaml for the rationale behind using one
+# third-party benchmark to compare three systems rather than three vendors'
+# self-reported numbers.
+#
+# Check it with:
+#     python3 scripts/validate_trg.py trg/trg_example_gemini_live.yaml
+
+system:
+  name: "Google gemini-live-2.5-flash-native-audio"
+  architecture: "end_to_end"
+  version: "as evaluated by tau-Voice, arXiv:2603.13686, released Dec 2025"
+
+timing:
+  metric: "Latency = avg(Response Latency, Yield Latency), Realistic condition,
+           aggregated across Retail/Airline/Telecom domains"
+  value: "1.14s"
+  statistic: "mean"
+  conditions: "Realistic speech complexity: diverse accents, background noise,
+               frame drops, muffling, LLM-driven interruptions and
+               backchannels, G.711 mu-law 8kHz telephony channel"
+  tail_reported: false
+
+recovery:
+  disruption_types:
+    - "interruption"
+    - "backchannel"
+    - "false_pause"
+  metric: "Responsiveness (avg of Response Rate and Yield Rate within 2s of
+           interruption); Interrupt Rate and Selectivity reported alongside"
+  value: "Responsiveness 69%; Interrupt Rate 21%; Selectivity 54%"
+  baseline_undisrupted: "not separately reported for these interaction-quality
+                         metrics under Clean conditions (see the note in the
+                         OpenAI sibling file: the undisturbed comparison
+                         exists only for the G axis in this paper)"
+  notes: "Lowest interrupt rate and smallest Clean-to-Realistic degradation of
+          the three providers (tau-Voice section 5.1.2), but also the lowest
+          responsiveness: it fails to respond to close to a third of user
+          turns. Robust but under-responsive, which is the opposite failure
+          mode from OpenAI's over-responsive, low-selectivity profile."
+
+grounded_outcome:
+  verification_method: "task completion scored by comparing the final
+                        environment state (e.g. database records) to a gold
+                        standard, following the tau-2-bench protocol; reported
+                        as pass@1"
+  state_source: "tau-Voice benchmark's seeded task environments across
+                Retail, Airline, and Telecom domains"
+  metric: "pass@1 task completion, Realistic condition, aggregated across all
+           three domains"
+  value: "26%"
+  self_report_excluded: true
+
+multiparty:
+  applicable: false
+  justification: "tau-Voice evaluates single-user, phone-style customer
+                  service calls (retail/airline/telecom); no multiparty
+                  condition is tested."

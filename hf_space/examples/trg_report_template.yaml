@@ -1,0 +1,69 @@
+# TRG reporting template (Timing - Recovery - Grounded)
+#
+# Fill this in alongside a real-time voice agent evaluation, then check it:
+#     python3 validate_trg.py trg_report.yaml
+#
+# TRG prescribes which AXES must be reported, not which metric to use on each.
+# Any metric is acceptable provided you say what it measures and how it was
+# obtained. A report silent on an applicable axis leaves the system
+# uncharacterised, however strong its remaining numbers are.
+
+system:
+  name: ""                  # system under evaluation
+  architecture: ""          # end_to_end | cascaded | hybrid
+  version: ""               # optional, but aids reproduction
+
+# ---------------------------------------------------------------------------
+# T - TIMING (required)
+# At least one latency measure under intended deployment conditions.
+# ---------------------------------------------------------------------------
+timing:
+  metric: ""                # e.g. "time to first audio"
+  value: ""                 # e.g. "755 ms"
+  statistic: ""             # mean | median | p95 | p99 | max
+  conditions: ""            # hardware, self-hosted vs API, load, audio setup
+  # Tail latency matters wherever users experience the worst case, not the
+  # average one. If you report only a mean, say why that is the right choice.
+  tail_reported: false
+
+# ---------------------------------------------------------------------------
+# R - RECOVERY (required)
+# Behaviour AFTER disruption, reported separately from undisturbed runs.
+# Recovery is empirically a distinct capability axis, not a corollary of
+# general quality, so an undisturbed-only number does not satisfy this axis.
+# ---------------------------------------------------------------------------
+recovery:
+  disruption_types: []      # interruption | backchannel | false_pause | noise
+  metric: ""                # e.g. "resumes at correct workflow step"
+  value: ""                 # e.g. "93%"
+  baseline_undisrupted: ""  # same metric without disruption, for contrast
+  notes: ""
+
+# ---------------------------------------------------------------------------
+# G - GROUNDED OUTCOME (required)
+# Task success verified against EXTERNAL STATE, not the agent's self-report.
+# A fluent agent confidently describing an action it never performed is the
+# failure mode this axis exists to catch.
+# ---------------------------------------------------------------------------
+grounded_outcome:
+  verification_method: ""   # e.g. "assert database rows after each episode"
+  state_source: ""          # e.g. "seeded PostgreSQL backend"
+  metric: ""                # e.g. "task completion with correct side effects"
+  value: ""                 # e.g. "62%"
+  # Set true ONLY if success is judged from external state. Grading a
+  # transcript, or asking a model whether the task succeeded, is self-report.
+  self_report_excluded: false
+
+# ---------------------------------------------------------------------------
+# M - MULTIPARTY APPROPRIATENESS (conditional)
+# Required only where the deployment admits more than two legitimate speakers.
+# A strictly dyadic system is not penalised for lacking a capability its
+# deployment never exercises - set applicable: false and say why.
+# ---------------------------------------------------------------------------
+multiparty:
+  applicable: false
+  justification: ""         # required when applicable is false
+  silence_metric: ""        # correctly declining to speak
+  silence_value: ""
+  authority_metric: ""      # who may be told what
+  authority_value: ""
