@@ -26,8 +26,18 @@ HEAD = """<!DOCTYPE html>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TRG Voice Agent Evaluation</title>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.css" />
+  <!-- Gradio's own maintainer-provided patched build, NOT jsdelivr/npm:
+       @gradio/lite (any released npm version, including pinned 5.45.0)
+       bundles a broken internal huggingface-hub constraint that has no
+       resolvable wasm wheel (github.com/gradio-app/gradio/issues/12262).
+       A `huggingface_hub==X` pin in gradio-lite-requirements does NOT fix
+       this - it's baked into Lite's own manifest, not a normal pip
+       constraint. This S3 URL is the exact patched build the Gradio team
+       pointed to in that issue. If it ever 404s, re-check the issue for a
+       replacement, or check whether a newer npm @gradio/lite release has
+       absorbed the fix (PR #12162) before falling back to this pin. -->
+  <script type="module" src="https://gradio-lite-previews.s3.amazonaws.com/PINNED_HF_HUB/dist/lite.js"></script>
+  <link rel="stylesheet" href="https://gradio-lite-previews.s3.amazonaws.com/PINNED_HF_HUB/dist/lite.css" />
   <style>
     html, body { margin: 0; padding: 0; height: 100%; }
     gradio-lite { display: block; min-height: 100vh; }
@@ -37,6 +47,7 @@ HEAD = """<!DOCTYPE html>
   <gradio-lite>
     <gradio-lite-requirements>
 pyyaml
+huggingface_hub==0.33.5
     </gradio-lite-requirements>
 """
 
