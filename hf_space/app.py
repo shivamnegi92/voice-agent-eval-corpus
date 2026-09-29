@@ -21,7 +21,10 @@ import yaml
 from leaderboard import load_reports, to_html
 from validator import format_report_html, validate_data
 
-EXAMPLES_DIR = Path(__file__).parent / "examples"
+# Gradio-Lite exec()s this file with no __file__; its virtual FS puts the
+# inlined files relative to the cwd instead.
+_HERE = Path(__file__).parent if "__file__" in globals() else Path.cwd()
+EXAMPLES_DIR = _HERE / "examples"
 
 EXAMPLE_FILES = {
     "Blank template": "trg_report_template.yaml",
