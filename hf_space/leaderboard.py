@@ -12,6 +12,7 @@ vendor chose to publish.
 
 from __future__ import annotations
 
+import html
 from pathlib import Path
 from typing import Any
 
@@ -79,3 +80,62 @@ def to_csv(rows: list[dict]) -> str:
     for r in rows:
         lines.append(",".join(str(r[f]).replace(",", ";") for f in fields))
     return "\n".join(lines) + "\n"
+
+
+def _cell(text: str, max_len: int = 70) -> str:
+    """Escape, truncate, and keep the full text as a hover tooltip."""
+    text = str(text)
+    escaped_full = html.escape(text, quote=True)
+    short = text if len(text) <= max_len else text[: max_len - 1] + "\u2026"
+    escaped_short = html.escape(short, quote=False)
+    return f'<td title="{escaped_full}">{escaped_short}</td>'
+
+
+def to_html(rows: list[dict]) -> str:
+    """Styled table for the web UI. Long cells truncate with a hover tooltip
+    showing the full text, since these reports carry real qualifying context
+    that a bare number would flatten."""
+    headers = [
+        "System", "Architecture", "Timing (T)", "Recovery (R)",
+        "Grounded Outcome (G)", "TRG", "Warnings", "Source",
+    ]
+    header_html = "".join(f"<th>{h}</th>" for h in headers)
+
+    body_rows = []
+    for r in rows:
+        if r["compliant"]:
+            badge = '<span style="color:#16a34a;font-weight:700;">&#10003; pass</span>'
+        else:
+            badge = '<span style="color:#dc2626;font-weight:700;">&#10007; fail</span>'
+        body_rows.append(
+            "<tr>"
+            + _cell(r["system"], 42)
+            + _cell(r["architecture"], 20)
+            + _cell(r["timing"], 50)
+            + _cell(r["recovery"], 65)
+            + _cell(r["grounded_outcome"], 20)
+            + f"<td>{badge}</td>"
+            + f'<td style="text-align:center;">{r["warnings"]}</td>'
+            + f'<td><code style="font-size:12px;">{html.escape(r["file"])}</code></td>'
+            + "</tr>"
+        )
+
+    style = (
+        "<style>"
+        ".trg-board{border-collapse:collapse;width:100%;font-family:system-ui,"
+        "-apple-system,sans-serif;font-size:13.5px;}"
+        ".trg-board th{text-align:left;padding:9px 10px;background:#f3f4f6;"
+        "border-bottom:2px solid #d1d5db;white-space:nowrap;}"
+        ".trg-board td{padding:9px 10px;border-bottom:1px solid #e5e7eb;"
+        "max-width:240px;overflow:hidden;text-overflow:ellipsis;"
+        "white-space:nowrap;vertical-align:top;}"
+        ".trg-board tr:hover td{background:#f9fafb;}"
+        "</style>"
+    )
+    return (
+        style
+        + '<p style="color:#6b7280;font-size:13px;margin:0 0 8px 0;">'
+        "Cells are truncated. Hover any cell to read the full value.</p>"
+        f'<table class="trg-board"><thead><tr>{header_html}</tr></thead>'
+        f"<tbody>{''.join(body_rows)}</tbody></table>"
+    )

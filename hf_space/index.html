@@ -24,8 +24,8 @@ Quality to Grounded Outcomes* (arXiv:2609.30798) and the corpus repo:
 https://github.com/shivamnegi92/voice-agent-eval-corpus
 
 Two tabs:
-1. Validate a TRG report you paste or upload - no invented scoring, just a
-   compliance check against the four axes.
+1. Validate a TRG report you paste, upload, or load from an example - no
+   invented scoring, just a compliance check against the four axes.
 2. Baseline leaderboard - four systems, one worked example self-reported and
    three benchmarked side-by-side by a single third party (tau-Voice).
 """
@@ -37,11 +37,57 @@ from pathlib import Path
 import gradio as gr
 import yaml
 
-from leaderboard import load_reports, to_markdown
-from validator import format_report, validate_data
+from leaderboard import load_reports, to_html
+from validator import format_report_html, validate_data
 
 EXAMPLES_DIR = Path(__file__).parent / "examples"
+
+EXAMPLE_FILES = {
+    "Blank template": "trg_report_template.yaml",
+    "OpenAI gpt-realtime-1.5 (tau-Voice benchmark)": "trg_example_openai_realtime.yaml",
+    "Google gemini-live-2.5-flash (tau-Voice benchmark)": "trg_example_gemini_live.yaml",
+    "xAI grok-voice-agent (tau-Voice benchmark)": "trg_example_grok_voice.yaml",
+    "NemotronLabs VoiceChat (self-reported)": "trg_example_nemotron.yaml",
+}
 TEMPLATE_TEXT = (EXAMPLES_DIR / "trg_report_template.yaml").read_text(encoding="utf-8")
+
+HEADER_HTML = """
+&lt;div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px;"&gt;
+  &lt;h1 style="margin:0;font-size:26px;"&gt;TRG: Timing &amp;middot; Recovery &amp;middot; Grounded&lt;/h1&gt;
+&lt;/div&gt;
+&lt;p style="margin:0 0 10px 0;color:#4b5563;"&gt;
+  A minimum reporting standard for real-time voice agents &amp;mdash; a report
+  cannot claim compliance while staying silent on an axis its deployment
+  actually exercises.
+&lt;/p&gt;
+&lt;div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;"&gt;
+  &lt;a href="https://arxiv.org/abs/2609.30798" target="_blank" style="text-decoration:none;"&gt;
+    &lt;span style="background:#b31b1b;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;arXiv:2609.30798&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;a href="https://github.com/shivamnegi92/voice-agent-eval-corpus" target="_blank" style="text-decoration:none;"&gt;
+    &lt;span style="background:#1f2328;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;GitHub repo&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;a href="https://github.com/shivamnegi92/voice-agent-eval-corpus/blob/main/corpus/leaderboard.md" target="_blank" style="text-decoration:none;"&gt;
+    &lt;span style="background:#2563eb;color:#fff;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:600;"&gt;Full leaderboard on GitHub&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+"""
+
+LEADERBOARD_INTRO = """
+&lt;p style="color:#374151;"&gt;
+Three of these four systems (OpenAI, Google, xAI) were benchmarked by a
+single third party &amp;mdash;
+&lt;a href="https://arxiv.org/abs/2603.13686" target="_blank"&gt;tau-Voice&lt;/a&gt;
+&amp;mdash; under identical conditions, with task success verified against
+final database state. TRG does not rank them into one score; it reports
+which axes are covered so you can compare like-for-like.
+&lt;/p&gt;
+"""
+
+
+def load_example(choice: str) -&gt; str:
+    filename = EXAMPLE_FILES.get(choice, "trg_report_template.yaml")
+    return (EXAMPLES_DIR / filename).read_text(encoding="utf-8")
 
 
 def validate(yaml_text: str, uploaded_file) -&gt; str:
@@ -49,62 +95,56 @@ def validate(yaml_text: str, uploaded_file) -&gt; str:
         yaml_text = Path(uploaded_file.name).read_text(encoding="utf-8")
 
     if not yaml_text or not yaml_text.strip():
-        return "Paste a TRG report (or upload one) to validate."
+        return '&lt;p style="color:#6b7280;"&gt;Paste a TRG report, upload one, or load an example above.&lt;/p&gt;'
 
     try:
         data = yaml.safe_load(yaml_text) or {}
     except yaml.YAMLError as exc:
-        return f"error: could not parse YAML: {exc}"
+        return f'&lt;p style="color:#dc2626;"&gt;Could not parse YAML: {exc}&lt;/p&gt;'
 
     report = validate_data(data)
-    return format_report(report)
+    return format_report_html(report)
 
 
-def build_leaderboard_markdown() -&gt; str:
+def build_leaderboard_html() -&gt; str:
     rows = load_reports(EXAMPLES_DIR)
-    intro = (
-        "Three of these four systems (OpenAI, Google, xAI) were benchmarked "
-        "by a single third party - [tau-Voice](https://arxiv.org/abs/2603.13686) "
-        "- under identical conditions, with task success verified against "
-        "final database state. TRG does not rank them into one score; it "
-        "reports which axes are covered so you can compare like-for-like.\n\n"
-    )
-    return intro + to_markdown(rows)
+    return LEADERBOARD_INTRO + to_html(rows)
 
 
-with gr.Blocks(title="TRG Voice Agent Evaluation") as demo:
-    gr.Markdown(
-        "# TRG: Timing - Recovery - Grounded\n"
-        "A minimum reporting standard for real-time voice agents, from "
-        "[*Evaluating Real-Time Voice Agents: From Component Quality to "
-        "Grounded Outcomes*](https://arxiv.org/abs/2609.30798). "
-        "[Corpus + full pipeline on GitHub]"
-        "(https://github.com/shivamnegi92/voice-agent-eval-corpus)."
-    )
+with gr.Blocks(title="TRG Voice Agent Evaluation", theme=gr.themes.Soft(primary_hue="blue")) as demo:
+    gr.HTML(HEADER_HTML)
 
     with gr.Tab("Validate a report"):
         gr.Markdown(
-            "Paste a filled-in TRG YAML report (or upload one) and check "
-            "which axes are compliant. This checks *coverage*, not quality - "
+            "Paste a filled-in TRG YAML report, upload one, or load a "
+            "worked example below. This checks *coverage*, not quality - "
             "it will not tell you your numbers are good, only that you "
             "reported the axis honestly."
+        )
+        example_picker = gr.Dropdown(
+            choices=list(EXAMPLE_FILES),
+            value="Blank template",
+            label="Load an example",
         )
         with gr.Row():
             with gr.Column():
                 yaml_input = gr.Textbox(
                     label="TRG report (YAML)",
                     value=TEMPLATE_TEXT,
-                    lines=28,
+                    lines=26,
+                    max_lines=40,
                 )
                 file_input = gr.File(label="...or upload a .yaml file", file_types=[".yaml", ".yml"])
                 run_btn = gr.Button("Validate", variant="primary")
             with gr.Column():
-                result = gr.Textbox(label="Result", lines=28)
+                gr.Markdown("**Result**")
+                result = gr.HTML()
 
+        example_picker.change(load_example, inputs=example_picker, outputs=yaml_input)
         run_btn.click(validate, inputs=[yaml_input, file_input], outputs=result)
 
     with gr.Tab("Baseline leaderboard"):
-        gr.Markdown(build_leaderboard_markdown())
+        gr.HTML(build_leaderboard_html())
 
 if __name__ == "__main__":
     demo.launch()
@@ -121,6 +161,7 @@ which is the reader's job, not a linter's.
 
 from __future__ import annotations
 
+import html
 from pathlib import Path
 from typing import Any
 
@@ -277,6 +318,47 @@ def format_report(r: Report) -&gt; str:
 
     return "\n".join(lines)
 
+
+def format_report_html(r: Report) -&gt; str:
+    """Same information as format_report, styled for the web UI."""
+    if r.compliant:
+        badge = (
+            '&lt;span style="background:#16a34a;color:#fff;padding:4px 12px;'
+            'border-radius:999px;font-weight:600;font-size:13px;"&gt;'
+            "&amp;#10003; COMPLIANT&lt;/span&gt;"
+        )
+    else:
+        n = len(r.errors)
+        badge = (
+            '&lt;span style="background:#dc2626;color:#fff;padding:4px 12px;'
+            'border-radius:999px;font-weight:600;font-size:13px;"&gt;'
+            f"&amp;#10007; NOT COMPLIANT &amp;middot; {n} error{'s' if n != 1 else ''}&lt;/span&gt;"
+        )
+
+    parts = [
+        '&lt;div style="font-family:system-ui,-apple-system,sans-serif;line-height:1.5;"&gt;',
+        f'&lt;h3 style="margin:0 0 10px 0;"&gt;{html.escape(r.system_name)}&lt;/h3&gt;',
+        badge,
+    ]
+
+    if r.errors:
+        parts.append('&lt;p style="margin:14px 0 4px 0;font-weight:600;color:#991b1b;"&gt;Errors&lt;/p&gt;')
+        parts.append('&lt;ul style="margin:0;padding-left:20px;color:#991b1b;"&gt;')
+        parts += [f"&lt;li&gt;{html.escape(e)}&lt;/li&gt;" for e in r.errors]
+        parts.append("&lt;/ul&gt;")
+
+    if r.warnings:
+        parts.append('&lt;p style="margin:14px 0 4px 0;font-weight:600;color:#92400e;"&gt;Warnings&lt;/p&gt;')
+        parts.append('&lt;ul style="margin:0;padding-left:20px;color:#92400e;"&gt;')
+        parts += [f"&lt;li&gt;{html.escape(w)}&lt;/li&gt;" for w in r.warnings]
+        parts.append("&lt;/ul&gt;")
+
+    if not r.errors and not r.warnings:
+        parts.append('&lt;p style="margin:14px 0 0 0;color:#6b7280;"&gt;No warnings.&lt;/p&gt;')
+
+    parts.append("&lt;/div&gt;")
+    return "".join(parts)
+
     </gradio-lite-file>
     <gradio-lite-file name="leaderboard.py">
 """Build a TRG leaderboard from a directory of report YAMLs.
@@ -293,6 +375,7 @@ vendor chose to publish.
 
 from __future__ import annotations
 
+import html
 from pathlib import Path
 from typing import Any
 
@@ -360,6 +443,65 @@ def to_csv(rows: list[dict]) -&gt; str:
     for r in rows:
         lines.append(",".join(str(r[f]).replace(",", ";") for f in fields))
     return "\n".join(lines) + "\n"
+
+
+def _cell(text: str, max_len: int = 70) -&gt; str:
+    """Escape, truncate, and keep the full text as a hover tooltip."""
+    text = str(text)
+    escaped_full = html.escape(text, quote=True)
+    short = text if len(text) &lt;= max_len else text[: max_len - 1] + "\u2026"
+    escaped_short = html.escape(short, quote=False)
+    return f'&lt;td title="{escaped_full}"&gt;{escaped_short}&lt;/td&gt;'
+
+
+def to_html(rows: list[dict]) -&gt; str:
+    """Styled table for the web UI. Long cells truncate with a hover tooltip
+    showing the full text, since these reports carry real qualifying context
+    that a bare number would flatten."""
+    headers = [
+        "System", "Architecture", "Timing (T)", "Recovery (R)",
+        "Grounded Outcome (G)", "TRG", "Warnings", "Source",
+    ]
+    header_html = "".join(f"&lt;th&gt;{h}&lt;/th&gt;" for h in headers)
+
+    body_rows = []
+    for r in rows:
+        if r["compliant"]:
+            badge = '&lt;span style="color:#16a34a;font-weight:700;"&gt;&amp;#10003; pass&lt;/span&gt;'
+        else:
+            badge = '&lt;span style="color:#dc2626;font-weight:700;"&gt;&amp;#10007; fail&lt;/span&gt;'
+        body_rows.append(
+            "&lt;tr&gt;"
+            + _cell(r["system"], 42)
+            + _cell(r["architecture"], 20)
+            + _cell(r["timing"], 50)
+            + _cell(r["recovery"], 65)
+            + _cell(r["grounded_outcome"], 20)
+            + f"&lt;td&gt;{badge}&lt;/td&gt;"
+            + f'&lt;td style="text-align:center;"&gt;{r["warnings"]}&lt;/td&gt;'
+            + f'&lt;td&gt;&lt;code style="font-size:12px;"&gt;{html.escape(r["file"])}&lt;/code&gt;&lt;/td&gt;'
+            + "&lt;/tr&gt;"
+        )
+
+    style = (
+        "&lt;style&gt;"
+        ".trg-board{border-collapse:collapse;width:100%;font-family:system-ui,"
+        "-apple-system,sans-serif;font-size:13.5px;}"
+        ".trg-board th{text-align:left;padding:9px 10px;background:#f3f4f6;"
+        "border-bottom:2px solid #d1d5db;white-space:nowrap;}"
+        ".trg-board td{padding:9px 10px;border-bottom:1px solid #e5e7eb;"
+        "max-width:240px;overflow:hidden;text-overflow:ellipsis;"
+        "white-space:nowrap;vertical-align:top;}"
+        ".trg-board tr:hover td{background:#f9fafb;}"
+        "&lt;/style&gt;"
+    )
+    return (
+        style
+        + '&lt;p style="color:#6b7280;font-size:13px;margin:0 0 8px 0;"&gt;'
+        "Cells are truncated. Hover any cell to read the full value.&lt;/p&gt;"
+        f'&lt;table class="trg-board"&gt;&lt;thead&gt;&lt;tr&gt;{header_html}&lt;/tr&gt;&lt;/thead&gt;'
+        f"&lt;tbody&gt;{''.join(body_rows)}&lt;/tbody&gt;&lt;/table&gt;"
+    )
 
     </gradio-lite-file>
     <gradio-lite-file name="examples/trg_example_gemini_live.yaml">

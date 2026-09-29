@@ -31,7 +31,7 @@ preferred-citation:
     - family-names: Negi
       given-names: Shivam
       email: negi.sh@northeastern.edu
-      affiliation: Northeastern University; Walmart
+      affiliation: Northeastern University
     - family-names: Rawat
       given-names: Arpit
       email: rawat.a@northeastern.edu
@@ -39,7 +39,7 @@ preferred-citation:
     - family-names: Jain
       given-names: Rashi
       email: rxj210013@utdallas.edu
-      affiliation: University of Texas at Dallas; Walmart
+      affiliation: University of Texas at Dallas
   year: 2026
   identifiers:
     - type: other

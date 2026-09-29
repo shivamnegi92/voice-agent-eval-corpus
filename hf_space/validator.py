@@ -8,6 +8,7 @@ which is the reader's job, not a linter's.
 
 from __future__ import annotations
 
+import html
 from pathlib import Path
 from typing import Any
 
@@ -163,3 +164,44 @@ def format_report(r: Report) -> str:
         lines.append("  (no warnings)")
 
     return "\n".join(lines)
+
+
+def format_report_html(r: Report) -> str:
+    """Same information as format_report, styled for the web UI."""
+    if r.compliant:
+        badge = (
+            '<span style="background:#16a34a;color:#fff;padding:4px 12px;'
+            'border-radius:999px;font-weight:600;font-size:13px;">'
+            "&#10003; COMPLIANT</span>"
+        )
+    else:
+        n = len(r.errors)
+        badge = (
+            '<span style="background:#dc2626;color:#fff;padding:4px 12px;'
+            'border-radius:999px;font-weight:600;font-size:13px;">'
+            f"&#10007; NOT COMPLIANT &middot; {n} error{'s' if n != 1 else ''}</span>"
+        )
+
+    parts = [
+        '<div style="font-family:system-ui,-apple-system,sans-serif;line-height:1.5;">',
+        f'<h3 style="margin:0 0 10px 0;">{html.escape(r.system_name)}</h3>',
+        badge,
+    ]
+
+    if r.errors:
+        parts.append('<p style="margin:14px 0 4px 0;font-weight:600;color:#991b1b;">Errors</p>')
+        parts.append('<ul style="margin:0;padding-left:20px;color:#991b1b;">')
+        parts += [f"<li>{html.escape(e)}</li>" for e in r.errors]
+        parts.append("</ul>")
+
+    if r.warnings:
+        parts.append('<p style="margin:14px 0 4px 0;font-weight:600;color:#92400e;">Warnings</p>')
+        parts.append('<ul style="margin:0;padding-left:20px;color:#92400e;">')
+        parts += [f"<li>{html.escape(w)}</li>" for w in r.warnings]
+        parts.append("</ul>")
+
+    if not r.errors and not r.warnings:
+        parts.append('<p style="margin:14px 0 0 0;color:#6b7280;">No warnings.</p>')
+
+    parts.append("</div>")
+    return "".join(parts)

@@ -31,8 +31,8 @@ https://github.com/shivamnegi92/voice-agent-eval-corpus
 `index.html` inlines a copy of `app.py` / `validator.py` / `leaderboard.py`
 for Gradio-Lite's virtual filesystem. The GitHub repo's `trg_eval/` package
 is the canonical source - if the two ever disagree, GitHub wins. Regenerate
-`index.html` from the plain `.py`/`.yaml` files with the generator noted in
-the repo's `CLAUDE.md` rather than hand-editing the embedded copies.
+`index.html` with `python3 hf_space/build_index.py` after touching any
+`.py`/`.yaml` file in this folder rather than hand-editing the embedded copies.
 
 Want a server-backed version instead (e.g. for heavier processing later)?
 The original `app.py` here also runs standalone: `pip install gradio pyyaml

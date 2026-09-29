@@ -9,6 +9,10 @@ Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.307
 
 **Try it without installing anything:** [Hugging Face Space](https://huggingface.co/spaces/shivamnegi92/trg-voice-agent-eval)
 
+![TRG validator and leaderboard demo: a blank report fails, a real benchmarked system passes with a warning, then all four baseline systems get compared side by side](assets/demo.gif)
+
+*Recorded with [VHS](https://github.com/charmbracelet/vhs); script at `assets/demo.tape`, regenerate with `vhs assets/demo.tape`.*
+
 ---
 
 ## Why this exists
@@ -48,6 +52,7 @@ trg/
   trg_example_gemini_live.yaml     worked example, third-party benchmarked
   trg_example_grok_voice.yaml      worked example, third-party benchmarked
 hf_space/                    Gradio app mirrored to the Hugging Face Space
+assets/                      demo.gif + demo.tape (the VHS script that recorded it)
 pyproject.toml              pip-installable package (trg-validate, trg-leaderboard)
 ```
 
