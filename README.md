@@ -1,5 +1,11 @@
 # Voice Agent Evaluation Corpus + TRG Evaluation Pipeline
 
+[![CI](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml/badge.svg)](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml)
+[![arXiv](https://img.shields.io/badge/arXiv-2609.30798-b31b1b.svg)](https://arxiv.org/abs/2609.30798)
+[![HF Space](https://img.shields.io/badge/%F0%9F%A4%97%20Space-TRG%20demo-blue)](https://huggingface.co/spaces/shivamnegi92/trg-voice-agent-eval)
+[![License: CC BY 4.0 (data) / MIT (code)](https://img.shields.io/badge/license-CC--BY--4.0%20%2F%20MIT-lightgrey)](#licence)
+[![GitHub stars](https://img.shields.io/github/stars/shivamnegi92/voice-agent-eval-corpus?style=social)](https://github.com/shivamnegi92/voice-agent-eval-corpus/stargazers)
+
 A verified, reproducible metadata corpus of **41 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
@@ -197,3 +203,18 @@ To cite the corpus or TRG tooling specifically, use the metadata in
 
 Licences cover *this* metadata and tooling. The papers themselves remain under
 their original terms, which is precisely why they are not included here.
+
+## Using this in your own work
+
+If you adopt TRG as a reporting standard, add your own system with
+`trg/trg_report_template.yaml`, or find a gap in the corpus, that's exactly
+the kind of use this was built for - a PR, a corpus correction, or a filled-in
+TRG report for a system not yet listed are all welcome, see
+[Discussions](https://github.com/shivamnegi92/voice-agent-eval-corpus/discussions)
+for a low-stakes place to start.
+
+If this saved you time, a star helps other people evaluating voice agents
+find it too - GitHub's search ranking and topic pages both weight it, which
+is otherwise the main way this reaches people outside citation search.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=shivamnegi92/voice-agent-eval-corpus&type=Date)](https://star-history.com/#shivamnegi92/voice-agent-eval-corpus&Date)
