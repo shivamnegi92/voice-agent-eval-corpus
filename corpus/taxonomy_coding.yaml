@@ -1,0 +1,597 @@
+# Two-axis taxonomy coding for every corpus record (cutoff 2026-10-02).
+# Axis A (capability evaluated): component, timing, recovery, grounded, multiparty.
+# Axis B (evidence quality), coded for evaluation works only:
+#   conditions: non_english, real_speech, acoustic_variation, long_session
+#   instruments: human_reference, model_judge, state_verification, simulation
+# Attributes are marked only when the analysed PDF states them; absence means
+# "not reported", not "absent". Roles: evaluation, meta_evaluation, system,
+# data, analysis, positioning, method.
+
+vocabulary:
+  axes: [component, timing, recovery, grounded, multiparty]
+  conditions: [non_english, real_speech, acoustic_variation, long_session]
+  instruments: [human_reference, model_judge, state_verification, simulation]
+
+coding:
+  bogavelli2026evabench:
+    role: evaluation
+    axes: [component, timing, recovery, grounded]
+    conditions: [acoustic_variation, long_session]
+    instruments: [human_reference, model_judge, state_verification, simulation]
+    basis: Bot-to-bot simulation, scenario database, accent and noise perturbations, judges validated against human agreement.
+  braun2026voicelight: {role: system, axes: [timing, recovery]}
+  ceccatelli2026speechjbb:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english]
+    instruments: [human_reference, model_judge]
+    basis: Spoken jailbreak safety across five European languages and code-switched pairs, TTS rendered; GPT-4.1 judge validated against two human annotators.
+  chen2024voicebench:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [human_reference, model_judge]
+    basis: Synthetic and real spoken instructions with speaker, environment and content variation; GPT scoring correlated with human judgements.
+  chen2025mmedfd:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, real_speech, long_session]
+    instruments: [human_reference, model_judge]
+    basis: Real Chinese healthcare full-duplex ASR sessions; LLM-based evaluation of generated responses.
+  ctctts2026: {role: system, axes: [timing]}
+  cui2024speechlm: {role: positioning, axes: []}
+  defossez2024moshi: {role: system, axes: [timing]}
+  dekel2023speak: {role: system, axes: [timing]}
+  deng2026qwenagent: {role: system, axes: [recovery, grounded]}
+  dinh2025tts:
+    role: evaluation
+    axes: [component, timing]
+    conditions: []
+    instruments: []
+    basis: Latency distributions, tail latency and intelligibility of open TTS systems.
+  duplex2026mpe:
+    role: evaluation
+    axes: [component, timing, recovery, multiparty]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge]
+    basis: TTS-rendered three- and four-speaker scenes; human validation of sampled data and outputs.
+  duplexcascade2026: {role: system, axes: [timing]}
+  duplexchat2026: {role: data, axes: [timing]}
+  ekstedt2022prosody: {role: analysis, axes: [timing]}
+  ekstedt2022vap: {role: system, axes: [timing]}
+  elmers2025triadic: {role: system, axes: [timing, multiparty]}
+  endpoint2026anticipation: {role: system, axes: [timing]}
+  fdbench15:
+    role: evaluation
+    axes: [timing, recovery, multiparty]
+    conditions: [acoustic_variation]
+    instruments: [model_judge]
+    basis: Interruption, backchannel, talking-to-others and background-speech overlap; GPT-4o evaluator on transcripts.
+  fdbench2:
+    role: evaluation
+    axes: [component, timing, recovery]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge, simulation]
+    basis: Multi-turn automated examiner including corrections; judge agreement with human annotators reported.
+  flexi2025:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: []
+    instruments: [model_judge]
+    basis: LLM-generated, synthesised scenarios including model interruption in emergencies.
+  floor2026necessity:
+    role: evaluation
+    axes: [component, timing]
+    conditions: []
+    instruments: [model_judge]
+    basis: TTS monologues separating the opportunity to speak from the reason to speak.
+  french2026fdb:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [non_english, real_speech]
+    instruments: [human_reference, model_judge]
+    basis: Canadian and European French benchmarks built from real spoken resources; LLM judge for content.
+  gupta2024s2st: {role: positioning, axes: []}
+  hamanaka2026sensor: {role: system, axes: [timing]}
+  he2026conversationalvoice: {role: data, axes: [timing]}
+  hu2025vcb:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, real_speech, acoustic_variation, long_session]
+    instruments: [human_reference, model_judge]
+    basis: Chinese benchmark built entirely on real human speech with environment and speaker perturbations.
+  hu2026frontendbackend: {role: system, axes: [timing, grounded]}
+  hu2026transcription: {role: system, axes: [component]}
+  indic2026fdb:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [non_english, real_speech]
+    instruments: [human_reference, model_judge]
+    basis: Ten Indian languages mined from channel-separated conversations; human-validated interruptions; LLM ratings.
+  inoue2024multilingual: {role: analysis, axes: [timing]}
+  inoue2024realtime: {role: system, axes: [timing]}
+  jain2025voiceagentbench:
+    role: evaluation
+    axes: [component, timing, grounded]
+    conditions: [non_english, acoustic_variation, long_session]
+    instruments: [human_reference, model_judge]
+    basis: Synthetic spoken tool queries in English and six Indic languages with simulated speaker variability; GPT-4o-mini judge compared with inter-annotator agreement.
+  labiausse2026hibikizero: {role: system, axes: [timing]}
+  lee2026hear:
+    role: evaluation
+    axes: [component, multiparty]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [human_reference]
+    basis: Human-verified speaker-attribution samples with voice-cloned counterfactuals.
+  lin2025fdbench:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [real_speech]
+    instruments: [human_reference, model_judge]
+    basis: Pause handling, backchannelling, turn-taking and user interruption with automatic metrics.
+  lin2026fdbv3:
+    role: evaluation
+    axes: [timing, recovery, grounded]
+    conditions: [real_speech]
+    instruments: [model_judge, state_verification]
+    basis: Real human audio from native and non-native speakers with disfluencies; GPT-4o judges response quality.
+  livespeech2024: {role: system, axes: [timing]}
+  lu2026duplexsurvey: {role: positioning, axes: []}
+  mathur2026dsbifeval:
+    role: evaluation
+    axes: [component, timing, recovery]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge, simulation]
+    basis: Synthesised controlled conversations; deterministic floor-management score and LLM-judged persona score with human validation.
+  meyer2026vamos:
+    role: evaluation
+    axes: [timing, grounded]
+    conditions: [long_session]
+    instruments: [model_judge, state_verification, simulation]
+    basis: Simulated callers, seeded PostgreSQL backend, LLM judge applying assertions to trace and returned rows.
+  mishra2026mtva:
+    role: evaluation
+    axes: [component, recovery, grounded]
+    conditions: [non_english, long_session]
+    instruments: [model_judge, state_verification, simulation]
+    basis: LLM caller, hidden backend state and action checks across English, Hindi and five further languages.
+  mitra2026adaptive: {role: system, axes: [timing, multiparty]}
+  mossspeech2025: {role: system, axes: [component]}
+  nemotron2026voicechat: {role: system, axes: [timing, recovery, grounded]}
+  omniflatten2024: {role: system, axes: [timing]}
+  pahwa2026audio2tool:
+    role: evaluation
+    axes: [recovery, grounded, multiparty]
+    conditions: [acoustic_variation, long_session]
+    instruments: []
+    basis: Voice-cloned TTS queries with diverse noise profiles; tool-call correctness.
+  pedinotti2026structsurvey: {role: method, axes: []}
+  purwar2026judges:
+    role: meta_evaluation
+    axes: [component, recovery, grounded]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge]
+    basis: Compares GPT-4.1 and GPT-5 judgements with human raters on voice-agent conversations.
+  qi2026muvap: {role: system, axes: [timing, multiparty]}
+  qiu2026enterprise: {role: system, axes: [timing, grounded]}
+  rajaa2026dualturn: {role: system, axes: [timing]}
+  ray2026tauvoice:
+    role: evaluation
+    axes: [timing, recovery, grounded, multiparty]
+    conditions: [acoustic_variation, long_session]
+    instruments: [human_reference, model_judge, state_verification, simulation]
+    basis: Simulated callers with accents and noise; interruptions; task completion verified against database state.
+  salimi2026ihbench:
+    role: evaluation
+    axes: [recovery, grounded]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge, simulation]
+    basis: Post-interruption workflow recovery; LLM judge validated against human annotators.
+  saloev2026mimi: {role: analysis, axes: [component]}
+  shamsaie2026tact:
+    role: evaluation
+    axes: [timing]
+    conditions: [real_speech, long_session]
+    instruments: [human_reference]
+    basis: Episodes from five dyadic corpora; annotator ratings fused with a calibrated LLM judge.
+  sharon2026less: {role: analysis, axes: [timing]}
+  shih2026mpbench:
+    role: evaluation
+    axes: [component, timing, multiparty]
+    conditions: [acoustic_variation]
+    instruments: [human_reference, model_judge, simulation]
+    basis: Multiparty turn-taking and response appropriateness; LLM judge correlated with human evaluation.
+  speechgym2026:
+    role: evaluation
+    axes: [recovery, grounded]
+    conditions: [long_session]
+    instruments: [state_verification, simulation]
+    basis: Audio-native agentic environment reusing an established benchmark's success check.
+  tau2026multilingual:
+    role: evaluation
+    axes: [component, timing, grounded, multiparty]
+    conditions: [non_english, long_session]
+    instruments: [human_reference, model_judge, state_verification, simulation]
+    basis: Extends tau-Voice to five languages with native-speaker review and validated judges.
+  turnbench2026:
+    role: evaluation
+    axes: [timing]
+    conditions: [real_speech, long_session]
+    instruments: [human_reference]
+    basis: Thirty hours of recorded dyadic conversation, triple-annotated.
+  tyagi2026steerduplex: {role: system, axes: [component, timing, recovery]}
+  vapmultimodal2025: {role: system, axes: [timing]}
+  veluri2024synchronous: {role: system, axes: [timing]}
+  voicechattts2026: {role: system, axes: [timing]}
+  wang2026humdialfd:
+    role: evaluation
+    axes: [timing, recovery, multiparty]
+    conditions: [non_english, real_speech]
+    instruments: [model_judge]
+    basis: Real human-recorded Chinese and English conversations; interruption, rejection and third-party speech.
+  xia2026sid:
+    role: evaluation
+    axes: [timing]
+    conditions: [non_english, real_speech, acoustic_variation]
+    instruments: []
+    basis: Semantic interruption detection built from real human dialogue including Chinese data.
+  xiong2026msibench:
+    role: evaluation
+    axes: [component, timing, recovery, grounded, multiparty]
+    conditions: [non_english, acoustic_variation, long_session]
+    instruments: [human_reference, model_judge]
+    basis: Mandarin and English multi-speaker scenes with expected tool calls; judge agreement with humans reported.
+  yan2026hearbias:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech, acoustic_variation]
+    instruments: []
+    basis: 87k human recordings from 843 demographically diverse speakers.
+  zhang2026mtrduplex:
+    role: evaluation
+    axes: [component, timing, recovery]
+    conditions: [real_speech, long_session]
+    instruments: [model_judge]
+    basis: Multi-round full-duplex evaluation with synthesised speech.
+  zhang2026vgbench:
+    role: evaluation
+    axes: [grounded, multiparty]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [model_judge]
+    basis: Addressedness with silence, tool call and answer actions; room and distance rendering; LLM judge for side-talk.
+  zhao2026echo:
+    role: evaluation
+    axes: [timing, multiparty]
+    conditions: [non_english, long_session]
+    instruments: [human_reference]
+    basis: Chinese paired yield/keep contexts; cases reviewed by human annotators.
+  zhao2026humdial:
+    role: evaluation
+    axes: [component, timing, recovery, multiparty]
+    conditions: [non_english, real_speech, long_session]
+    instruments: [human_reference, model_judge]
+    basis: Authentic Chinese and English conversations; human evaluators.
+  zhong2026iraf: {role: system, axes: [component, timing]}
+  zou2026lts: {role: system, axes: [timing]}
+  # BEGIN evaluation-search records
+  arora2025talkingturns:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [real_speech, long_session]
+    instruments: [human_reference]
+    basis: 'Collects live human conversations with Moshi and a cascaded system and scores their turn-taking decisions with a supervised turn-taking judge trained on Switchboard, plus a Switchboard-based understanding benchmark.'
+  bhosale2026duplexworld:
+    role: evaluation
+    axes: [grounded, timing, component, recovery]
+    conditions: [acoustic_variation, long_session]
+    instruments: [simulation, state_verification, model_judge]
+    basis: 'Five commercial speech-to-speech agents talk with an LLM user simulator across six worlds; terminal world state is graded against gold, alongside turn-taking, LLM-judged conversation metrics, and MOS predictors.'
+  bokkahallisatish2026cds:
+    role: meta_evaluation
+    axes: [component, timing]
+    conditions: [real_speech, long_session]
+    instruments: [human_reference]
+    basis: 'Proposes a distributional score comparing pace, rhythm and turn-interaction features of system conversations to human reference conversations, and checks its system rankings against third-party listener judgments.'
+  chang2025gametime:
+    role: evaluation
+    axes: [timing, component]
+    conditions: []
+    instruments: [model_judge, human_reference]
+    basis: 'Tests five spoken language models on TTS-synthesized basic instruction tasks and tasks with timing, tempo and simultaneous-speaking constraints, scored by an LLM judge on time-aligned dual-channel transcripts.'
+  cheng2026voxinfinity:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech, long_session]
+    instruments: [human_reference, model_judge]
+    basis: 'Evaluates spoken language models on question answering over long spoken dialogue and monologue histories, binned by required context duration and scored for accuracy by GPT-4o.'
+  chiba2026talk2agent:
+    role: evaluation
+    axes: [grounded]
+    conditions: []
+    instruments: [model_judge, state_verification]
+    basis: 'Evaluates voice interfaces (ASR, audio LLMs, biasing, repair) by passing human-spoken computer-use instructions to fixed text agents scored by source-benchmark graders, plus an execution-free retention score.'
+  du2025mtalkbench:
+    role: evaluation
+    axes: [component, multiparty]
+    conditions: [real_speech, acoustic_variation, long_session]
+    instruments: [human_reference, model_judge]
+    basis: 'Evaluates speech-to-speech models on human-recorded multi-turn dialogues across semantic, paralinguistic and ambient-sound dimensions using human and LLM arena comparisons and binary rubrics.'
+  fukuda2026m3duplexbench:
+    role: evaluation
+    axes: [timing, recovery, component]
+    conditions: [non_english, real_speech, long_session]
+    instruments: [model_judge]
+    basis: 'Evaluates Moshi-based full-duplex models on English and Japanese chat and multi-turn QA events under three dialogue-context conditions, scoring timing metrics and LLM-judged content.'
+  fukuda2026meetingturntaking:
+    role: evaluation
+    axes: [multiparty, timing]
+    conditions: [real_speech]
+    instruments: [human_reference]
+    basis: 'Compares supervised models, text LLMs, multimodal LLMs and human subjects on online addressee detection, turn-change and next-speaker prediction in AMI four-party meetings.'
+  gosai2025audiomultichallenge:
+    role: evaluation
+    axes: [component, recovery]
+    conditions: [real_speech, long_session]
+    instruments: [model_judge, human_reference]
+    basis: 'Evaluates end-to-end spoken dialogue systems on human-recorded unscripted multi-turn conversations, judging the final-turn response against human-written atomic rubrics with an LLM judge.'
+  hallur2026prosodyref:
+    role: meta_evaluation
+    axes: [component]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Builds matched human reference distributions for F0 and rhythm metrics from a large English dyadic corpus and checks, on held-out human rows, that matched references flag outputs at the nominal rate better than pooled ones.'
+  hou2025sovabench:
+    role: evaluation
+    axes: [component]
+    conditions: []
+    instruments: [model_judge]
+    basis: 'Speech LLMs are compared on knowledge QA, ASR, spoken QA, paralinguistic recognition, and speech generation, scored by accuracy, WER, a GPT judge, and a MOS predictor.'
+  huang2026pardon:
+    role: evaluation
+    axes: [recovery, component]
+    conditions: [acoustic_variation]
+    instruments: [model_judge]
+    basis: 'Seven LALMs answer spoken QA items whose audio is masked to be answerable or unanswerable; accuracy and an LLM-judged repair category are combined into the EAR score.'
+  huo2026speechjudgeaudit:
+    role: meta_evaluation
+    axes: [component]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [human_reference, model_judge]
+    basis: 'Audits six speech LLM judges with controlled intensity, content-richness and emotional-delivery manipulations, comparing pointwise and pairwise judgments and rationales against human preference calibration.'
+  inoue2024userbehaviors:
+    role: meta_evaluation
+    axes: [timing]
+    conditions: [non_english, real_speech, long_session]
+    instruments: [human_reference]
+    basis: 'Correlates observable user behaviours (utterance counts, backchannels, disfluencies, switching pause length) with users'' subjective ratings across three Japanese social dialogue tasks with an android, to find objective evaluation indicators.'
+  inoue2025addressee:
+    role: evaluation
+    axes: [multiparty]
+    conditions: [non_english]
+    instruments: [human_reference]
+    basis: 'Tests GPT-4o on addressee recognition and next-speaker prediction from transcribed Japanese triadic discussions against author-annotated addressee labels.'
+  ivry2026lalmasajudge:
+    role: meta_evaluation
+    axes: [component]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge]
+    basis: 'Builds 24,000 synthetic multi-turn spoken dialogues with one controlled unsafe turn and measures how sensitively and consistently audio-language models judge their safety across text, audio and multimodal inputs.'
+  kwon2025m3slu:
+    role: evaluation
+    axes: [multiparty]
+    conditions: [real_speech, long_session]
+    instruments: [model_judge]
+    basis: 'Evaluates cascaded and end-to-end multimodal models on speaker-attributed QA and same-speaker true/false matching over 1-3 minute multi-speaker recordings, scored by GPT-4o judge and accuracy.'
+  laskar2026texttovoice:
+    role: evaluation
+    axes: [grounded]
+    conditions: [acoustic_variation]
+    instruments: [model_judge, human_reference]
+    basis: 'Converts text tool-calling benchmarks (Confetti, When2Call) to TTS audio with voice and noise variation and scores omni-modal models'' tool calls against preserved gold labels.'
+  lee2026tpibench:
+    role: evaluation
+    axes: [multiparty, recovery]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [model_judge, human_reference]
+    basis: 'Spoken language models get primary-user queries interrupted by a third speaker, plus single-speaker counterfactuals with identical transcripts; LLM judges score strategy following and helpfulness.'
+  li2025mindthegap:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech]
+    instruments: [human_reference]
+    basis: 'Collects 7,500 pairwise user preference votes on spoken queries to six speech-in text-out systems and tests how well twenty static benchmarks predict the resulting interactive ranking.'
+  li2025televal:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, real_speech, acoustic_variation, long_session]
+    instruments: [human_reference, model_judge]
+    basis: 'Benchmarks spoken language models on Chinese spoken input for semantic accuracy and paralinguistically appropriate responses, scored by string matching, an LLM judge and audio metrics.'
+  lin2026wearvox:
+    role: evaluation
+    axes: [component, grounded, multiparty]
+    conditions: [non_english, real_speech, acoustic_variation, long_session]
+    instruments: [model_judge, human_reference]
+    basis: 'Speech LLMs are tested on 3,842 egocentric multi-channel recordings from AI glasses across QA, tool calling, side-talk rejection and bilingual translation, scored by LLM judge, AST tool-call match and binary accuracy.'
+  liu2025vocalbench:
+    role: evaluation
+    axes: [component, timing]
+    conditions: [non_english, acoustic_variation, long_session]
+    instruments: [model_judge, human_reference]
+    basis: '27 speech interaction models are scored on about 24k synthesized English and Mandarin instances across semantic, acoustic, conversational, robustness and latency dimensions using accuracy, LLM scores, MOS and latency measures.'
+  lu2026omniinteract:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [non_english, real_speech]
+    instruments: [human_reference, model_judge]
+    basis: 'Runs omnimodal real-time models on audio-visual streams with spoken queries embedded in the audio and scores answer quality, response timing, interruption handling and nested-context resumption against manually annotated response slots, using a GPT-4o judge.'
+  ma2025c3:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, long_session]
+    instruments: [model_judge, human_reference]
+    basis: 'Ten end-to-end spoken dialogue models answer 1,079 English and Chinese instances on ambiguity, omission, coreference and multi-turn context, scored for correctness by LLM judges validated against human experts.'
+  maruf2026banglaturn:
+    role: evaluation
+    axes: [timing]
+    conditions: [non_english, real_speech]
+    instruments: [human_reference]
+    basis: 'Builds a Bangla end-of-turn detection corpus from podcast speech with human-checked labels and compares a Whisper-encoder classifier against Smart-Turn v3 and silence/prosody baselines on a held-out 319-clip test set.'
+  mathur2026apexvoice:
+    role: evaluation
+    axes: [grounded, recovery]
+    conditions: [long_session]
+    instruments: [simulation, state_verification, model_judge, human_reference]
+    basis: 'Five real-time voice agents complete 120 synthetic professional workflows with a simulated full-duplex user; final environment state and event traces are checked by deterministic verifiers, with an LLM judge for field equivalence.'
+  mathur2026dsbdg:
+    role: evaluation
+    axes: [component, timing]
+    conditions: [long_session]
+    instruments: [model_judge]
+    basis: 'Seven voice systems answer TTS-spoken questions over injected professional documents at five context lengths and in scripted multi-turn dialogues; an LLM judge scores answer support, and first-token delay is measured.'
+  mazumdar2026videofdb:
+    role: evaluation
+    axes: [timing]
+    conditions: [real_speech]
+    instruments: [human_reference, model_judge]
+    basis: 'Streams 237 real dyadic video-call clips to vision-speech agents and scores responses to nonverbal conversational dynamics with a rubric-based GPT-4o judge plus a deterministic takeover-rate timing metric and latency.'
+  modi2026echochain:
+    role: evaluation
+    axes: [recovery]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge, simulation]
+    basis: 'Injects pre-synthesized barge-ins at a fixed offset into simulated multi-exchange conversations with four real-time voice models and scores whether post-interruption continuations correctly update task state, via a GPT-5.2 failure classifier and blinded human rubric review.'
+  peng2025fdbench:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [acoustic_variation, long_session]
+    instruments: [model_judge, simulation]
+    basis: 'Streams TTS-synthesized user turns from GPT-4o-simulated conversations into three full-duplex systems and scores interruption handling, delays, noise robustness and GPT-4o-rated reply quality.'
+  ray2026tauelicitation:
+    role: evaluation
+    axes: [grounded, recovery]
+    conditions: [acoustic_variation, long_session]
+    instruments: [state_verification, simulation, human_reference, model_judge]
+    basis: 'Voice agents collect exact entity values from a simulated caller and write them to a database; final values are compared with gold strings across regular, noisy and speech-disrupted conditions.'
+  sayyad2026lalmjudges:
+    role: meta_evaluation
+    axes: [component]
+    conditions: [acoustic_variation]
+    instruments: [human_reference, model_judge]
+    basis: 'Measures how closely Gemini audio judges scoring raw stereo full-duplex agent sessions on eight speech-fidelity dimensions agree with three calibrated human raters, including on DSP-perturbed clips.'
+  shen2026codett:
+    role: evaluation
+    axes: [timing, multiparty]
+    conditions: [non_english, real_speech, acoustic_variation, long_session]
+    instruments: []
+    basis: 'Evaluates turn-taking controllers and omni speech models on a bilingual dataset of 14 decision scenarios, scoring action accuracy over four turn actions and a semantic misalignment rate for the underlying intent.'
+  sun2026msubench:
+    role: evaluation
+    axes: [multiparty]
+    conditions: [non_english]
+    instruments: [human_reference]
+    basis: 'Evaluates audio language models on 16 speaker-centric multiple-choice tasks over Chinese and English multi-speaker conversations, scored by exact-match accuracy.'
+  tang2026instructfd:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [long_session]
+    instruments: [human_reference, model_judge, simulation]
+    basis: 'Benchmarks six full-duplex systems on whether they follow natural-language turn-taking instructions (backchannel, interrupt, listen, continue, acknowledge), using a scripted multi-turn user orchestrator and an LLM judge validated against human annotations.'
+  thebaud2026spearbench:
+    role: evaluation
+    axes: [component, timing]
+    conditions: [real_speech]
+    instruments: [model_judge]
+    basis: 'Feeds context and question audio from recorded Seamless Interaction dialogues to seven speech-to-speech models and compares their answers with the original human answers on automatic naturalness metrics.'
+  vesessook2026scb:
+    role: evaluation
+    axes: [component]
+    conditions: [long_session]
+    instruments: []
+    basis: 'Five speech systems answer 103 sharded GSM8K problems presented whole, concatenated, or disclosed incrementally over turns, scored by final-answer accuracy.'
+  wang2026rolebreak:
+    role: evaluation
+    axes: [component]
+    conditions: [long_session, acoustic_variation]
+    instruments: [model_judge, human_reference]
+    basis: 'Speech-to-speech systems play 310 roles across long multi-turn scenarios with probes and stress turns; an LLM judge checks turn-level persona, interaction and safety criteria, and vocal emotion is classified.'
+  xiao2026lateintent:
+    role: evaluation
+    axes: [timing, component]
+    conditions: []
+    instruments: [model_judge]
+    basis: 'Four native full-duplex models receive matched benign/harmful requests with a controlled pause before intent is revealed; response onset is measured against the reveal point and engagement is scored by an LLM judge.'
+  xie2026socialomni:
+    role: evaluation
+    axes: [multiparty, timing, component]
+    conditions: []
+    instruments: [human_reference, model_judge]
+    basis: 'Offline benchmark testing omni models on audio-visual multi-party clips for speaker attribution, fixed-time turn-entry decisions and response generation scored by a three-judge ensemble.'
+  xing2026duplexactbench:
+    role: evaluation
+    axes: [timing, recovery, component]
+    conditions: [non_english, real_speech]
+    instruments: [model_judge]
+    basis: 'Streams 1,290 English and Chinese trials covering six interaction behaviors under three contextual conditions to 12 full-duplex systems, scoring behavior-specific timing and judge-rated content.'
+  xu2026provoicebench:
+    role: evaluation
+    axes: [timing, grounded, multiparty]
+    conditions: [acoustic_variation]
+    instruments: [model_judge]
+    basis: 'Tests whether multimodal LLMs decide correctly when to intervene or stay silent in synthesized conversational audio with digital context, and judges the resulting tool calls and responses.'
+  yan2025urobench:
+    role: evaluation
+    axes: [component, timing]
+    conditions: [non_english, long_session]
+    instruments: [model_judge]
+    basis: 'Evaluates end-to-end spoken dialogue models on 40 TTS-synthesized English, Chinese and multilingual test sets for understanding, reasoning and oral conversation, scored mainly by LLM judges plus UTMOS, WER and latency.'
+  zhang2025wildspeech:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech, acoustic_variation]
+    instruments: [model_judge, human_reference]
+    basis: 'Speech-to-speech responses to 1,100 single-turn queries drawn from real chat logs, with speaker variation and added noise, are transcribed and scored by an LLM judge using query-specific checklists.'
+  zhang2026turnnat:
+    role: meta_evaluation
+    axes: [timing]
+    conditions: [real_speech]
+    instruments: [human_reference]
+    basis: 'Proposes a likelihood-based turn-taking naturalness metric from voice-activity prediction models and tests whether it separates natural from timing-perturbed human dialogue clips, with the perturbations validated by human A/B judgments.'
+  # END evaluation-search records
+  # BEGIN acl-search records
+  kim2025contextdialog:
+    role: evaluation
+    axes: [component]
+    conditions: [long_session]
+    instruments: [model_judge, human_reference]
+    basis: 'Feeds multi-turn spoken dialog histories plus TTS-synthesized recall questions to open-source voice interaction models and scores whether spoken answers recall past user or model utterances, with and without retrieval augmentation.'
+  kubo2026binaryturn:
+    role: meta_evaluation
+    axes: [timing]
+    conditions: [non_english]
+    instruments: [human_reference]
+    basis: 'Critiques thresholded binary evaluation of turn-shift predictions against corpus-observed shifts and proposes a Wasserstein-distance comparison against ambiguity-aware reference distributions, demonstrated on a text-only Japanese TurnGPT model.'
+  miyazawa2026paranuc:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, real_speech]
+    instruments: [human_reference]
+    basis: 'Scores cascaded spoken dialogue systems by how well their LLM ranks the next utterance''s dialogue act in Japanese MapTask dialogues, with and without attitudes inferred from speech audio, and validates the protocol against expert rankings and listener preferences.'
+  mori2026nextspeaker:
+    role: evaluation
+    axes: [multiparty, timing]
+    conditions: [non_english, long_session]
+    instruments: [human_reference]
+    basis: 'Prompts GPT-5-series MLLMs with full Japanese triadic dialogue transcripts, optionally turn-taking rules and a still frame, and scores next-speaker predictions against conversation-analytic annotations.'
+  umair2024whentospeak:
+    role: evaluation
+    axes: [timing]
+    conditions: []
+    instruments: [human_reference]
+    basis: 'Collects on-the-fly backchannel responses from 118 listeners to recorded conversational turns to locate within-turn TRPs, then scores text-only LLMs'' incremental TRP predictions against these participant-derived references.'
+  wang2026realtalkcn:
+    role: evaluation
+    axes: [component]
+    conditions: [non_english, real_speech, acoustic_variation, long_session]
+    instruments: [model_judge]
+    basis: 'Evaluates speech LLMs and an ASR+GPT-4o pipeline on recorded Chinese multi-turn task-oriented dialogues, scoring intent classification, slot filling and GPT-4o-mini-judged chat under disfluency, speaker age/accent and cross-modal conditions.'
+  # END acl-search records

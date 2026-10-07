@@ -8,6 +8,16 @@
 # obtained. A report silent on an applicable axis leaves the system
 # uncharacterised, however strong its remaining numbers are.
 
+reporting_version: 2
+
+evaluation_conditions:
+  languages: []
+  accents: ""
+  noise: ""
+  speaker_configuration: ""
+  load: ""
+  evaluator: ""
+
 system:
   name: ""                  # system under evaluation
   architecture: ""          # end_to_end | cascaded | hybrid
@@ -22,6 +32,14 @@ timing:
   value: ""                 # e.g. "755 ms"
   statistic: ""             # mean | median | p95 | p99 | max
   conditions: ""            # hardware, self-hosted vs API, load, audio setup
+  anchors: ""
+  units: ""
+  appropriateness:
+    applicable: true
+    justification: ""
+    metric: ""
+    value: ""
+    protocol: ""
   # Tail latency matters wherever users experience the worst case, not the
   # average one. If you report only a mean, say why that is the right choice.
   tail_reported: false
@@ -37,6 +55,8 @@ recovery:
   metric: ""                # e.g. "resumes at correct workflow step"
   value: ""                 # e.g. "93%"
   baseline_undisrupted: ""  # same metric without disruption, for contrast
+  state_definition: ""
+  protocol: ""
   notes: ""
 
 # ---------------------------------------------------------------------------
@@ -53,6 +73,14 @@ grounded_outcome:
   # Set true ONLY if success is judged from external state. Grading a
   # transcript, or asking a model whether the task succeeded, is self-report.
   self_report_excluded: false
+  no_action:
+    applicable: true
+    justification: ""
+    policy: ""
+    metric: ""
+    value: ""
+    verification_method: ""
+    action_trace: ""
 
 # ---------------------------------------------------------------------------
 # M - MULTIPARTY APPROPRIATENESS (conditional)
@@ -67,3 +95,5 @@ multiparty:
   silence_value: ""
   authority_metric: ""      # who may be told what
   authority_value: ""
+  intervention_metric: ""
+  intervention_value: ""

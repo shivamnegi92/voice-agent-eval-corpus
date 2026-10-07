@@ -1,42 +1,129 @@
 paper_id,pdf_filename,license,redistributable,evidence
-lin2026fdbv3,full-duplex-bench-v3-tool-use-disfluency.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-meyer2026vamos,vamos-bench-voice-agent-simulation-bench.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-mishra2026mtva,mtva-bench-cascaded-voice-agents.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-nemotron2026voicechat,nemotronlabs-voicechat-duplex-tools.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-ray2026tauvoice,tau-voice-benchmarking-full-duplex-voice-agents.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-salimi2026ihbench,ihbench-post-interruption-recovery.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-speechgym2026,speechgym-audio-native-voice-agent-rl.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-duplexcascade2026,duplexcascade-full-duplex-s2s-dialogue.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-qiu2026enterprise,building-enterprise-realtime-voice-agents-tutorial.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-zou2026lts,lts-voiceagent-listen-think-speak-streaming.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-chen2024voicebench,voicebench-benchmarking-llm-voice-assistants.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-fdbench15,full-duplex-bench-v1.5-overlap-handling.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-fdbench2,full-duplex-bench-v2-multiturn-examiner.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-flexi2025,flexi-full-duplex-human-llm-interaction.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-lin2025fdbench,full-duplex-bench-turn-taking-capabilities.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-zhang2026mtrduplex,mtr-duplexbench-multiround-eval.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-shih2026mpbench,mp-bench-voice-agents-multiparty-conversation.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-xiong2026msibench,msi-bench-multispeaker-voice-interaction.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-defossez2024moshi,moshi-speech-text-foundation-model.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-omniflatten2024,omniflatten-seamless-voice-conversation.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-veluri2024synchronous,synchronous-llms-full-duplex-dialogue-agents.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-mossspeech2025,moss-speech-true-speech-to-speech-models.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-duplexchat2026,duplexchat-speaker-separated-full-duplex-dialogue.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-labiausse2026hibikizero,simultaneous-speech-to-speech-translation-no-aligned-data.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-cui2024speechlm,cui2024-speechlm-survey.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-gupta2024s2st,gupta2024-direct-s2st-survey.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-pedinotti2026structsurvey,structsurvey-agentic-survey-generation.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-dekel2023speak,speak-while-you-think-streaming-synthesis.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-livespeech2024,livespeech-low-latency-zero-shot-tts.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-dinh2025tts,benchmarking-responsiveness-open-source-tts-mdpi.pdf,CC-BY-4.0,true,utedunderthetermsandconditionsofthecreativecommonsattribution(ccby)license(https://creativecommons.org/licenses/by/4.0/)
-ctctts2026,ctc-tts-dual-streaming.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-saloev2026mimi,mimi-codec-metalinguistic-representations.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-voicechattts2026,voicechat-tts-low-latency-continuous-synthesis.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-ekstedt2022prosody,prosody-for-turn-taking-vap.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-ekstedt2022vap,voice-activity-projection-self-supervised-turn-taking.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-inoue2024multilingual,multilingual-vap-turn-taking.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-inoue2024realtime,realtime-continuous-vap-turn-taking.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-elmers2025triadic,triadic-multiparty-vap-turn-taking.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-vapmultimodal2025,vap-multimodal-encoders.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-hamanaka2026sensor,sensor-augmented-vap-turn-taking-sigdial2026.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
-qi2026muvap,muvap-multimodal-multiparty-voice-activity-projection.pdf,arXiv-default,false,arXiv-hosted; no explicit CC grant found in document text
+jain2025voiceagentbench,voiceagentbench-agentic-tasks.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+bhosale2026duplexworld,2608.10716-duplexworld-voice-agents-help-through.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: uthoredbyusandcontainnothird-partydata,andtherealisticchannel’sbackground-noiserecordinginventoryisdistributedwiththerelease.wereleasethescenariocorpus,annotationsandevaluationcode"
+bogavelli2026evabench,eva-bench-evaluating-voice-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ceccatelli2026speechjbb,speechjbb-safety-code-switched-speech.pdf,unspecified-in-PDF,false,Licence mention lacks an explicit paper-scoped grant: romptusedforthefleurs-slusibtask.licensesthedatasetsarereleasedunderthefollowingopensourceandopen-accesslicenses:themitlicenseforthejailbreakbenchdataset;theccby-sa4.0licenseformgs
+chiba2026talk2agent,2609.38867-talk2agent-benchmarking-voice-interfaces-text.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+laskar2026texttovoice,2605.15104-text-voice-reproducible-verifiable-framework.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lin2026fdbv3,full-duplex-bench-v3-tool-use-disfluency.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mathur2026apexvoice,2609.34973-apex-voice-agents-complete-professional.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+meyer2026vamos,vamos-bench-voice-agent-simulation-bench.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mishra2026mtva,mtva-bench-cascaded-voice-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+nemotron2026voicechat,nemotronlabs-voicechat-duplex-tools.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+pahwa2026audio2tool,audio2tool-speech-tool-use.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+purwar2026judges,llm-judges-voice-agent-evaluation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ray2026tauelicitation,2609.13602-elicitation-benchmarking-multi-turn-entity.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ray2026tauvoice,tau-voice-benchmarking-full-duplex-voice-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+salimi2026ihbench,ihbench-post-interruption-recovery.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+speechgym2026,speechgym-audio-native-voice-agent-rl.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+tau2026multilingual,tau-multilingual-voice-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhang2026vgbench,acoustic-context-gating-voice-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+braun2026voicelight,voice-light-cascaded-speculative-generation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+deng2026qwenagent,qwen-audio-agent-technical-report.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+duplexcascade2026,duplexcascade-full-duplex-s2s-dialogue.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hu2026frontendbackend,frontend-backend-tool-calls-full-duplex.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+qiu2026enterprise,building-enterprise-realtime-voice-agents-tutorial.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zou2026lts,lts-voiceagent-listen-think-speak-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+inoue2024userbehaviors,2401.04867-analysis-user-behaviors-objectively-evaluating.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+umair2024whentospeak,2024.findings-emnlp.909.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+arora2025talkingturns,2503.01174-talking-turns-turn-benchmarking-audio.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+chang2025gametime,2509.26388-game-time-evaluating-temporal-dynamics.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+chen2025mmedfd,mmedfd-healthcare-full-duplex-asr.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+du2025mtalkbench,2508.18240-mtalk-bench-evaluating-speech-models.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: ntificartifacts,includingabenchmarkdataset,evaluationscripts,andanalysistools,tosupportreproducibilityandfurtherresearch.licenseforartifacts.allartifactsaremadeavailableunderanopen"
+fdbench15,full-duplex-bench-v1.5-overlap-handling.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+flexi2025,flexi-full-duplex-human-llm-interaction.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hou2025sovabench,2506.02457-sova-bench-benchmarking-speech-conversation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+inoue2025addressee,2501.16643-benchmark-addressee-recognition-multi-modal.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+kim2025contextdialog,2025.findings-acl.470.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: pache-2.0apache-2.0apache-2.0apache-2.0apache-2.0apache-2.0apache-2.0apache-2.0mitlicenseapache-2.0apache-2.0,mitlicensemultidialog(parketal.,2024)spokenwoz(sietal.,2023)contextdia"
+li2025mindthegap,2502.15919-mind-static-interactive-evaluations-large.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+li2025televal,2507.18061-televal-benchmark-designed-spoken-language.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lin2025fdbench,full-duplex-bench-turn-taking-capabilities.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+liu2025vocalbench,2505.15727-vocalbench-vocal-benchmarking-conversational-abilities.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ma2025c3,2507.22968-bilingual-benchmark-spoken-dialogue-models.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+peng2025fdbench,2507.19040-bench-full-duplex-benchmarking-pipeline.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+yan2025urobench,2502.17810-bench-comprehensive-evaluation-spoken-dialogue.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhang2025wildspeech,2506.21875-wildspeech-wild-bench-benchmarking-speechllms.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+bokkahallisatish2026cds,2609.31719-distributional-metrics-evaluating-spoken-conversational.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+chen2024voicebench,voicebench-benchmarking-llm-voice-assistants.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+cheng2026voxinfinity,2609.22452-infinity-benchmarking-limits-long-context.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+duplex2026mpe,duplex-mpe-multi-party-interaction.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+fdbench2,full-duplex-bench-v2-multiturn-examiner.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+floor2026necessity,full-duplex-take-floor-asked-needed.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+french2026fdb,french-full-duplex-benchmark.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+fukuda2026m3duplexbench,2607.29125-duplexbench-duplex-multi-turn-multilingual.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+fukuda2026meetingturntaking,2606.17542-evaluating-large-language-models-abilities.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+gosai2025audiomultichallenge,2512.14865-audio-multi-multichallenge-turn-evaluation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hallur2026prosodyref,2606.31055-reference-based-prosody-rhythm-evaluation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hu2025vcb,vcb-bench-audio-grounded-conversational-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+huang2026pardon,2601.12973-pardon-evaluating-conversational-repair-large.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+huo2026speechjudgeaudit,2609.36979-louder-longer-livelier-acoustic-shortcuts.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+indic2026fdb,indicfdb-indian-languages.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ivry2026lalmasajudge,2602.04796-lalm-judge-benchmarking-large-audio.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+kubo2026binaryturn,2026.sigdial-1.2.pdf,unknown,false,no paper-scoped licence statement found
+kwon2025m3slu,2510.19358-evaluating-speaker-attributed-reasoning-multimodal.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lee2026hear,hear-speaker-attributed-reasoning.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: valuationunitratherthanastwoindividualclips.ilicensesandintendeduseweuseallassetsinaccordancewiththeirstatedterms.ami(carlettaetal.,2005),icsi(janinetal.,2003),andvoxmm(kwaketal.,2"
+lee2026tpibench,2604.17358-still-between-evaluating-improving-voice.pdf,unspecified-in-PDF,false,Licence mention lacks an explicit paper-scoped grant: kesmethinkofgrandma’scooking.icouldgoforherlasagnarightnow.jlicensesthemultilinguallibrispeech(mls)datasetusedinthisworkisderivedfromlibrivoxaudiobooksandreleasedunderthecreativeco
+lin2026wearvox,2601.02391-wearvox-egocentric-multichannel-voice-assistant.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lu2026omniinteract,2605.26485-omniinteract-benchmarking-real-world-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+maruf2026banglaturn,2609.29371-banglaturn-bangla-turn-benchmark-whisper.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mathur2026dsbdg,2610.00316-duplexspeechbench-document-grounding-benchmarking-hallucinations.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mathur2026dsbifeval,duplexspeechbench-implicit-instruction-following.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mazumdar2026videofdb,2605.30256-videofdb-evaluating-full-duplex-vision.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+miyazawa2026paranuc,2026.sigdial-1.50.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+modi2026echochain,2604.16456-echochain-full-duplex-benchmark-state.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mori2026nextspeaker,2026.iwsds-1.8.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+sayyad2026lalmjudges,2607.07985-reliability-assessment-lalm-audio-judges.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+shamsaie2026tact,intent-conditioned-turn-taking-tact.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+shen2026codett,2603.25434-codett-context-aware-decision-benchmark.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+shih2026mpbench,mp-bench-voice-agents-multiparty-conversation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+sun2026msubench,2606.22868-bench-speaker-centric-understanding-conversational.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+tang2026instructfd,2607.20460-instruct-full-duplex-speech-system.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+thebaud2026spearbench,2607.05365-spearbench-benchmark-naturalness-evaluation-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+turnbench2026,turnbench-turn-taking-dynamics.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+vesessook2026scb,2609.40198-speechconversationbench-speech-evaluating-multi-turn.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+wang2026humdialfd,humdial-full-duplex-interaction-study.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+wang2026realtalkcn,2026.acl-long.131.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: sedllms,werecognizepotentialmisuserisksandhaveadoptedagatedaccessmechanismandconductstrictauditstoensurethatthedatawillnotbeabused.thedatasetisreleasedunderacreativecommonsattribut"
+wang2026rolebreak,2609.16614-rolebreak-role-benchmarking-long-horizon.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+xiao2026lateintent,2610.00272-when-intent-arrives-late-benchmark.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+xie2026socialomni,2603.16859-social-socialomni-omni-benchmarking-audio.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+xing2026duplexactbench,2609.39446-duplexact-duplex-bench-broadening-full.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: withethicalstandardsthisstudyprimarilyusessyntheticallyconstructedspeechdata.forevaluationonnaturalconversations,weuseonlyaudiofromasubsetofthepubliclyreleasedotospeech-full-duplex"
+xiong2026msibench,msi-bench-multispeaker-voice-interaction.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+xu2026provoicebench,2604.15037-reactive-proactive-assessing-proactivity-voice.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+yan2026hearbias,hear-real-voices-demographic-bias.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhang2026mtrduplex,mtr-duplexbench-multiround-eval.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhang2026turnnat,2607.01345-turn-turnnat-automatic-evaluation-taking.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhao2026echo,paired-turn-taking-dialogue-contexts-echo.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+zhao2026humdial,humdial-challenge-spoken-dialogue.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+defossez2024moshi,moshi-speech-text-foundation-model.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+veluri2024synchronous,synchronous-llms-full-duplex-dialogue-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mossspeech2025,moss-speech-true-speech-to-speech-models.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+omniflatten2024,omniflatten-seamless-voice-conversation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+duplexchat2026,duplexchat-speaker-separated-full-duplex-dialogue.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+he2026conversationalvoice,conversationalvoice-full-duplex-speech-data.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hu2026transcription,streaming-user-transcription-full-duplex.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+labiausse2026hibikizero,simultaneous-speech-to-speech-translation-no-aligned-data.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+tyagi2026steerduplex,steerduplex-steerable-dialogue-models.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: earchrelease;benchnothird-partyv1/v2[20,22]redistributionvoicebench[5]evaluationapache-2.0dataset/codereleasemoshi[8]basemodel/ccby4.0modelreleasebaselinepersonaplex[29]baselinenvi"
+zhong2026iraf,iraf-interference-resilient-adaptive-fusion.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+gupta2024s2st,gupta2024-direct-s2st-survey.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+cui2024speechlm,cui2024-speechlm-survey.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lu2026duplexsurvey,full-duplex-survey-architecture-ontology-state-machine.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+pedinotti2026structsurvey,structsurvey-agentic-survey-generation.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+dekel2023speak,speak-while-you-think-streaming-synthesis.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+livespeech2024,livespeech-low-latency-zero-shot-tts.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+dinh2025tts,benchmarking-responsiveness-open-source-tts-mdpi.pdf,CC-BY-4.0,true,"025,14,406.https://doi.org/10.3390/computers14100406copyright:©2025bytheauthors.licenseemdpi,basel,switzerland.thisarticleisanopenaccessarticledistributedunderthetermsandconditionsofthecreativecommonsattribution(ccby)license(https://creativecommons.org/licenses/by/4.0/).computers2025,14,406https://d"
+ctctts2026,ctc-tts-dual-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+saloev2026mimi,mimi-codec-metalinguistic-representations.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+voicechattts2026,voicechat-tts-low-latency-continuous-synthesis.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ekstedt2022prosody,prosody-for-turn-taking-vap.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ekstedt2022vap,voice-activity-projection-self-supervised-turn-taking.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+inoue2024multilingual,multilingual-vap-turn-taking.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+inoue2024realtime,realtime-continuous-vap-turn-taking.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+elmers2025triadic,triadic-multiparty-vap-turn-taking.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+vapmultimodal2025,vap-multimodal-encoders.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+endpoint2026anticipation,endpoint-anticipation-low-latency-dialogue.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+hamanaka2026sensor,sensor-augmented-vap-turn-taking-sigdial2026.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+mitra2026adaptive,adaptive-turn-taking-multi-party-agents.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+qi2026muvap,muvap-multimodal-multiparty-voice-activity-projection.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+rajaa2026dualturn,dualturn-generative-speech-pretraining.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: conferenceoncomputervision(iccv),2017.[21]otoearth,“otospeech-full-duplex-280h:full-duplexconversationalspeechdataset,”https://huggingface.co/datasets/otoearth/otospeech-full-duple"
+sharon2026less,speech-aspects-end-of-turn-detection.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+xia2026sid,semantic-aware-interruption-detection.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined

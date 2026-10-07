@@ -6,7 +6,7 @@ Context for AI agents working in this repo.
 
 Public companion resource to an arXiv preprint on real-time voice agent
 evaluation ([2609.30798](https://arxiv.org/abs/2609.30798)). Ships
-**metadata for 41 sources** plus **TRG** (Timing-Recovery-Grounded): a
+**metadata for 128 sources in the local revision** (cutoff 2026-10-02) plus **TRG** (Timing-Recovery-Grounded): a
 minimum reporting standard, a compliance checker, a pip-installable pipeline
 (`trg_eval/`), and a baseline leaderboard built from published figures.
 
@@ -16,13 +16,19 @@ minimum reporting standard, a compliance checker, a pip-installable pipeline
 - Source repo for the paper is `SLM_PAPER`, which is **private** and lives at
   `../SLM_PAPER` locally.
 
+The expanded snapshot and TRG report version 2 are prepared locally only.
+No new release, arXiv revision, Zenodo record or live demo deployment has been
+published. Existing examples remain legacy reports; preserve their measured
+values and benchmark comparability.
+
 ## The one rule that matters
 
 **Never commit a PDF here.**
 
-A licence audit found exactly **1 of 41** sources carries an explicit
-open-licence grant. The other 40 are arXiv-default, which does not give third
-parties redistribution rights. Publishing them would be unlawful.
+A PDF-text audit finds **1 of 128** paper-scoped grants. The other 127 are
+unspecified in the PDF, not necessarily arXiv-default. Licences for referenced
+datasets/models do not license the paper. No PDFs may be committed regardless
+of classification.
 
 This is enforced twice, deliberately:
 - `.gitignore` blocks `*.pdf` and `pdfs/`
@@ -35,7 +41,7 @@ corpus auditable without hosting anything.
 ## Layout
 
 ```
-corpus/    voice_agent_corpus.csv|.json  41 rows, 15 fields
+corpus/    voice_agent_corpus.csv|.json  128 rows, 19 core fields
            schema.md                     field definitions
            reconciliation.md             how 51 yaml -> 41 PDFs -> 38 primary
            licence_audit.csv             per-source redistribution status
@@ -60,25 +66,28 @@ benchmark into that trio without flagging the comparability difference.
 
 ## Counts that must hold
 
-**41 rows = 38 primary + 2 positioning + 1 method.** The 38 split
-6/3/8/8/7/6 across six taxonomy categories, matching the paper.
+**128 rows = 124 primary + 3 positioning + 1 method.** The 124 split
+10/6/13/70/19/6 across six legacy artifact-type groups. Two-axis taxonomy
+codes are recorded in `corpus/taxonomy_coding.yaml`.
 
-CI enforces: 41 rows, 38 primary, no duplicate `paper_id` or `pdf_sha256`,
+CI enforces the explicit reviewed `revision` totals, full CSV/JSON equality,
+no duplicate `paper_id` or `pdf_sha256`,
 every identifier resolvable (`arXiv:` / `doi:` / `aclanthology:` prefixed).
 
 ## Regenerating
 
 This repo is **generated**, not hand-edited. Source of truth is
-`../SLM_PAPER/voice_agent_research/`:
+`../SLM_PAPER/survey-paper-voice-agent-research/`:
 
 ```bash
-cd ../SLM_PAPER/survey-paper-voice-agent-research/corpus_build
-python3 scripts/build_corpus.py     # -> voice_agent_corpus.csv
-python3 scripts/audit_licences.py   # -> licence_audit.csv
+cd ../SLM_PAPER/survey-paper-voice-agent-research
+~/.venvs/voice-survey/bin/python scripts/build_corpus.py     # -> voice_agent_corpus.csv
+~/.venvs/voice-survey/bin/python scripts/audit_licences.py   # -> licence_audit.csv
 ```
 
-Then copy the outputs across. Editing the CSV here directly will be
-overwritten on the next build.
+Then copy `voice_agent_corpus.csv|.json`, `join_overrides.yaml`,
+`licence_audit.csv` and `taxonomy_coding.yaml` from `corpus_build/`. Editing
+the CSV here directly will be overwritten on the next build.
 
 ## Local checks before pushing
 
@@ -90,6 +99,15 @@ git ls-files '*.pdf' | wc -l                                   # must be 0
 ```
 
 The template failing is correct behaviour: a blank report is not compliant.
+
+Missing `reporting_version` means version 1. Version 2 requires timing anchors
+and appropriateness, recovery state/protocol, no-action policy and trace evidence,
+and shared conditions. Validate reporting structure, not performance thresholds;
+equal disrupted and undisrupted results are valid. Do not fill legacy examples
+with unreported measurements. The Space's vendored validator also retains its
+demo-specific `format_report_html` function; do not replace it blindly with
+the CLI module. Rebuild local `hf_space/index.html` after updating its assets,
+but deployment requires separate authorisation.
 
 ## Things not to get wrong
 

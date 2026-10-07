@@ -43,12 +43,15 @@ class Report:
         }
 
 
+PLACEHOLDERS = {"not reported", "not measured", "unknown"}
+
+
 def blank(value: Any) -> bool:
-    return (
-        value is None
-        or (isinstance(value, str) and not value.strip())
-        or (isinstance(value, list) and not value)
-    )
+    if isinstance(value, str):
+        return not value.strip() or value.strip().lower() in PLACEHOLDERS
+    if isinstance(value, list):
+        return all(blank(v) for v in value)
+    return value is None
 
 
 def check_timing(data: dict, r: Report) -> None:
@@ -129,6 +132,53 @@ def check_multiparty(data: dict, r: Report) -> None:
             r.error("M", f"multiparty.{field} is required when applicable")
 
 
+def check_reporting_version(data: dict, r: Report) -> None:
+    version = data.get("reporting_version", 1)
+    if type(version) is not int or version not in (1, 2):
+        r.error("report", "reporting_version must be 1 or 2")
+        return
+    if version == 1:
+        return
+
+    def require(axis: str, section: dict, fields: tuple[str, ...], path: str) -> None:
+        for field in fields:
+            value = section.get(field)
+            if blank(value) or (isinstance(value, str) and value.strip().lower()
+                                in {"not reported", "not measured", "unknown"}):
+                r.error(axis, f"{path}.{field} is required by report version 2")
+
+    conditions = data.get("evaluation_conditions") or {}
+    for field in ("languages", "accents", "noise", "speaker_configuration", "load", "evaluator"):
+        if blank(conditions.get(field)):
+            r.error("conditions", f"evaluation_conditions.{field} must be disclosed")
+
+    timing = data.get("timing") or {}
+    require("T", timing, ("value", "anchors", "units"), "timing")
+    if not isinstance(timing.get("tail_reported"), bool):
+        r.error("T", "timing.tail_reported must explicitly disclose measurement status")
+    recovery = data.get("recovery") or {}
+    require("R", recovery, ("value", "state_definition", "protocol"), "recovery")
+    grounded = data.get("grounded_outcome") or {}
+    require("G", grounded, ("value",), "grounded_outcome")
+
+    for axis, parent, name, fields in (
+        ("T", timing, "appropriateness", ("metric", "value", "protocol")),
+        ("G", grounded, "no_action", ("policy", "metric", "value", "verification_method", "action_trace")),
+    ):
+        section = parent.get(name) or {}
+        if not isinstance(section.get("applicable"), bool):
+            r.error(axis, f"{name}.applicable must be explicitly true or false")
+        elif section["applicable"]:
+            require(axis, section, fields, name)
+        else:
+            require(axis, section, ("justification",), name)
+    multiparty = data.get("multiparty") or {}
+    if multiparty.get("applicable"):
+        require("M", multiparty, ("intervention_metric", "intervention_value"), "multiparty")
+    elif blank(multiparty.get("justification")):
+        r.error("M", "version 2 requires a justification when multiparty is inapplicable")
+
+
 def validate_data(data: dict) -> Report:
     """Run all TRG checks against an already-parsed report dict."""
     r = Report()
@@ -137,6 +187,7 @@ def validate_data(data: dict) -> Report:
     check_recovery(data, r)
     check_grounded(data, r)
     check_multiparty(data, r)
+    check_reporting_version(data, r)
     return r
 
 

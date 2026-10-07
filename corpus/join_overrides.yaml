@@ -1,22 +1,5 @@
-# Manually verified filename -> bibtex key pairings.
-#
-# The fuzzy matcher in build_join.py proposes pairings; every one that did not
-# auto-accept was checked by reading page 1 of the actual PDF. This file
-# records those human decisions so the join is reproducible and never silently
-# re-derived. A wrong pairing here puts the wrong paper in the corpus, which is
-# the exact failure this project already caught once (2602.05105 turned out to
-# be a robotics paper, not Full-Duplex-Bench-v3).
-#
-# Verified 2026-09-23 against page-1 text of each PDF.
-
 overrides:
-  # Scored 0.000: filename is an author-year slug, not a title slug, so token
-  # containment had nothing to work with. Page 1 reads "Recent Advances in
-  # Speech Language Models: A Survey".
   cui2024-speechlm-survey.pdf: cui2024speechlm
-
-  # Below auto-accept only because filenames are truncated/abbreviated forms
-  # of longer titles. All confirmed on page 1.
   triadic-multiparty-vap-turn-taking.pdf: elmers2025triadic
   benchmarking-responsiveness-open-source-tts-mdpi.pdf: dinh2025tts
   sensor-augmented-vap-turn-taking-sigdial2026.pdf: hamanaka2026sensor
@@ -24,23 +7,1332 @@ overrides:
   mtr-duplexbench-multiround-eval.pdf: zhang2026mtrduplex
   realtime-continuous-vap-turn-taking.pdf: inoue2024realtime
   vap-multimodal-encoders.pdf: vapmultimodal2025
-
-# Bib entries intentionally NOT backed by a corpus PDF.
+  full-duplex-bench-v3-tool-use-disfluency.pdf: lin2026fdbv3
+  vamos-bench-voice-agent-simulation-bench.pdf: meyer2026vamos
+  mtva-bench-cascaded-voice-agents.pdf: mishra2026mtva
+  nemotronlabs-voicechat-duplex-tools.pdf: nemotron2026voicechat
+  tau-voice-benchmarking-full-duplex-voice-agents.pdf: ray2026tauvoice
+  ihbench-post-interruption-recovery.pdf: salimi2026ihbench
+  speechgym-audio-native-voice-agent-rl.pdf: speechgym2026
+  duplexcascade-full-duplex-s2s-dialogue.pdf: duplexcascade2026
+  building-enterprise-realtime-voice-agents-tutorial.pdf: qiu2026enterprise
+  lts-voiceagent-listen-think-speak-streaming.pdf: zou2026lts
+  voicebench-benchmarking-llm-voice-assistants.pdf: chen2024voicebench
+  full-duplex-bench-v1.5-overlap-handling.pdf: fdbench15
+  full-duplex-bench-v2-multiturn-examiner.pdf: fdbench2
+  flexi-full-duplex-human-llm-interaction.pdf: flexi2025
+  full-duplex-bench-turn-taking-capabilities.pdf: lin2025fdbench
+  mp-bench-voice-agents-multiparty-conversation.pdf: shih2026mpbench
+  msi-bench-multispeaker-voice-interaction.pdf: xiong2026msibench
+  moshi-speech-text-foundation-model.pdf: defossez2024moshi
+  omniflatten-seamless-voice-conversation.pdf: omniflatten2024
+  synchronous-llms-full-duplex-dialogue-agents.pdf: veluri2024synchronous
+  moss-speech-true-speech-to-speech-models.pdf: mossspeech2025
+  duplexchat-speaker-separated-full-duplex-dialogue.pdf: duplexchat2026
+  simultaneous-speech-to-speech-translation-no-aligned-data.pdf: labiausse2026hibikizero
+  structsurvey-agentic-survey-generation.pdf: pedinotti2026structsurvey
+  speak-while-you-think-streaming-synthesis.pdf: dekel2023speak
+  livespeech-low-latency-zero-shot-tts.pdf: livespeech2024
+  ctc-tts-dual-streaming.pdf: ctctts2026
+  mimi-codec-metalinguistic-representations.pdf: saloev2026mimi
+  voicechat-tts-low-latency-continuous-synthesis.pdf: voicechattts2026
+  prosody-for-turn-taking-vap.pdf: ekstedt2022prosody
+  voice-activity-projection-self-supervised-turn-taking.pdf: ekstedt2022vap
+  multilingual-vap-turn-taking.pdf: inoue2024multilingual
+  muvap-multimodal-multiparty-voice-activity-projection.pdf: qi2026muvap
+  full-duplex-survey-architecture-ontology-state-machine.pdf: lu2026duplexsurvey
+  eva-bench-evaluating-voice-agents.pdf: bogavelli2026evabench
+  audio2tool-speech-tool-use.pdf: pahwa2026audio2tool
+  voiceagentbench-agentic-tasks.pdf: jain2025voiceagentbench
+  semantic-aware-interruption-detection.pdf: xia2026sid
+  humdial-full-duplex-interaction-study.pdf: wang2026humdialfd
+  humdial-challenge-spoken-dialogue.pdf: zhao2026humdial
+  dualturn-generative-speech-pretraining.pdf: rajaa2026dualturn
+  endpoint-anticipation-low-latency-dialogue.pdf: endpoint2026anticipation
+  tau-multilingual-voice-agents.pdf: tau2026multilingual
+  duplex-mpe-multi-party-interaction.pdf: duplex2026mpe
+  turnbench-turn-taking-dynamics.pdf: turnbench2026
+  mmedfd-healthcare-full-duplex-asr.pdf: chen2025mmedfd
+  llm-judges-voice-agent-evaluation.pdf: purwar2026judges
+  hear-speaker-attributed-reasoning.pdf: lee2026hear
+  adaptive-turn-taking-multi-party-agents.pdf: mitra2026adaptive
+  speechjbb-safety-code-switched-speech.pdf: ceccatelli2026speechjbb
+  voice-light-cascaded-speculative-generation.pdf: braun2026voicelight
+  intent-conditioned-turn-taking-tact.pdf: shamsaie2026tact
+  acoustic-context-gating-voice-agents.pdf: zhang2026vgbench
+  indicfdb-indian-languages.pdf: indic2026fdb
+  french-full-duplex-benchmark.pdf: french2026fdb
+  full-duplex-take-floor-asked-needed.pdf: floor2026necessity
+  paired-turn-taking-dialogue-contexts-echo.pdf: zhao2026echo
+  duplexspeechbench-implicit-instruction-following.pdf: mathur2026dsbifeval
+  vcb-bench-audio-grounded-conversational-agents.pdf: hu2025vcb
+  speech-aspects-end-of-turn-detection.pdf: sharon2026less
+  frontend-backend-tool-calls-full-duplex.pdf: hu2026frontendbackend
+  streaming-user-transcription-full-duplex.pdf: hu2026transcription
+  iraf-interference-resilient-adaptive-fusion.pdf: zhong2026iraf
+  steerduplex-steerable-dialogue-models.pdf: tyagi2026steerduplex
+  conversationalvoice-full-duplex-speech-data.pdf: he2026conversationalvoice
+  qwen-audio-agent-technical-report.pdf: deng2026qwenagent
+  hear-real-voices-demographic-bias.pdf: yan2026hearbias
+  2503.01174-talking-turns-turn-benchmarking-audio.pdf: arora2025talkingturns
+  2608.10716-duplexworld-voice-agents-help-through.pdf: bhosale2026duplexworld
+  2609.31719-distributional-metrics-evaluating-spoken-conversational.pdf: bokkahallisatish2026cds
+  2509.26388-game-time-evaluating-temporal-dynamics.pdf: chang2025gametime
+  2609.22452-infinity-benchmarking-limits-long-context.pdf: cheng2026voxinfinity
+  2609.38867-talk2agent-benchmarking-voice-interfaces-text.pdf: chiba2026talk2agent
+  2508.18240-mtalk-bench-evaluating-speech-models.pdf: du2025mtalkbench
+  2607.29125-duplexbench-duplex-multi-turn-multilingual.pdf: fukuda2026m3duplexbench
+  2606.17542-evaluating-large-language-models-abilities.pdf: fukuda2026meetingturntaking
+  2512.14865-audio-multi-multichallenge-turn-evaluation.pdf: gosai2025audiomultichallenge
+  2606.31055-reference-based-prosody-rhythm-evaluation.pdf: hallur2026prosodyref
+  2506.02457-sova-bench-benchmarking-speech-conversation.pdf: hou2025sovabench
+  2601.12973-pardon-evaluating-conversational-repair-large.pdf: huang2026pardon
+  2609.36979-louder-longer-livelier-acoustic-shortcuts.pdf: huo2026speechjudgeaudit
+  2401.04867-analysis-user-behaviors-objectively-evaluating.pdf: inoue2024userbehaviors
+  2501.16643-benchmark-addressee-recognition-multi-modal.pdf: inoue2025addressee
+  2602.04796-lalm-judge-benchmarking-large-audio.pdf: ivry2026lalmasajudge
+  2510.19358-evaluating-speaker-attributed-reasoning-multimodal.pdf: kwon2025m3slu
+  2605.15104-text-voice-reproducible-verifiable-framework.pdf: laskar2026texttovoice
+  2604.17358-still-between-evaluating-improving-voice.pdf: lee2026tpibench
+  2502.15919-mind-static-interactive-evaluations-large.pdf: li2025mindthegap
+  2507.18061-televal-benchmark-designed-spoken-language.pdf: li2025televal
+  2601.02391-wearvox-egocentric-multichannel-voice-assistant.pdf: lin2026wearvox
+  2505.15727-vocalbench-vocal-benchmarking-conversational-abilities.pdf: liu2025vocalbench
+  2605.26485-omniinteract-benchmarking-real-world-streaming.pdf: lu2026omniinteract
+  2507.22968-bilingual-benchmark-spoken-dialogue-models.pdf: ma2025c3
+  2609.29371-banglaturn-bangla-turn-benchmark-whisper.pdf: maruf2026banglaturn
+  2609.34973-apex-voice-agents-complete-professional.pdf: mathur2026apexvoice
+  2610.00316-duplexspeechbench-document-grounding-benchmarking-hallucinations.pdf: mathur2026dsbdg
+  2605.30256-videofdb-evaluating-full-duplex-vision.pdf: mazumdar2026videofdb
+  2604.16456-echochain-full-duplex-benchmark-state.pdf: modi2026echochain
+  2507.19040-bench-full-duplex-benchmarking-pipeline.pdf: peng2025fdbench
+  2609.13602-elicitation-benchmarking-multi-turn-entity.pdf: ray2026tauelicitation
+  2607.07985-reliability-assessment-lalm-audio-judges.pdf: sayyad2026lalmjudges
+  2603.25434-codett-context-aware-decision-benchmark.pdf: shen2026codett
+  2606.22868-bench-speaker-centric-understanding-conversational.pdf: sun2026msubench
+  2607.20460-instruct-full-duplex-speech-system.pdf: tang2026instructfd
+  2607.05365-spearbench-benchmark-naturalness-evaluation-streaming.pdf: thebaud2026spearbench
+  2609.40198-speechconversationbench-speech-evaluating-multi-turn.pdf: vesessook2026scb
+  2609.16614-rolebreak-role-benchmarking-long-horizon.pdf: wang2026rolebreak
+  2610.00272-when-intent-arrives-late-benchmark.pdf: xiao2026lateintent
+  2603.16859-social-socialomni-omni-benchmarking-audio.pdf: xie2026socialomni
+  2609.39446-duplexact-duplex-bench-broadening-full.pdf: xing2026duplexactbench
+  2604.15037-reactive-proactive-assessing-proactivity-voice.pdf: xu2026provoicebench
+  2502.17810-bench-comprehensive-evaluation-spoken-dialogue.pdf: yan2025urobench
+  2506.21875-wildspeech-wild-bench-benchmarking-speechllms.pdf: zhang2025wildspeech
+  2607.01345-turn-turnnat-automatic-evaluation-taking.pdf: zhang2026turnnat
+  2025.findings-acl.470.pdf: kim2025contextdialog
+  2026.sigdial-1.2.pdf: kubo2026binaryturn
+  2026.sigdial-1.50.pdf: miyazawa2026paranuc
+  2026.iwsds-1.8.pdf: mori2026nextspeaker
+  2024.findings-emnlp.909.pdf: umair2024whentospeak
+  2026.acl-long.131.pdf: wang2026realtalkcn
 not_in_corpus:
-  sahoo2024prompt: >-
-    Reference paper (Sahoo et al., prompt engineering survey). Cited for
-    methodology/structure only; stored at repo root as reference_paper.pdf,
-    not part of the voice-agent corpus.
-
-# Sources present in the corpus but cited for POSITIONING or METHOD rather
-# than counted among the 38 primary taxonomy sources. Recorded explicitly so
-# the published counts reconcile: 38 primary + 3 = 41 PDFs.
+  sahoo2024prompt: Reference paper (Sahoo et al., prompt engineering survey). Cited
+    for methodology/structure only; stored at repo root as reference_paper.pdf, not
+    part of the voice-agent corpus.
 corpus_roles:
-  cui2024speechlm: positioning      # closest related survey (SpeechLM)
-  gupta2024s2st: positioning        # closest related survey (direct S2ST)
-  pedinotti2026structsurvey: method # cited in the methodological note
-
-# Identifiers for sources that predate sources.yaml and carry no arXiv id on
-# page 1 (so the PDF-text fallback cannot recover them).
+  cui2024speechlm: positioning
+  gupta2024s2st: positioning
+  pedinotti2026structsurvey: method
 identifiers:
-  hamanaka2026sensor: "aclanthology:2026.sigdial-1.12"
+  hamanaka2026sensor: aclanthology:2026.sigdial-1.12
+  wang2026realtalkcn: aclanthology:2026.acl-long.131
+  kim2025contextdialog: aclanthology:2025.findings-acl.470
+  umair2024whentospeak: aclanthology:2024.findings-emnlp.909
+  miyazawa2026paranuc: aclanthology:2026.sigdial-1.50
+  kubo2026binaryturn: aclanthology:2026.sigdial-1.2
+  mori2026nextspeaker: aclanthology:2026.iwsds-1.8
+records:
+  lin2026fdbv3:
+    pdf_filename: full-duplex-bench-v3-tool-use-disfluency.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2604.04847
+    url: ''
+    pdf_sha256: bb3c9143ac444f766aaa57a29f92bfe3294181b1d5f1c0426383489356cb8bc6
+    verified: 'true'
+    verified_date: '2026-09-23'
+  meyer2026vamos:
+    pdf_filename: vamos-bench-voice-agent-simulation-bench.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2607.27453
+    url: ''
+    pdf_sha256: fb55761f6199d3ff10cee2baf180136e850da982d3b798cc86ffcca4b2e7954d
+    verified: 'true'
+    verified_date: '2026-09-23'
+  mishra2026mtva:
+    pdf_filename: mtva-bench-cascaded-voice-agents.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.20152
+    url: ''
+    pdf_sha256: 87086ed2dfa8aa89bc3d55ca723778c34e12c9a66633cd67a01ac30e70c5a89f
+    verified: 'true'
+    verified_date: '2026-09-23'
+  nemotron2026voicechat:
+    pdf_filename: nemotronlabs-voicechat-duplex-tools.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.21967
+    url: ''
+    pdf_sha256: b3f6b81779e31b5454d108cf01abf760571349e283823509d9c196fc32fadf80
+    verified: 'true'
+    verified_date: '2026-09-23'
+  ray2026tauvoice:
+    pdf_filename: tau-voice-benchmarking-full-duplex-voice-agents.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2603.13686
+    url: ''
+    pdf_sha256: 4656c70efc086472102e735f346613ac66db40ff705bd91e8590d1be15670c3e
+    verified: 'true'
+    verified_date: '2026-09-23'
+  salimi2026ihbench:
+    pdf_filename: ihbench-post-interruption-recovery.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2606.19595
+    url: ''
+    pdf_sha256: 604da0359aaf591597b908a594227c55858f16f944daa22d63a2f52485f767f3
+    verified: 'true'
+    verified_date: '2026-09-23'
+  speechgym2026:
+    pdf_filename: speechgym-audio-native-voice-agent-rl.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2608.26432
+    url: ''
+    pdf_sha256: b1915881d57c40020e898456a6afdc95e0105848c3e80a99d230656f9e5c82c0
+    verified: 'true'
+    verified_date: '2026-09-23'
+  duplexcascade2026:
+    pdf_filename: duplexcascade-full-duplex-s2s-dialogue.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2603.09180
+    url: ''
+    pdf_sha256: 08644474d5f4ff96e94a2268532a20a9a074ad7a7d8e8af3268f06666790acb1
+    verified: 'true'
+    verified_date: '2026-09-23'
+  qiu2026enterprise:
+    pdf_filename: building-enterprise-realtime-voice-agents-tutorial.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2603.05413
+    url: ''
+    pdf_sha256: a9b76057630af8ccd8c3b5aec56038c40f90cca32a1ce340eff74c3c10a78770
+    verified: 'true'
+    verified_date: '2026-09-23'
+  zou2026lts:
+    pdf_filename: lts-voiceagent-listen-think-speak-streaming.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2601.19952
+    url: ''
+    pdf_sha256: d25c97a806de2f9c423c0a2c3aab11aa39abd744f761ff2b34f2b5277e6616a0
+    verified: 'true'
+    verified_date: '2026-09-23'
+  chen2024voicebench:
+    pdf_filename: voicebench-benchmarking-llm-voice-assistants.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2410.17196
+    url: ''
+    pdf_sha256: a9e2a4c4609f144aab883e9508f5d201a94a62ae444dd4ce67abdf5086a5d556
+    verified: 'true'
+    verified_date: '2026-09-23'
+  fdbench15:
+    pdf_filename: full-duplex-bench-v1.5-overlap-handling.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2507.23159
+    url: ''
+    pdf_sha256: 15ef4c908dae321d6ebc87b04e43e02edeb203a907a7b206361c7df5a7f7f88b
+    verified: 'true'
+    verified_date: '2026-09-23'
+  fdbench2:
+    pdf_filename: full-duplex-bench-v2-multiturn-examiner.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2510.07838
+    url: ''
+    pdf_sha256: 689e2e73b3bbc47cd51a9bfade7c05a2c3035fe364e3a7a6eef57455e2d2a1c4
+    verified: 'true'
+    verified_date: '2026-09-23'
+  flexi2025:
+    pdf_filename: flexi-full-duplex-human-llm-interaction.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2509.22243
+    url: ''
+    pdf_sha256: 0e692075de3fd6ffb0ef0c75d9725b4118ae8087ffe6315c9175ddac4c743c99
+    verified: 'true'
+    verified_date: '2026-09-23'
+  lin2025fdbench:
+    pdf_filename: full-duplex-bench-turn-taking-capabilities.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2503.04721
+    url: ''
+    pdf_sha256: de2b3a6743c36a4dafd98a09263ee7db8e458e475106691e126083117eeb74e0
+    verified: 'true'
+    verified_date: '2026-09-23'
+  zhang2026mtrduplex:
+    pdf_filename: mtr-duplexbench-multiround-eval.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2511.10262
+    url: ''
+    pdf_sha256: 4fef00ae0ca4332f7cb39fc392f2f20eb8e0d241a59636f7f5dbd685f299a17d
+    verified: 'true'
+    verified_date: '2026-09-23'
+  shih2026mpbench:
+    pdf_filename: mp-bench-voice-agents-multiparty-conversation.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.13076
+    url: ''
+    pdf_sha256: 5884709947e6b6f0cbddee5e56dc9d827547d4ccb2e490e10994234d899d8516
+    verified: 'true'
+    verified_date: '2026-09-23'
+  xiong2026msibench:
+    pdf_filename: msi-bench-multispeaker-voice-interaction.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.24812
+    url: ''
+    pdf_sha256: d0e76a7fb1d4c9fecc5f999913d62af23c71308b4ab8d6406e9d7c22e87e8bc2
+    verified: 'true'
+    verified_date: '2026-09-23'
+  defossez2024moshi:
+    pdf_filename: moshi-speech-text-foundation-model.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2410.00037
+    url: ''
+    pdf_sha256: ea702589e103f8d02b4fbec733c556b08d136c2ccaa013eb48a91a7366c7e390
+    verified: 'true'
+    verified_date: '2026-09-23'
+  omniflatten2024:
+    pdf_filename: omniflatten-seamless-voice-conversation.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2410.17799
+    url: ''
+    pdf_sha256: e229fa598701bccd4abc8d76e6cb447ecd6d5590387e4391d968b33b4ebfe449
+    verified: 'true'
+    verified_date: '2026-09-23'
+  veluri2024synchronous:
+    pdf_filename: synchronous-llms-full-duplex-dialogue-agents.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2409.15594
+    url: ''
+    pdf_sha256: d125eeb88e98853a8e673a3490fcf2b5b64dc798efd38987a3188fa908f4e355
+    verified: 'true'
+    verified_date: '2026-09-23'
+  mossspeech2025:
+    pdf_filename: moss-speech-true-speech-to-speech-models.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2510.00499
+    url: ''
+    pdf_sha256: eca32686d399df9d05eef4701c3f8653cea85c617f565bdc363bac935066ef8a
+    verified: 'true'
+    verified_date: '2026-09-23'
+  duplexchat2026:
+    pdf_filename: duplexchat-speaker-separated-full-duplex-dialogue.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2607.04941
+    url: ''
+    pdf_sha256: 6f9eac506fe8cdbf8ae169e2373ad37b904beb7e09ea2f43d3bfd9c8ba9d3124
+    verified: 'true'
+    verified_date: '2026-09-23'
+  labiausse2026hibikizero:
+    pdf_filename: simultaneous-speech-to-speech-translation-no-aligned-data.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2602.11072
+    url: ''
+    pdf_sha256: a4ddd73500667f1b54fb42ade29c77dd35927146102238aa0bb45b3aa930af83
+    verified: 'true'
+    verified_date: '2026-09-23'
+  cui2024speechlm:
+    pdf_filename: cui2024-speechlm-survey.pdf
+    category: not_applicable
+    corpus_role: positioning
+    identifier: arXiv:2410.03751
+    url: ''
+    pdf_sha256: 1f32bbe73b90e7df33ce5b7dfccea6ea80337c7fbe81ccdef6c2163d1e5958ea
+    verified: 'true'
+    verified_date: '2026-09-23'
+  gupta2024s2st:
+    pdf_filename: gupta2024-direct-s2st-survey.pdf
+    category: not_applicable
+    corpus_role: positioning
+    identifier: arXiv:2411.14453
+    url: ''
+    pdf_sha256: 60ec14be43471abec10d714e1fdfb3bf81c9704c1df759b4f7951a32be161b7d
+    verified: 'true'
+    verified_date: '2026-09-23'
+  pedinotti2026structsurvey:
+    pdf_filename: structsurvey-agentic-survey-generation.pdf
+    category: not_applicable
+    corpus_role: method
+    identifier: arXiv:2607.01243
+    url: ''
+    pdf_sha256: cb501ac9e556ffc27e0042a0207f0dfe8923cbaf34848182d61ce1d3695a770f
+    verified: 'true'
+    verified_date: '2026-09-23'
+  dekel2023speak:
+    pdf_filename: speak-while-you-think-streaming-synthesis.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: arXiv:2309.11210
+    url: ''
+    pdf_sha256: 847ff28ef4181609b000c3a53c85eb15f645a53912787077f5292f4659d1f2be
+    verified: 'true'
+    verified_date: '2026-09-23'
+  livespeech2024:
+    pdf_filename: livespeech-low-latency-zero-shot-tts.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: arXiv:2406.02897
+    url: ''
+    pdf_sha256: ce6b13f34fd1e5758b63a7ac146e5cadbff86dae90a438a9763a0a4ac455f44a
+    verified: 'true'
+    verified_date: '2026-09-23'
+  dinh2025tts:
+    pdf_filename: benchmarking-responsiveness-open-source-tts-mdpi.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: doi:10.3390/computers14100406
+    url: https://mdpi-res.com/d_attachment/computers/computers-14-00406/article_deploy/computers-14-00406-v2.pdf
+    pdf_sha256: 52ad03bb827554083ab0d423b9c129d5488b4e350f659be72d7f67dcb698181e
+    verified: 'true'
+    verified_date: '2026-09-23'
+  ctctts2026:
+    pdf_filename: ctc-tts-dual-streaming.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: arXiv:2602.19574
+    url: ''
+    pdf_sha256: 30bdcf50253dd4e3b38a92e0d1ad6fbe578e94d0ead31ebc2a75f99f9ff270b4
+    verified: 'true'
+    verified_date: '2026-09-23'
+  saloev2026mimi:
+    pdf_filename: mimi-codec-metalinguistic-representations.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: arXiv:2608.15799
+    url: ''
+    pdf_sha256: 9950fca90923dd73b0822815d516d546e35f268203374929de61d375619370bc
+    verified: 'true'
+    verified_date: '2026-09-23'
+  voicechattts2026:
+    pdf_filename: voicechat-tts-low-latency-continuous-synthesis.pdf
+    category: streaming_synthesis_codecs
+    corpus_role: primary
+    identifier: arXiv:2608.13831
+    url: ''
+    pdf_sha256: 29c59193446daf5314e62c2ba63abca467a5d96435c6c98090b04b2a51479261
+    verified: 'true'
+    verified_date: '2026-09-23'
+  ekstedt2022prosody:
+    pdf_filename: prosody-for-turn-taking-vap.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2209.05161
+    url: ''
+    pdf_sha256: cf997b7027570011cce174815b7dc709fee243bf7a54bcc16643d014e0230f62
+    verified: 'true'
+    verified_date: '2026-09-23'
+  ekstedt2022vap:
+    pdf_filename: voice-activity-projection-self-supervised-turn-taking.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2205.09812
+    url: ''
+    pdf_sha256: 212c82beadf6d43a8144c741be841fd9a2bb7d4d68402876dfff698788823752
+    verified: 'true'
+    verified_date: '2026-09-23'
+  inoue2024multilingual:
+    pdf_filename: multilingual-vap-turn-taking.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2403.06487
+    url: ''
+    pdf_sha256: a12189557e7022189609c710cd8071f359ae4e05a3c755c7e1aceef1b19a86bc
+    verified: 'true'
+    verified_date: '2026-09-23'
+  inoue2024realtime:
+    pdf_filename: realtime-continuous-vap-turn-taking.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2401.04868
+    url: ''
+    pdf_sha256: 129a900833fb9a775f6abc8869de60f3526a3a489ed6fda5f8b267136a5a8cec
+    verified: 'true'
+    verified_date: '2026-09-23'
+  elmers2025triadic:
+    pdf_filename: triadic-multiparty-vap-turn-taking.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2507.07518
+    url: ''
+    pdf_sha256: 3ffd3a3e104d0ecbc588a67d5f87770c5e7f177fea7f3712c527727f673736af
+    verified: 'true'
+    verified_date: '2026-09-23'
+  vapmultimodal2025:
+    pdf_filename: vap-multimodal-encoders.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2506.03980
+    url: ''
+    pdf_sha256: 3a65f816022202745ff376675f7d6f0b5ff03d6139b387f9baf287610621e6bf
+    verified: 'true'
+    verified_date: '2026-09-23'
+  hamanaka2026sensor:
+    pdf_filename: sensor-augmented-vap-turn-taking-sigdial2026.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: aclanthology:2026.sigdial-1.12
+    url: https://aclanthology.org/2026.sigdial-1.12.pdf
+    pdf_sha256: 2bee42fa827e149481369901368ccc0da53f9a7def548fc4751569438c82f140
+    verified: 'true'
+    verified_date: '2026-09-23'
+  qi2026muvap:
+    pdf_filename: muvap-multimodal-multiparty-voice-activity-projection.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2606.16731
+    url: ''
+    pdf_sha256: 622a5ff70df3307c79cbc57dfcd5e28eb17e45088692eca3ecd97758e0addf66
+    verified: 'true'
+    verified_date: '2026-09-23'
+  lu2026duplexsurvey:
+    pdf_filename: full-duplex-survey-architecture-ontology-state-machine.pdf
+    category: not_applicable
+    corpus_role: positioning
+    identifier: arXiv:2606.19453v1
+    url: https://arxiv.org/abs/2606.19453
+    pdf_sha256: 04d73c1464fe92b2819faab53f1fe6ec17748addd6cdbf227fb8bff3d76631eb
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2606.19453v1
+  bogavelli2026evabench:
+    pdf_filename: eva-bench-evaluating-voice-agents.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2605.13841v3
+    url: https://arxiv.org/abs/2605.13841
+    pdf_sha256: 5afbebfa9df496a216a4a9d61141b9b46d072a45d9595f1c1b8b19abc868c38f
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2605.13841v3
+  pahwa2026audio2tool:
+    pdf_filename: audio2tool-speech-tool-use.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2604.22821v2
+    url: https://arxiv.org/abs/2604.22821
+    pdf_sha256: c3365e5474f0da450a3d4acaccd985bb8c5a3c169c5bb98dceb96a135669f4c0
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2604.22821v2
+  jain2025voiceagentbench:
+    pdf_filename: voiceagentbench-agentic-tasks.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2510.07978v3
+    url: https://arxiv.org/abs/2510.07978
+    pdf_sha256: d9a6310f274080b586c83722791da432e73059c0ba63757c61fe0fde8c63bc14
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2510.07978v3
+  xia2026sid:
+    pdf_filename: semantic-aware-interruption-detection.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2603.24144v1
+    url: https://arxiv.org/abs/2603.24144
+    pdf_sha256: 925d820ff2dbfb007e1b24a58396f37358f0c4174bf7fd8cf86678b2ace5b40e
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2603.24144v1
+  wang2026humdialfd:
+    pdf_filename: humdial-full-duplex-interaction-study.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2604.21406v2
+    url: https://arxiv.org/abs/2604.21406
+    pdf_sha256: e0808bdddddcae5d4aa0289280bbb3313f61b774f96a576ca26fe533242e3ea7
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2604.21406v2
+  zhao2026humdial:
+    pdf_filename: humdial-challenge-spoken-dialogue.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2601.05564v2
+    url: https://arxiv.org/abs/2601.05564
+    pdf_sha256: 8486a6262040ec52ff5f88ed1f7f429247c9976d6cf0bdf21ea88e82b2fa24fd
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2601.05564v2
+  rajaa2026dualturn:
+    pdf_filename: dualturn-generative-speech-pretraining.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2603.08216v1
+    url: https://arxiv.org/abs/2603.08216
+    pdf_sha256: 288056d790f72a0ea0f47e31ca29ad8d743566154e4ec5f5c68419daedc8edaa
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2603.08216v1
+  endpoint2026anticipation:
+    pdf_filename: endpoint-anticipation-low-latency-dialogue.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2606.13450v1
+    url: https://arxiv.org/abs/2606.13450
+    pdf_sha256: 1e6174f5feb96acc6a760ad072ffca1d877b1ff145635c4276e82c7aec9016c4
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2606.13450v1
+  tau2026multilingual:
+    pdf_filename: tau-multilingual-voice-agents.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.35820v1
+    url: https://arxiv.org/abs/2609.35820
+    pdf_sha256: e3a9fc29e2faf80ac79d5376e0a2bf8ad49c81aa3891837588a78aab40b90ebf
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.35820v1
+  duplex2026mpe:
+    pdf_filename: duplex-mpe-multi-party-interaction.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.31948v1
+    url: https://arxiv.org/abs/2609.31948
+    pdf_sha256: 125f7c66e2d7b1c6d7e60051abb4028ce5535cc03362d53c4f263c49c7ca265d
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.31948v1
+  turnbench2026:
+    pdf_filename: turnbench-turn-taking-dynamics.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2608.25218v2
+    url: https://arxiv.org/abs/2608.25218
+    pdf_sha256: 673cd7d6b5680140b36cbdf7fbc3daffe807e4146fd297d9359dde3dc84b05c3
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2608.25218v2
+  chen2025mmedfd:
+    pdf_filename: mmedfd-healthcare-full-duplex-asr.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2509.19817v3
+    url: https://arxiv.org/abs/2509.19817
+    pdf_sha256: 5262ccc332d538dab43deeea60b657b1ea259678b6a99a7d672a639d52c143b7
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2509.19817v3
+  purwar2026judges:
+    pdf_filename: llm-judges-voice-agent-evaluation.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2608.24314v2
+    url: https://arxiv.org/abs/2608.24314
+    pdf_sha256: 5ae4b3c29209d4ba8125572c18107a9fb0e93c18a981bd7392bb7c575fcc1438
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2608.24314v2
+  lee2026hear:
+    pdf_filename: hear-speaker-attributed-reasoning.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2608.29120v1
+    url: https://arxiv.org/abs/2608.29120
+    pdf_sha256: ba98d412c64bac28c8cae83809bdcac7bd7a568da11a55f1d6ec9b629c56cfe6
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2608.29120v1
+  mitra2026adaptive:
+    pdf_filename: adaptive-turn-taking-multi-party-agents.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2606.13544v3
+    url: https://arxiv.org/abs/2606.13544
+    pdf_sha256: f53641eb11981cf0fbc6636a80fb7ca89f340fad924f42aee1ca0a4d00ad7380
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2606.13544v3
+  ceccatelli2026speechjbb:
+    pdf_filename: speechjbb-safety-code-switched-speech.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2606.06037v3
+    url: https://arxiv.org/abs/2606.06037
+    pdf_sha256: 0c138b1cf233cacd36747fb5f5e9cf5d6d47bc5e78317e155d06200df40eb8d4
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2606.06037v3
+  braun2026voicelight:
+    pdf_filename: voice-light-cascaded-speculative-generation.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2609.20995v1
+    url: https://arxiv.org/abs/2609.20995
+    pdf_sha256: 73951bb3e3c4eba37cc83e11e3aed04e44000fd72b2b62cecf54448e8f9b1b3b
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.20995v1
+  shamsaie2026tact:
+    pdf_filename: intent-conditioned-turn-taking-tact.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.27372v1
+    url: https://arxiv.org/abs/2609.27372
+    pdf_sha256: 73147de353cd5718d0f2eeab8b859ad11953af1aa905a378f513aac3e91b6ebc
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.27372v1
+  zhang2026vgbench:
+    pdf_filename: acoustic-context-gating-voice-agents.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.32536v1
+    url: https://arxiv.org/abs/2609.32536
+    pdf_sha256: 71658ea5beea1cf5f9485d825f57b8a545e7645a5ff5bbe79fe9a45e30a8d6db
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.32536v1
+  indic2026fdb:
+    pdf_filename: indicfdb-indian-languages.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.31967v1
+    url: https://arxiv.org/abs/2609.31967
+    pdf_sha256: 6ae1aec9f56a429efe9d37236cd6f2b64bbfb308efa05a6139dd5afe41bd5a91
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.31967v1
+  french2026fdb:
+    pdf_filename: french-full-duplex-benchmark.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.10765v1
+    url: https://arxiv.org/abs/2609.10765
+    pdf_sha256: 09de86078ed9848e3618dfa0b003d2939fe7c62f8a84ac634429cf33dc7a1af8
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.10765v1
+  floor2026necessity:
+    pdf_filename: full-duplex-take-floor-asked-needed.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.19596v1
+    url: https://arxiv.org/abs/2609.19596
+    pdf_sha256: 86f52ee419f03a7e1284472fe9b46cf85b7278adf2282877a0cee2e384798eba
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.19596v1
+  zhao2026echo:
+    pdf_filename: paired-turn-taking-dialogue-contexts-echo.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.17360v2
+    url: https://arxiv.org/abs/2609.17360
+    pdf_sha256: e19b36a70b7cd7c468487eed89acaf094181cdb508e8244bcb196aa3352ff167
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.17360v2
+  mathur2026dsbifeval:
+    pdf_filename: duplexspeechbench-implicit-instruction-following.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.03423v2
+    url: https://arxiv.org/abs/2609.03423
+    pdf_sha256: e6c0ecae82ab1058585130e445b952c5e797533d76c70e3a0fee4b077e7da1f7
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.03423v2
+  hu2025vcb:
+    pdf_filename: vcb-bench-audio-grounded-conversational-agents.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2510.11098v5
+    url: https://arxiv.org/abs/2510.11098
+    pdf_sha256: fbc38c4f5b8e99fb8de6795aaeea44fe01e36a3c492594459e685276cdc63f03
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2510.11098v5
+  sharon2026less:
+    pdf_filename: speech-aspects-end-of-turn-detection.pdf
+    category: turn_taking_vap
+    corpus_role: primary
+    identifier: arXiv:2609.11066v1
+    url: https://arxiv.org/abs/2609.11066
+    pdf_sha256: 334d0e56da5215e3761d8d77dca7f21f83c185a59ccfe852b5c6a0b4e762bfdf
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.11066v1
+  hu2026frontendbackend:
+    pdf_filename: frontend-backend-tool-calls-full-duplex.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2609.19334v2
+    url: https://arxiv.org/abs/2609.19334
+    pdf_sha256: 6d5fc1902b580e219ddb567e1a95463589a635d633f599bd9a992f9b5cb40cac
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.19334v2
+  hu2026transcription:
+    pdf_filename: streaming-user-transcription-full-duplex.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2609.15759v1
+    url: https://arxiv.org/abs/2609.15759
+    pdf_sha256: 6d2886cf2b2e5dcd53f2e9cf9a0758b607b5f632e9810b43b006406428e10346
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.15759v1
+  zhong2026iraf:
+    pdf_filename: iraf-interference-resilient-adaptive-fusion.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2606.06559v1
+    url: https://arxiv.org/abs/2606.06559
+    pdf_sha256: 23159fc079cbba86eea4807368b7d44556510ea826ab3b9473b6600fa55bb671
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2606.06559v1
+  tyagi2026steerduplex:
+    pdf_filename: steerduplex-steerable-dialogue-models.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2609.12623v1
+    url: https://arxiv.org/abs/2609.12623
+    pdf_sha256: c29d2b1042dfa6281f07c114740f989dc68cdc53d1e6aaef3709e6806984e375
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.12623v1
+  he2026conversationalvoice:
+    pdf_filename: conversationalvoice-full-duplex-speech-data.pdf
+    category: end_to_end_s2s
+    corpus_role: primary
+    identifier: arXiv:2609.08147v1
+    url: https://arxiv.org/abs/2609.08147
+    pdf_sha256: 36f8866f409d626018bd12ea31cffcc7bcc1dc11c6bf7f71daf49097cd7c2fd2
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.08147v1
+  deng2026qwenagent:
+    pdf_filename: qwen-audio-agent-technical-report.pdf
+    category: cascaded_hybrid
+    corpus_role: primary
+    identifier: arXiv:2609.25195v1
+    url: https://arxiv.org/abs/2609.25195
+    pdf_sha256: bec103d47eee627b8d9c47d90da101f00dc694e3c0775b16bcb92b396034341c
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.25195v1
+  yan2026hearbias:
+    pdf_filename: hear-real-voices-demographic-bias.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.35952v1
+    url: https://arxiv.org/abs/2609.35952
+    pdf_sha256: 7f0d121621fdeda82e090ee73f909bece0b3a0f2872ad8c718203f0113aa8ba2
+    verified: true
+    verified_date: '2026-10-02'
+    pdf_url: https://arxiv.org/pdf/2609.35952v1
+  arora2025talkingturns:
+    pdf_filename: 2503.01174-talking-turns-turn-benchmarking-audio.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2503.01174v1
+    url: https://arxiv.org/abs/2503.01174
+    pdf_sha256: 2be490c5aa93518d33c0e5d1145ac49ace539a457296eb9f049f7688e4155eea
+    verified: true
+    verified_date: '2026-10-05'
+  bhosale2026duplexworld:
+    pdf_filename: 2608.10716-duplexworld-voice-agents-help-through.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2608.10716v1
+    url: https://arxiv.org/abs/2608.10716
+    pdf_sha256: 29f021b3db41aa2c33ebc69e9b486f334578f1e36ac0ca25c14a715e4a886e85
+    verified: true
+    verified_date: '2026-10-05'
+  bokkahallisatish2026cds:
+    pdf_filename: 2609.31719-distributional-metrics-evaluating-spoken-conversational.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.31719v1
+    url: https://arxiv.org/abs/2609.31719
+    pdf_sha256: 97f1a6db283aa14df9128e0f72af343f3c9addfeadd32c48e2621ac6585d348b
+    verified: true
+    verified_date: '2026-10-05'
+  chang2025gametime:
+    pdf_filename: 2509.26388-game-time-evaluating-temporal-dynamics.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2509.26388v4
+    url: https://arxiv.org/abs/2509.26388
+    pdf_sha256: c6b37a108cb069a4847b150d771f6caf658efd16ff1da5770dd083712607d570
+    verified: true
+    verified_date: '2026-10-05'
+  cheng2026voxinfinity:
+    pdf_filename: 2609.22452-infinity-benchmarking-limits-long-context.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.22452v1
+    url: https://arxiv.org/abs/2609.22452
+    pdf_sha256: 4b5698fecad6fdcb01a715684613c741c524e5c3918f8b51bb3bd7208093443b
+    verified: true
+    verified_date: '2026-10-05'
+  chiba2026talk2agent:
+    pdf_filename: 2609.38867-talk2agent-benchmarking-voice-interfaces-text.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.38867v1
+    url: https://arxiv.org/abs/2609.38867
+    pdf_sha256: 870511a518e4e45f4675013bb7bb181d1485677f51a4aa11fc5b58a9fc118914
+    verified: true
+    verified_date: '2026-10-05'
+  du2025mtalkbench:
+    pdf_filename: 2508.18240-mtalk-bench-evaluating-speech-models.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2508.18240v2
+    url: https://arxiv.org/abs/2508.18240
+    pdf_sha256: e5f0b89106fc1471cb0cd96e3c0a5d93067eb4a857558484b74bd1b9231b3e95
+    verified: true
+    verified_date: '2026-10-05'
+  fukuda2026m3duplexbench:
+    pdf_filename: 2607.29125-duplexbench-duplex-multi-turn-multilingual.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2607.29125v1
+    url: https://arxiv.org/abs/2607.29125
+    pdf_sha256: e9d8b3209861b8ecceaf548717696031b833b881ddd80f6720cd6562af1f45c3
+    verified: true
+    verified_date: '2026-10-05'
+  fukuda2026meetingturntaking:
+    pdf_filename: 2606.17542-evaluating-large-language-models-abilities.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2606.17542v1
+    url: https://arxiv.org/abs/2606.17542
+    pdf_sha256: 47af68ff2db7f825d1facdc088b240ccc8fd956d67e421de11dca84035c6eb81
+    verified: true
+    verified_date: '2026-10-05'
+  gosai2025audiomultichallenge:
+    pdf_filename: 2512.14865-audio-multi-multichallenge-turn-evaluation.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2512.14865v1
+    url: https://arxiv.org/abs/2512.14865
+    pdf_sha256: d724dd047b476408bef588fac478984c0237e76a84c7e9096ff64f330d145e57
+    verified: true
+    verified_date: '2026-10-05'
+  hallur2026prosodyref:
+    pdf_filename: 2606.31055-reference-based-prosody-rhythm-evaluation.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2606.31055v1
+    url: https://arxiv.org/abs/2606.31055
+    pdf_sha256: 2ca88bce550783fd21a2983546b4987eb6ffa25061a8788f0990e40e4b6ae19b
+    verified: true
+    verified_date: '2026-10-05'
+  hou2025sovabench:
+    pdf_filename: 2506.02457-sova-bench-benchmarking-speech-conversation.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2506.02457v1
+    url: https://arxiv.org/abs/2506.02457
+    pdf_sha256: 4b956187832ca8f6741edbf683473ddc003e3fd4c382e6e60dd03ce4b6e887d1
+    verified: true
+    verified_date: '2026-10-05'
+  huang2026pardon:
+    pdf_filename: 2601.12973-pardon-evaluating-conversational-repair-large.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2601.12973v1
+    url: https://arxiv.org/abs/2601.12973
+    pdf_sha256: adce26235848cebf55fffc09eabb5a778877bd22c1bdaf717c60cc076f2085d5
+    verified: true
+    verified_date: '2026-10-05'
+  huo2026speechjudgeaudit:
+    pdf_filename: 2609.36979-louder-longer-livelier-acoustic-shortcuts.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.36979v1
+    url: https://arxiv.org/abs/2609.36979
+    pdf_sha256: b79f0c285523baf70bb7d6e45b6026f96bc3b8258d4b60ba20c0e51c0fcef13f
+    verified: true
+    verified_date: '2026-10-05'
+  inoue2024userbehaviors:
+    pdf_filename: 2401.04867-analysis-user-behaviors-objectively-evaluating.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2401.04867v2
+    url: https://arxiv.org/abs/2401.04867
+    pdf_sha256: 73c27af5f69f3ba474e02ea152cea1a0f08809655e2dd951a965481ee63ece5e
+    verified: true
+    verified_date: '2026-10-05'
+  inoue2025addressee:
+    pdf_filename: 2501.16643-benchmark-addressee-recognition-multi-modal.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2501.16643v2
+    url: https://arxiv.org/abs/2501.16643
+    pdf_sha256: 4a767e3f74480eab7ffa6a9a2810ddb75e26368613a5ee0a041068fdfefbcfcb
+    verified: true
+    verified_date: '2026-10-05'
+  ivry2026lalmasajudge:
+    pdf_filename: 2602.04796-lalm-judge-benchmarking-large-audio.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2602.04796v2
+    url: https://arxiv.org/abs/2602.04796
+    pdf_sha256: 242565aa9bf22b348a259e8a51e864350835f58e380d579066e6b1db911ac0f2
+    verified: true
+    verified_date: '2026-10-05'
+  kwon2025m3slu:
+    pdf_filename: 2510.19358-evaluating-speaker-attributed-reasoning-multimodal.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2510.19358v1
+    url: https://arxiv.org/abs/2510.19358
+    pdf_sha256: 408f7dd6cb804d7323e79e0646fd1a77d747ba96e41edb988e543149a70ba676
+    verified: true
+    verified_date: '2026-10-05'
+  laskar2026texttovoice:
+    pdf_filename: 2605.15104-text-voice-reproducible-verifiable-framework.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2605.15104v2
+    url: https://arxiv.org/abs/2605.15104
+    pdf_sha256: e0638bda7ae0dbd8f14f342829c358c1bfb4252558468aad03aaa29a32049e47
+    verified: true
+    verified_date: '2026-10-05'
+  lee2026tpibench:
+    pdf_filename: 2604.17358-still-between-evaluating-improving-voice.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2604.17358v1
+    url: https://arxiv.org/abs/2604.17358
+    pdf_sha256: d9d49a54ec32454953d980e275cba35f10d72a1a96651a46df6cee703a16bac2
+    verified: true
+    verified_date: '2026-10-05'
+  li2025mindthegap:
+    pdf_filename: 2502.15919-mind-static-interactive-evaluations-large.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2502.15919v1
+    url: https://arxiv.org/abs/2502.15919
+    pdf_sha256: 50f8160c09df81bd4d71544e43d711c47036f036112266c01aa9f3b86f57eba1
+    verified: true
+    verified_date: '2026-10-05'
+  li2025televal:
+    pdf_filename: 2507.18061-televal-benchmark-designed-spoken-language.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2507.18061v4
+    url: https://arxiv.org/abs/2507.18061
+    pdf_sha256: 05116e4af81749abda399cff1a0d01a54c94e164bb28de14d54609b048715747
+    verified: true
+    verified_date: '2026-10-05'
+  lin2026wearvox:
+    pdf_filename: 2601.02391-wearvox-egocentric-multichannel-voice-assistant.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2601.02391v1
+    url: https://arxiv.org/abs/2601.02391
+    pdf_sha256: 738f79f6ebfe8dfc06eb5eed40fe9cb0cdfa0ba7461abc9421a6f2c0d529efcd
+    verified: true
+    verified_date: '2026-10-05'
+  liu2025vocalbench:
+    pdf_filename: 2505.15727-vocalbench-vocal-benchmarking-conversational-abilities.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2505.15727v3
+    url: https://arxiv.org/abs/2505.15727
+    pdf_sha256: faacc91db7c7f8d34db974b88ac7e3f8c83f101962ce4f2085f951952f015a36
+    verified: true
+    verified_date: '2026-10-05'
+  lu2026omniinteract:
+    pdf_filename: 2605.26485-omniinteract-benchmarking-real-world-streaming.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2605.26485v1
+    url: https://arxiv.org/abs/2605.26485
+    pdf_sha256: c51c0afc878268de4fa700a4c7bf542f208ea7ecda54b06af12f892cd2b17bd3
+    verified: true
+    verified_date: '2026-10-05'
+  ma2025c3:
+    pdf_filename: 2507.22968-bilingual-benchmark-spoken-dialogue-models.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2507.22968v3
+    url: https://arxiv.org/abs/2507.22968
+    pdf_sha256: 2ecd8c33ad8a4f1a639a45977b868f7558cdf7fc8a81c88c832c795e164dc849
+    verified: true
+    verified_date: '2026-10-05'
+  maruf2026banglaturn:
+    pdf_filename: 2609.29371-banglaturn-bangla-turn-benchmark-whisper.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.29371v1
+    url: https://arxiv.org/abs/2609.29371
+    pdf_sha256: c23e15b20a1929562c48197c3f74c62c3649e5b92c6607653c0c9ca341055d57
+    verified: true
+    verified_date: '2026-10-05'
+  mathur2026apexvoice:
+    pdf_filename: 2609.34973-apex-voice-agents-complete-professional.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.34973v1
+    url: https://arxiv.org/abs/2609.34973
+    pdf_sha256: 858d14e535e6479a8408de22f1d0de28ac5eb52ac801a4fd599e874469c6940a
+    verified: true
+    verified_date: '2026-10-05'
+  mathur2026dsbdg:
+    pdf_filename: 2610.00316-duplexspeechbench-document-grounding-benchmarking-hallucinations.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2610.00316v1
+    url: https://arxiv.org/abs/2610.00316
+    pdf_sha256: 5d5c6575c2d588de5440bd8a71139eb608a875b55ac2340c45ec75c5e2328b1a
+    verified: true
+    verified_date: '2026-10-05'
+  mazumdar2026videofdb:
+    pdf_filename: 2605.30256-videofdb-evaluating-full-duplex-vision.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2605.30256v2
+    url: https://arxiv.org/abs/2605.30256
+    pdf_sha256: 7b38406536584983598f79c9ed1b74905e53b3b11ee6f84c8b2451fb7d68cbbd
+    verified: true
+    verified_date: '2026-10-05'
+  modi2026echochain:
+    pdf_filename: 2604.16456-echochain-full-duplex-benchmark-state.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2604.16456v1
+    url: https://arxiv.org/abs/2604.16456
+    pdf_sha256: 4d0df21eeea17f1567224f5f2fc8b29dce043580a995c76ebc217f10c83156de
+    verified: true
+    verified_date: '2026-10-05'
+  peng2025fdbench:
+    pdf_filename: 2507.19040-bench-full-duplex-benchmarking-pipeline.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2507.19040v1
+    url: https://arxiv.org/abs/2507.19040
+    pdf_sha256: 443ea21e9dff90e27d004ca306b3a333ed3e7ffd8b6918c2e99e7bf1a44a24b0
+    verified: true
+    verified_date: '2026-10-05'
+  ray2026tauelicitation:
+    pdf_filename: 2609.13602-elicitation-benchmarking-multi-turn-entity.pdf
+    category: agentic_evaluation
+    corpus_role: primary
+    identifier: arXiv:2609.13602v1
+    url: https://arxiv.org/abs/2609.13602
+    pdf_sha256: 408291f621963b99049f726f1512b603502fc0c60c2e161b65788e6f7e350490
+    verified: true
+    verified_date: '2026-10-05'
+  sayyad2026lalmjudges:
+    pdf_filename: 2607.07985-reliability-assessment-lalm-audio-judges.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2607.07985v1
+    url: https://arxiv.org/abs/2607.07985
+    pdf_sha256: 03c1f88e081ee289812db33532bb65713c97cb646189337994a3e645687c07fe
+    verified: true
+    verified_date: '2026-10-05'
+  shen2026codett:
+    pdf_filename: 2603.25434-codett-context-aware-decision-benchmark.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2603.25434v2
+    url: https://arxiv.org/abs/2603.25434
+    pdf_sha256: ef0cd38c41f5f74b19003bbde40ae0d8d8107831ff255cc82b63fb70dfd79966
+    verified: true
+    verified_date: '2026-10-05'
+  sun2026msubench:
+    pdf_filename: 2606.22868-bench-speaker-centric-understanding-conversational.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2606.22868v1
+    url: https://arxiv.org/abs/2606.22868
+    pdf_sha256: fa79c999f1b47b9331aa2d1312714c2a0be00d5ef0454ba3892f744376720bd4
+    verified: true
+    verified_date: '2026-10-05'
+  tang2026instructfd:
+    pdf_filename: 2607.20460-instruct-full-duplex-speech-system.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2607.20460v1
+    url: https://arxiv.org/abs/2607.20460
+    pdf_sha256: 2aa12f83ed8763d3f7c2433cf9fcd10d08ecab7405f6aabc7f361d4e4f7458b3
+    verified: true
+    verified_date: '2026-10-05'
+  thebaud2026spearbench:
+    pdf_filename: 2607.05365-spearbench-benchmark-naturalness-evaluation-streaming.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2607.05365v1
+    url: https://arxiv.org/abs/2607.05365
+    pdf_sha256: aec6a2eeccaa7b71c7ddaa9416903697ef7b32e06c813c730d2195d62ca7ac89
+    verified: true
+    verified_date: '2026-10-05'
+  vesessook2026scb:
+    pdf_filename: 2609.40198-speechconversationbench-speech-evaluating-multi-turn.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.40198v1
+    url: https://arxiv.org/abs/2609.40198
+    pdf_sha256: 1e63699e385988af2b4af99d647ed9e60ed78814f502e7771053a33cc1ce4a4e
+    verified: true
+    verified_date: '2026-10-05'
+  wang2026rolebreak:
+    pdf_filename: 2609.16614-rolebreak-role-benchmarking-long-horizon.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.16614v1
+    url: https://arxiv.org/abs/2609.16614
+    pdf_sha256: d5d9b81e873adc3efd9d853aeb529757c31d354d49535b306c95f88941d633fa
+    verified: true
+    verified_date: '2026-10-05'
+  xiao2026lateintent:
+    pdf_filename: 2610.00272-when-intent-arrives-late-benchmark.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2610.00272v1
+    url: https://arxiv.org/abs/2610.00272
+    pdf_sha256: 85e15fb806a47dea5beb928efd81351e90f77e95e0cc7a557aca429225d05573
+    verified: true
+    verified_date: '2026-10-05'
+  xie2026socialomni:
+    pdf_filename: 2603.16859-social-socialomni-omni-benchmarking-audio.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2603.16859v3
+    url: https://arxiv.org/abs/2603.16859
+    pdf_sha256: fda885323158cc1f648849db92acc521d221c2bfa042a4ccb74763d101a21b9c
+    verified: true
+    verified_date: '2026-10-05'
+  xing2026duplexactbench:
+    pdf_filename: 2609.39446-duplexact-duplex-bench-broadening-full.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2609.39446v1
+    url: https://arxiv.org/abs/2609.39446
+    pdf_sha256: d709215f0f85e97d856a452b4c3828fb290d891deffda9868526378ba355c87e
+    verified: true
+    verified_date: '2026-10-05'
+  xu2026provoicebench:
+    pdf_filename: 2604.15037-reactive-proactive-assessing-proactivity-voice.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2604.15037v3
+    url: https://arxiv.org/abs/2604.15037
+    pdf_sha256: 7546d9f77162aeea843b59512a3a91f6c9e74c17f7b36e8144dd12e26c80dc13
+    verified: true
+    verified_date: '2026-10-05'
+  yan2025urobench:
+    pdf_filename: 2502.17810-bench-comprehensive-evaluation-spoken-dialogue.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2502.17810v3
+    url: https://arxiv.org/abs/2502.17810
+    pdf_sha256: 65d5c2368dcba63a68d9c40997c518abd535081efe9538bf8b396370ba498ada
+    verified: true
+    verified_date: '2026-10-05'
+  zhang2025wildspeech:
+    pdf_filename: 2506.21875-wildspeech-wild-bench-benchmarking-speechllms.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2506.21875v3
+    url: https://arxiv.org/abs/2506.21875
+    pdf_sha256: 51a6e4f959058ac1d3efce3f5aca469b8a44b242aed4a692b053c85371d7db12
+    verified: true
+    verified_date: '2026-10-05'
+  zhang2026turnnat:
+    pdf_filename: 2607.01345-turn-turnnat-automatic-evaluation-taking.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2607.01345v2
+    url: https://arxiv.org/abs/2607.01345
+    pdf_sha256: d8a3e13cbc273308ace343d217fd2476f14640789da42947c17f524e0227f449
+    verified: true
+    verified_date: '2026-10-05'
+  kim2025contextdialog:
+    pdf_filename: 2025.findings-acl.470.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2025.findings-acl.470
+    url: https://aclanthology.org/2025.findings-acl.470.pdf
+    pdf_sha256: 3f702722e2ce2e1c230ecf575cdb58a8d94c6a5996f665ba16ff10432d372b50
+    verified: true
+    verified_date: '2026-10-06'
+  kubo2026binaryturn:
+    pdf_filename: 2026.sigdial-1.2.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2026.sigdial-1.2
+    url: https://aclanthology.org/2026.sigdial-1.2.pdf
+    pdf_sha256: 7c5314d6ed8984736684e4124a37f4d1d81bcc0d284f8e032e746f4c15116c20
+    verified: true
+    verified_date: '2026-10-06'
+  miyazawa2026paranuc:
+    pdf_filename: 2026.sigdial-1.50.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2026.sigdial-1.50
+    url: https://aclanthology.org/2026.sigdial-1.50.pdf
+    pdf_sha256: 4caa1e749a6a34c4fe530687ce9c01b710a32f3e96a39a1ba39fd8a192bbc2be
+    verified: true
+    verified_date: '2026-10-06'
+  mori2026nextspeaker:
+    pdf_filename: 2026.iwsds-1.8.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2026.iwsds-1.8
+    url: https://aclanthology.org/2026.iwsds-1.8.pdf
+    pdf_sha256: 1cb5e6391d46e4562b2a77414efb6fc71d933f853ee5274a8cd6149e68c62f39
+    verified: true
+    verified_date: '2026-10-06'
+  umair2024whentospeak:
+    pdf_filename: 2024.findings-emnlp.909.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2024.findings-emnlp.909
+    url: https://aclanthology.org/2024.findings-emnlp.909.pdf
+    pdf_sha256: 997d0ba284d2e312622031e6a9df2221a30f02a9100fb1a37c1b7b528b90998b
+    verified: true
+    verified_date: '2026-10-06'
+  wang2026realtalkcn:
+    pdf_filename: 2026.acl-long.131.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2026.acl-long.131
+    url: https://aclanthology.org/2026.acl-long.131.pdf
+    pdf_sha256: b37eea5fb38674b6935a155368ccc05c807ec44d453a0bfa511186be8872bc60
+    verified: true
+    verified_date: '2026-10-06'
+revision:
+  cutoff: '2026-10-02'
+  total: 128
+  primary: 124
+  positioning: 3
+  method: 1

@@ -31,6 +31,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlparse
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -50,13 +51,15 @@ def sha256(path: Path) -> str:
 def pdf_url(row: dict) -> str | None:
     """Best-effort source URL for a row."""
     ident = (row.get("identifier") or "").strip()
+    url = (row.get("url") or "").strip()
+    if urlparse(url).path.lower().endswith(".pdf"):
+        return url
     if ident.startswith("arXiv:"):
         return f"https://arxiv.org/pdf/{ident.removeprefix('arXiv:')}"
     if ident.startswith("doi:"):
         return f"https://doi.org/{ident.removeprefix('doi:')}"
     if ident.startswith("aclanthology:"):
         return f"https://aclanthology.org/{ident.removeprefix('aclanthology:')}.pdf"
-    url = (row.get("url") or "").strip()
     return url or None
 
 
@@ -150,7 +153,7 @@ def main() -> int:
     print(f"skipped          : {skipped}")
     print(f"total            : {len(rows)}")
 
-    return 0 if (mismatched == 0 and failed == 0) else 1
+    return 0 if (mismatched == 0 and failed == 0 and skipped == 0) else 1
 
 
 if __name__ == "__main__":

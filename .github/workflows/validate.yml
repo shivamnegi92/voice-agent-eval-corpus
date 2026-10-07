@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
-      # Hard guard. Only 1 of 41 sources is provably redistributable, so a
+      # Hard guard. PDFs remain excluded irrespective of individual licences; a
       # committed PDF is a licensing problem, not an untidy repo.
       - name: No PDFs may be committed
         run: |
@@ -32,20 +32,29 @@ jobs:
       - name: Corpus integrity
         run: |
           python3 - <<'PY'
-          import csv, json, sys
+          import csv, json, sys, yaml
 
           rows = list(csv.DictReader(open("corpus/voice_agent_corpus.csv")))
           data = json.load(open("corpus/voice_agent_corpus.json"))
+          metadata = yaml.safe_load(open("corpus/join_overrides.yaml"))
+          expected = metadata["revision"]
           fail = []
 
-          if len(rows) != len(data):
-              fail.append(f"csv/json length mismatch: {len(rows)} vs {len(data)}")
+          if rows != data:
+              fail.append("csv/json records differ")
+          if len(rows) != expected["total"]:
+              fail.append(f"expected {expected['total']} total sources, found {len(rows)}")
 
           primary = sum(1 for r in rows if r["corpus_role"] == "primary")
-          if primary != 38:
-              fail.append(f"expected 38 primary sources, found {primary}")
+          if primary != expected["primary"]:
+              fail.append(f"expected {expected['primary']} primary sources, found {primary}")
+          for role in ("positioning", "method"):
+              if sum(r["corpus_role"] == role for r in rows) != expected[role]:
+                  fail.append(f"incorrect {role} source count")
 
           ids = [r["paper_id"] for r in rows]
+          if set(ids) != set(metadata["records"]):
+              fail.append("corpus and explicit source records disagree")
           if len(set(ids)) != len(ids):
               fail.append("duplicate paper_id values")
 

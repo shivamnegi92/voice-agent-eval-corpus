@@ -6,9 +6,16 @@
 [![License: CC BY 4.0 (data) / MIT (code)](https://img.shields.io/badge/license-CC--BY--4.0%20%2F%20MIT-lightgrey)](#licence)
 [![GitHub stars](https://img.shields.io/github/stars/shivamnegi92/voice-agent-eval-corpus?style=social)](https://github.com/shivamnegi92/voice-agent-eval-corpus/stargazers)
 
-A verified, reproducible metadata corpus of **41 sources** on real-time voice
+A verified, reproducible metadata corpus of **128 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
+
+**Local update, not yet released:** the current corpus (cutoff October 2, 2026)
+contains 124 primary, 3 positioning, and 1 methodological source, including 53
+evaluation works from a targeted evaluation-focused search and an ACL Anthology search. It accompanies the
+rewritten manuscript, not a newly posted arXiv revision. The existing public
+release and live demo retain their published snapshot until a separate release
+is authorised.
 
 Companion resource to [*Evaluating Real-Time Voice Agents: From Component
 Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.30798).
@@ -37,7 +44,7 @@ This repo addresses both: a structured corpus for (1), and TRG for (2).
 
 ```
 corpus/
-  voice_agent_corpus.csv     41 sources, 15 fields
+  voice_agent_corpus.csv     128 sources, 19 core fields
   voice_agent_corpus.json    same data, machine-readable
   schema.md                  field definitions
   reconciliation.md          how the counts add up, and where the gaps are
@@ -64,16 +71,18 @@ pyproject.toml              pip-installable package (trg-validate, trg-leaderboa
 
 ## No PDFs here, by design
 
-This corpus ships **metadata only**. Of the 41 sources, exactly **one** carries
-an explicit open-licence grant; the rest are arXiv-hosted with no licence
-permitting third-party redistribution (see `corpus/licence_audit.csv`).
+This corpus ships **metadata only**. PDF-text scanning finds one explicit
+paper-scoped grant among 128 artifacts. The other 127 state no paper-scoped grant in the PDF;
+that does not establish their host licence. Dataset or model licence mentions
+do not grant rights on the paper. No PDFs are redistributed, irrespective of
+classification (see `corpus/licence_audit.csv`).
 
 So instead of hosting papers we should not host, we ship their **SHA-256
 hashes**. You fetch from the original source, and verify you received the
 identical artefact the survey analysed:
 
 ```bash
-python3 scripts/fetch_corpus.py           # fetch all 41, verify each hash
+python3 scripts/fetch_corpus.py           # fetch all 128, verify each hash
 python3 scripts/fetch_corpus.py --verify-only   # re-check an existing copy
 ```
 
@@ -95,10 +104,19 @@ on all applicable axes, not on whichever one is most flattering:
 
 | Axis | Requirement |
 |---|---|
-| **T** Timing | A latency measure under intended deployment conditions, stating what it measures and whether it is a mean or a tail statistic. |
-| **R** Recovery | Behaviour after interruption, backchannel, or false pause, reported *separately* from undisturbed performance. |
-| **G** Grounded outcome | Task success verified against external state, not the agent's own report of what it did. |
-| **M** Multiparty *(conditional)* | Where more than two legitimate speakers exist: appropriate silence and authority-aware disclosure. |
+| **T** Timing appropriateness | Latency with clock anchors, units and statistics; context-sensitive floor appropriateness and its protocol where applicable. |
+| **R** Recovery | Restoration of conversational/task state after an observed disruption, separate from undisturbed performance. |
+| **G** Grounded outcome | Externally verified authorised outcomes, including justified no-action with an eligibility policy and action/state evidence. |
+| **M** Multiparty *(conditional)* | Appropriate speech and silence, missed interventions, and authority-aware disclosure/action where multiple participants are legitimate. |
+
+The new template declares `reporting_version: 2`. Missing or version-1 reports
+retain the original rules, so historical examples are not retroactively credited
+with timing appropriateness or no-action measurements. Version 2 requires shared
+language, accent, noise, speaker, load and evaluator disclosures; untested
+conditions may be explicitly recorded as `not reported`. Applicable measurement
+values cannot use that placeholder. Inapplicable appropriateness/no-action
+blocks require a justification. The checker tests reporting structure, not the
+truth of evidence, score quality, or complete safety/governance coverage.
 
 TRG is deliberately weak. It prescribes which **axes** must appear, not which
 metric to use on each; fixing metrics would ossify a literature whose best
@@ -122,10 +140,9 @@ trg-validate my_report.yaml
 trg-leaderboard          # regenerates corpus/leaderboard.md and .csv
 ```
 
-The worked examples are instructive. `trg_example_nemotron.yaml` uses
-published figures from the strongest system in the corpus, and it *still*
-raises a warning for reporting only a central latency statistic. That gap is
-typical.
+The four worked examples remain legacy reports populated from their original
+sources. Their existing warnings and benchmark comparability remain visible;
+no version-2 measurements have been invented to fill gaps.
 
 ### Baseline leaderboard
 
@@ -147,16 +164,16 @@ instead of trusting whichever axis a vendor chose to publish.
 
 ## Corpus at a glance
 
-**38 primary sources** across six categories, plus 3 positioning/method
+**124 primary sources** across six stable legacy categories, plus 4 positioning/method
 references:
 
 | Category | n |
 |---|---|
-| End-to-end speech-to-speech | 6 |
-| Cascaded and hybrid pipelines | 3 |
-| Turn-taking and voice activity projection | 8 |
-| Conversational benchmarks | 8 |
-| Agentic and tool-use evaluation | 7 |
+| End-to-end speech-to-speech | 10 |
+| Cascaded and hybrid pipelines | 6 |
+| Turn-taking and voice activity projection | 13 |
+| Conversational benchmarks | 70 |
+| Agentic and tool-use evaluation | 19 |
 | Streaming synthesis and neural codecs | 6 |
 
 Every count is reconciled in `corpus/reconciliation.md`, including where the
@@ -164,15 +181,26 @@ repo's own bookkeeping had gaps.
 
 ## Provenance and integrity
 
-- 41/41 PDFs passed first-page identity verification, confirming each file
+- 128/128 PDFs passed first-page identity verification, confirming each file
   contains the paper it claims to.
-- 41/41 carry a SHA-256; no duplicates.
+- 128/128 carry a SHA-256; no duplicates.
 - Filename-to-BibTeX pairings that were not unambiguous were confirmed by
   reading page 1 of each PDF, recorded in `join_overrides.yaml`.
 
 This matters more than it sounds. During construction, one widely-circulated
 arXiv identifier turned out to point at an unrelated robotics paper. Automated
 matching alone would have propagated that error into the corpus.
+
+The search combines supplied candidates, targeted primary-source
+snowballing, an evaluation-focused search of logged arXiv queries with
+backward and forward citation snowballing, and an ACL Anthology search, all under one October 2, 2026
+cutoff; it is not an exhaustive database census.
+`corpus/join_overrides.yaml` records explicit artifact-type groups,
+verification dates and reviewed revision totals; `corpus/taxonomy_coding.yaml`
+codes each source on two axes (capability exercised; evaluation conditions and
+grading instruments).
+CI checks these totals, full CSV/JSON agreement, identifiers and unique hashes.
+The PDF prohibition remains unchanged.
 
 ## Citing
 
