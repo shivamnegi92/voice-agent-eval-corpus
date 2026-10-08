@@ -1,6 +1,7 @@
 # Voice Agent Evaluation Corpus + TRG Evaluation Pipeline
 
 [![CI](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml/badge.svg)](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22924302.svg)](https://doi.org/10.5281/zenodo.22924302)
 [![arXiv](https://img.shields.io/badge/arXiv-2609.30798-b31b1b.svg)](https://arxiv.org/abs/2609.30798)
 [![HF Space](https://img.shields.io/badge/%F0%9F%A4%97%20Space-TRG%20demo-blue)](https://huggingface.co/spaces/shivamnegi92/trg-voice-agent-eval)
 [![License: CC BY 4.0 (data) / MIT (code)](https://img.shields.io/badge/license-CC--BY--4.0%20%2F%20MIT-lightgrey)](#licence)
@@ -10,12 +11,13 @@ A verified, reproducible metadata corpus of **128 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
 
-**Local update, not yet released:** the current corpus (cutoff October 2, 2026)
+**Release v1.1.0 (2026-10-07):** the corpus (cutoff October 2, 2026)
 contains 124 primary, 3 positioning, and 1 methodological source, including 53
-evaluation works from a targeted evaluation-focused search and an ACL Anthology search. It accompanies the
-rewritten manuscript, not a newly posted arXiv revision. The existing public
-release and live demo retain their published snapshot until a separate release
-is authorised.
+evaluation works from a targeted evaluation-focused search and an ACL Anthology
+search, with two-axis taxonomy codes and TRG report version 2. It accompanies the
+rewritten manuscript; the arXiv preprint below has not yet been revised to match.
+Cite the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.22924302),
+which always resolves to the latest version.
 
 Companion resource to [*Evaluating Real-Time Voice Agents: From Component
 Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.30798).
