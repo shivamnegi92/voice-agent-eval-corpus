@@ -10,4 +10,4 @@ Quality to Grounded Outcomes* (arXiv:2609.30798).
 from trg_eval.validator import Report, validate_data, validate_file
 
 __all__ = ["Report", "validate_data", "validate_file"]
-__version__ = "1.1.0"
+__version__ = "1.1.1"

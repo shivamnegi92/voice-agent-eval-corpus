@@ -19,9 +19,11 @@ minimum reporting standard, a compliance checker, a pip-installable pipeline
 - **Zenodo concept DOI:** `10.5281/zenodo.22924302` (always-latest). Version DOIs
   change per release; cite the concept DOI.
 
-v1.1.0 (2026-10-07) releases the 128-source snapshot and TRG report version 2.
-The arXiv preprint has NOT been revised to match, and the live HF Space was NOT
-redeployed (deployment needs separate authorisation). Existing examples remain legacy reports; preserve their measured
+v1.1.0 (2026-10-07) released the 128-source snapshot and TRG report version 2;
+v1.1.1 (2026-10-08) adds four Interspeech citation upgrades. The HF Space was
+redeployed on 2026-10-08 (validator fix, v2 template, DOI badge). Pyodide assets
+from cdn.jsdelivr.net are 403 on the corporate network, so the Space cannot be
+smoke-tested in a browser from there; check it off-network. Existing examples remain legacy reports; preserve their measured
 values and benchmark comparability.
 
 ## The one rule that matters

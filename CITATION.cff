@@ -55,5 +55,5 @@ identifiers:
     description: "Zenodo concept DOI (resolves to the latest version)"
 repository-code: "https://github.com/shivamnegi92/voice-agent-eval-corpus"
 url: "https://github.com/shivamnegi92/voice-agent-eval-corpus"
-version: 1.1.0
-date-released: "2026-10-07"
+version: 1.1.1
+date-released: "2026-10-08"

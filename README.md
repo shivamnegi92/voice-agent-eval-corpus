@@ -11,10 +11,11 @@ A verified, reproducible metadata corpus of **128 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
 
-**Release v1.1.0 (2026-10-07):** the corpus (cutoff October 2, 2026)
+**Release v1.1.1 (2026-10-08):** the corpus (cutoff October 2, 2026)
 contains 124 primary, 3 positioning, and 1 methodological source, including 53
 evaluation works from a targeted evaluation-focused search and an ACL Anthology
-search, with two-axis taxonomy codes and TRG report version 2. It accompanies the
+search, with two-axis taxonomy codes and TRG report version 2. Four works cite
+their Interspeech versions. It accompanies the
 rewritten manuscript; the arXiv preprint below has not yet been revised to match.
 Cite the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.22924302),
 which always resolves to the latest version.
