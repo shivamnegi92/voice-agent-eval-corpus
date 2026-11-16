@@ -127,6 +127,18 @@ overrides:
   2026.iwsds-1.8.pdf: mori2026nextspeaker
   2024.findings-emnlp.909.pdf: umair2024whentospeak
   2026.acl-long.131.pdf: wang2026realtalkcn
+  addlesee2020-incremental-asr-diarization.pdf: addlesee2020incremental
+  2023.acl-industry.19.pdf: komma2023dqa
+  2023.emnlp-main.724.pdf: kubis2023backtranscription
+  2022.findings-emnlp.354.pdf: ma2022dorothie
+  2022.findings-naacl.124.pdf: spithourakis2022evi
+  fatan2024-3m-transformer-turn-taking.pdf: fatan2024threeM
+  2109.13489.pdf: kim2021howrobust
+  chen21n_interspeech.pdf: chen2021ftad
+  ekstedt23_interspeech.pdf: ekstedt2023automatic
+  fujie21_interspeech.pdf: fujie2021timing
+  jin21b_interspeech.pdf: jin2021duplex
+  shangguan21_interspeech.pdf: shangguan2021latency
 not_in_corpus:
   sahoo2024prompt: Reference paper (Sahoo et al., prompt engineering survey). Cited
     for methodology/structure only; stored at repo root as reference_paper.pdf, not
@@ -143,6 +155,18 @@ identifiers:
   miyazawa2026paranuc: aclanthology:2026.sigdial-1.50
   kubo2026binaryturn: aclanthology:2026.sigdial-1.2
   mori2026nextspeaker: aclanthology:2026.iwsds-1.8
+  addlesee2020incremental: aclanthology:2020.coling-main.312
+  ma2022dorothie: aclanthology:2022.findings-emnlp.354
+  spithourakis2022evi: aclanthology:2022.findings-naacl.124
+  komma2023dqa: aclanthology:2023.acl-industry.19
+  kubis2023backtranscription: aclanthology:2023.emnlp-main.724
+  kim2021howrobust: arXiv:2109.13489
+  fatan2024threeM: arXiv:2310.14859
+  ekstedt2023automatic: isca:interspeech_2023/ekstedt23_interspeech
+  jin2021duplex: isca:interspeech_2021/jin21b_interspeech
+  fujie2021timing: isca:interspeech_2021/fujie21_interspeech
+  shangguan2021latency: isca:interspeech_2021/shangguan21_interspeech
+  chen2021ftad: isca:interspeech_2021/chen21n_interspeech
 records:
   lin2026fdbv3:
     pdf_filename: full-duplex-bench-v3-tool-use-disfluency.pdf
@@ -1330,9 +1354,117 @@ records:
     pdf_sha256: b37eea5fb38674b6935a155368ccc05c807ec44d453a0bfa511186be8872bc60
     verified: true
     verified_date: '2026-10-06'
+  addlesee2020incremental:
+    pdf_filename: addlesee2020-incremental-asr-diarization.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2020.coling-main.312
+    url: https://aclanthology.org/2020.coling-main.312.pdf
+    pdf_sha256: d6f0a4f8a7cc592646f39c00bb11c9dec52112596c625fbe8ceaafa97132970e
+    verified: true
+    verified_date: '2026-10-08'
+  komma2023dqa:
+    pdf_filename: 2023.acl-industry.19.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2023.acl-industry.19
+    url: https://aclanthology.org/2023.acl-industry.19.pdf
+    pdf_sha256: 078d7717b18c6f276191e18a8d3254cb23da141b78ef6368958c1d370bcb65bb
+    verified: true
+    verified_date: '2026-10-08'
+  kubis2023backtranscription:
+    pdf_filename: 2023.emnlp-main.724.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2023.emnlp-main.724
+    url: https://aclanthology.org/2023.emnlp-main.724.pdf
+    pdf_sha256: a349f8b16fc852a96938542263ce27421240aa8c0acd965ac7bef3d96e4a80ed
+    verified: true
+    verified_date: '2026-10-08'
+  ma2022dorothie:
+    pdf_filename: 2022.findings-emnlp.354.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2022.findings-emnlp.354
+    url: https://aclanthology.org/2022.findings-emnlp.354.pdf
+    pdf_sha256: fe276347981719cdc888a0e32695e93217ef38a185f823d15fe7f760400ad307
+    verified: true
+    verified_date: '2026-10-08'
+  spithourakis2022evi:
+    pdf_filename: 2022.findings-naacl.124.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: aclanthology:2022.findings-naacl.124
+    url: https://aclanthology.org/2022.findings-naacl.124.pdf
+    pdf_sha256: 8e88f88a4da9ead7d9a43b39056b531ff0a9c444b78484906e659301f63af149
+    verified: true
+    verified_date: '2026-10-08'
+  fatan2024threeM:
+    pdf_filename: fatan2024-3m-transformer-turn-taking.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2310.14859
+    url: https://arxiv.org/pdf/2310.14859
+    pdf_sha256: d980e577ee782740b56335fb1c382cf72091617368f14f2dbaf81dbffa782204
+    verified: true
+    verified_date: '2026-10-08'
+  kim2021howrobust:
+    pdf_filename: 2109.13489.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: arXiv:2109.13489
+    url: https://arxiv.org/pdf/2109.13489
+    pdf_sha256: 673a3b01c06448203837337567415756b6d34e83b2f46158c80c2ae796ee50cf
+    verified: true
+    verified_date: '2026-10-08'
+  chen2021ftad:
+    pdf_filename: chen21n_interspeech.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: isca:interspeech_2021/chen21n_interspeech
+    url: https://www.isca-archive.org/interspeech_2021/chen21n_interspeech.pdf
+    pdf_sha256: 53c77bc30cd62d46ccc9e43dbeffdc6b3e36fb4f85922c612cb13c9e8aa559a5
+    verified: true
+    verified_date: '2026-10-08'
+  ekstedt2023automatic:
+    pdf_filename: ekstedt23_interspeech.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: isca:interspeech_2023/ekstedt23_interspeech
+    url: https://www.isca-archive.org/interspeech_2023/ekstedt23_interspeech.pdf
+    pdf_sha256: f9359f44c81f3130d13065a8e68eedcd0331170ead58549d0564977990cdae39
+    verified: true
+    verified_date: '2026-10-08'
+  fujie2021timing:
+    pdf_filename: fujie21_interspeech.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: isca:interspeech_2021/fujie21_interspeech
+    url: https://www.isca-archive.org/interspeech_2021/fujie21_interspeech.pdf
+    pdf_sha256: e5c04e94bc04cf5059f2a4d773f80192144298517e38a2ad2bef9860c0bcbebe
+    verified: true
+    verified_date: '2026-10-08'
+  jin2021duplex:
+    pdf_filename: jin21b_interspeech.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: isca:interspeech_2021/jin21b_interspeech
+    url: https://www.isca-archive.org/interspeech_2021/jin21b_interspeech.pdf
+    pdf_sha256: de51935dd3e2d1b76691e4ce0f9572e68b67cb979ccb9b86f9efbfe95bd034c7
+    verified: true
+    verified_date: '2026-10-08'
+  shangguan2021latency:
+    pdf_filename: shangguan21_interspeech.pdf
+    category: conversational_benchmarks
+    corpus_role: primary
+    identifier: isca:interspeech_2021/shangguan21_interspeech
+    url: https://www.isca-archive.org/interspeech_2021/shangguan21_interspeech.pdf
+    pdf_sha256: 9eb12f1eb61741a999130f90d637050228f2d9925587a61a5065301ecc178e49
+    verified: true
+    verified_date: '2026-10-08'
 revision:
   cutoff: '2026-10-02'
-  total: 128
-  primary: 124
+  total: 140
+  primary: 136
   positioning: 3
   method: 1

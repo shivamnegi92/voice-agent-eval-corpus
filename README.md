@@ -1,5 +1,7 @@
 # Voice Agent Evaluation Corpus + TRG Evaluation Pipeline
 
+[**English**](README.md) | [简体中文](README.zh-CN.md)
+
 [![CI](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml/badge.svg)](https://github.com/shivamnegi92/voice-agent-eval-corpus/actions/workflows/validate.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22924302.svg)](https://doi.org/10.5281/zenodo.22924302)
 [![arXiv](https://img.shields.io/badge/arXiv-2609.30798-b31b1b.svg)](https://arxiv.org/abs/2609.30798)
@@ -11,14 +13,17 @@ A verified, reproducible metadata corpus of **128 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
 
-**Release v1.1.1 (2026-10-08):** the corpus (cutoff October 2, 2026)
-contains 124 primary, 3 positioning, and 1 methodological source, including 53
-evaluation works from a targeted evaluation-focused search and an ACL Anthology
-search, with two-axis taxonomy codes and TRG report version 2. Four works cite
-their Interspeech versions. It accompanies the
-rewritten manuscript; the arXiv preprint below has not yet been revised to match.
-**This is a version mismatch, not evidence that the public preprint contains
-these changes.** See [release status](RELEASE_STATUS.md) for the publication gates.
+**Release v1.2.0 (2026-11-16): 140 artifacts = 136 primary + 3 positioning +
+1 methodological source**, cutoff October 2, 2026. Includes 91 evaluation and
+11 meta-evaluation works, two-axis coding, TRG report version 2, and the optional
+TRG-Ref 0.1 measurement protocol/analyzer. Metadata and provenance match the
+prepared replacement manuscript. See [release notes](CHANGELOG.md).
+
+**arXiv replacement pending author upload.** The live preprint still predates
+this release; do not assume it contains these revisions. The original Zenodo
+concept archive may also lag the GitHub release. Use the exact
+[v1.2.0 release](https://github.com/shivamnegi92/voice-agent-eval-corpus/releases/tag/v1.2.0)
+and its checksum manifest for this snapshot. See [release status](RELEASE_STATUS.md).
 Use the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.22924302)
 to discover the release family. For a reproducible study, record the exact
 version DOI, tag or commit used; a moving concept link does not freeze inputs.
@@ -50,7 +55,7 @@ This repo addresses both: a structured corpus for (1), and TRG for (2).
 
 ```
 corpus/
-  voice_agent_corpus.csv     128 sources, 19 core fields
+  voice_agent_corpus.csv     140 artifacts, 19 fields
   voice_agent_corpus.json    same data, machine-readable
   schema.md                  field definitions
   reconciliation.md          how the counts add up, and where the gaps are
@@ -75,7 +80,7 @@ assets/                      demo.gif + demo.tape (the VHS script that recorded 
 pyproject.toml              pip-installable package (trg-validate, trg-leaderboard)
 ```
 
-## Reproducible measurements (development preview)
+## Reproducible measurements (TRG-Ref 0.1 preview)
 
 [**TRG-Ref 0.1**](protocol/README.md) is an optional companion protocol with
 starter sandbox tasks, client-playout clock anchors, a matched clean/interrupted
@@ -99,8 +104,8 @@ reproduction checklist, independent-use evidence requirements and a pilot invita
 
 ## No PDFs here, by design
 
-This corpus ships **metadata only**. PDF-text scanning finds one explicit
-paper-scoped grant among 128 artifacts. The other 127 state no paper-scoped grant in the PDF;
+This corpus ships **metadata only**. PDF-text scanning finds explicit
+paper-scoped grants among 140 artifacts (two grants found). The other 138 state no paper-scoped grant in the PDF;
 that does not establish their host licence. Dataset or model licence mentions
 do not grant rights on the paper. No PDFs are redistributed, irrespective of
 classification (see `corpus/licence_audit.csv`).
@@ -110,7 +115,7 @@ hashes**. You fetch from the original source, and verify you received the
 identical artefact the survey analysed:
 
 ```bash
-python3 scripts/fetch_corpus.py           # fetch all 128, verify each hash
+python3 scripts/fetch_corpus.py           # fetch all 140, verify each hash
 python3 scripts/fetch_corpus.py --verify-only   # re-check an existing copy
 ```
 
@@ -136,6 +141,8 @@ on all applicable axes, not on whichever one is most flattering:
 | **R** Recovery | Restoration of conversational/task state after an observed disruption, separate from undisturbed performance. |
 | **G** Grounded outcome | Externally verified authorised outcomes, including justified no-action with an eligibility policy and action/state evidence. |
 | **M** Multiparty *(conditional)* | Appropriate speech and silence, missed interventions, and authority-aware disclosure/action where multiple participants are legitimate. |
+
+![TRG dimensions: Timing, Recovery and Grounded outcomes, with Multiparty when applicable.](assets/trg-axis-map.svg)
 
 The new template declares `reporting_version: 2`. Missing or version-1 reports
 retain the original rules, so historical examples are not retroactively credited
@@ -255,7 +262,7 @@ To cite the corpus or TRG tooling specifically, use the metadata in
 ## Licence
 
 - **Data** (`corpus/`): CC-BY-4.0, see `LICENSE`
-- **Code** (`scripts/`): MIT, see `LICENSE-CODE`
+- **Code** (`scripts/`, `trg_eval/`, tests and demo tooling): MIT, see `LICENSE-CODE`
 
 Licences cover *this* metadata and tooling. The papers themselves remain under
 their original terms, which is precisely why they are not included here.

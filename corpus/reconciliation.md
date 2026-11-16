@@ -4,11 +4,13 @@ Why the repo's several counts differ, and how they add up. Published because
 a corpus whose own numbers do not reconcile should not be trusted, and the
 discrepancies here are real but explicable.
 
-## Current Corpus (Cutoff 2026-10-02, Prepared Locally)
+## Release v1.2.0 corpus (cutoff 2026-10-02)
 
-The verified corpus has **128 PDFs and metadata rows: 124 primary,
-3 positioning, and 1 methodological source**, drawn from five sources under
-one October 2, 2026 cutoff:
+The verified corpus has **140 PDFs and metadata rows: 136 primary, 3 positioning,
+and 1 methodological source**, under the October 2, 2026 cutoff. The coding has
+91 evaluation works and 11 meta-evaluation works. Its discovery routes are
+reported separately because the searches have different coverage and screening
+depths:
 
 - 15 supplied seed papers, 20 papers from eight arXiv API queries, 3 follow-up
   additions, and 3 positioning or method sources (41 artifacts, 38 primary);
@@ -16,53 +18,66 @@ one October 2, 2026 cutoff:
   positioning survey). Audio2Tool and the HumDial full-duplex study were
   resolved through official projects; IRAF and demographic HEAR through
   primary arXiv search. The two HEAR projects remain separate;
-- 47 evaluation and meta-evaluation works from an evaluation-focused search:
-  22 logged arXiv queries, backward snowballing from reference lists and
-  forward snowballing via Semantic Scholar gave 2,472 ranked candidates; 49
-  were proposed by an AI assistant from the top 500 ranks and accepted by the
-  first author, and 2 were excluded at full text as out of scope. Their codes
-  were drafted by the AI assistant with a verbatim quote per code,
-  machine-checked against the cited page, and accepted by the first author;
-- 6 evaluation and meta-evaluation works from an ACL Anthology search: regex
-  equivalents of the same queries over 24,307 Anthology papers (2024-2026)
-  matched 170; 120 not already screened were screened by title and abstract,
-  and the AI assistant's 6 proposals were accepted by the first author.
+- 47 evaluation and meta-evaluation works from the evaluation-focused search
+  (`search_protocol.yaml`): 22 logged arXiv queries, backward snowballing from
+  reference lists and forward snowballing via Semantic Scholar gave 2,472
+  ranked candidates; 49 were proposed by the AI assistant from the top 500
+  ranks and accepted by the first author, and 2 were excluded at full text
+  (E1). Their codes were drafted by the AI assistant with a verbatim quote per
+  code, machine-checked against the cited page, and accepted by the first author;
+- 6 evaluation and meta-evaluation works from the 2024--2026 ACL Anthology
+  search (`screening/acl_includes.yaml`);
+- 12 accepted primary works from historical 2019--2023 searches: 5 ACL
+  Anthology (18,058 papers, 74 matches, 73 new candidates screened by title and
+  abstract, 5 accepted at full text), 5 ISCA Archive (5,403 papers, 108
+  matches, 106 new candidates; 3 accepted at full text first, then a later
+  full-text pass read 102 of the remaining 103 (one returned HTTP 404) and
+  accepted 2 more evaluation works, with 27 others recorded as include_other
+  but not coded), and 2 IEEE-venue
+  works from Semantic Scholar metadata results (231 candidates, 115 query
+  matches, 79 new; the 2 accepted came from open arXiv full texts). The later
+  pass read 40 of the remaining 77 new IEEE candidates and accepted none; the
+  other 37 have no open copy (36 need library access, 1 bad PMC link) and were
+  not screened beyond metadata. Inclusion and codes for these 12 were
+  AI-drafted and accepted by the second author (2026-10-08 for the first 10,
+  2026-10-09 for the 2 ISCA works; `search_runs/2026-10-08-backfill/fulltext/`).
+  See `search_protocol.yaml`
+  and `screening/*_backfill_includes.yaml` for decisions and exact records.
 
-A separate model instance re-coded a random sample of 15 evaluation works
-(kappa 0.78) and all 32 works coded before the evaluation-focused search
-(kappa 0.66) blind; the first author adjudicated every disagreement. This is a
-model consistency check, not human inter-coder agreement.
+The eight appendix arXiv queries were rerun verbatim on 2026-10-08 with dated
+hit counts (`search_runs/2026-10-08-O1-O8-redate/log.csv`), closing the original
+provenance gap without pretending the first run had been logged.
 
-The search is supplied-candidate-led with targeted snowballing, not an
+The search remains supplied-candidate-led and incompletely screened, not an
 exhaustive multi-database review. Primary works with a published version cite
-it (25 of 124) without adding sources. The
-bibliography has 129 entries (128 corpus works plus one uncited external
-reference). PDFs remain private.
+it (41 of 136) without adding sources. The bibliography has 141 entries (140
+corpus works plus one uncited external reference). The manuscript (`arr/`)
+covers all 140 artifacts. `source_audit.yaml` records the
+original discovery and acquisition evidence; `evidence_ledger.md` contains
+short PDF excerpts with page locators. PDFs remain private.
 
 | Legacy category | Primary sources |
-|---|---|
+|---|---:|
 | `end_to_end_s2s` | 10 |
 | `cascaded_hybrid` | 6 |
 | `turn_taking_vap` | 13 |
-| `conversational_benchmarks` | 70 |
+| `conversational_benchmarks` | 82 |
 | `agentic_evaluation` | 19 |
 | `streaming_synthesis_codecs` | 6 |
-| **Total** | **124** |
+| **Total** | **136** |
 
 Classification and verification come from explicit source records, not
 citation order. Artifacts have pinned versions, SHA-256 checks, and recorded
-identity-verification dates; dates are not rewritten to imply later
-verification. All 128 identifiers and hashes are populated with no duplicates,
-and the identity check reports zero suspects.
+identity-verification dates. All 140 identifiers and hashes are populated with
+no duplicates, and the identity alarm reports zero suspects. All 102 outcome
+evidence quotes are verified against their cited PDF pages. The PDF-text
+licence audit finds two explicit paper-scoped grants and 138 PDFs without one.
+No PDF is redistributed regardless of classification.
 
-The PDF-text licence audit finds one paper-scoped grant and 127 PDFs without
-one. Licences for referenced datasets or models are
-not grants on the paper. This does not determine the host's licence selection,
-and no PDF is redistributed regardless of classification.
-
-The companion update is staged locally only. Existing public releases and
-the arXiv package are not silently replaced. The following sections document
-the **historical 2026-09-23 public snapshot**, not the current counts.
+The following sections document the **historical 2026-09-23 public snapshot**,
+not the v1.2.0 counts. WearVox uses its arXiv first-submission year (2025),
+verified from the authoritative abstract page; its stable paper key and pinned
+identifier are unchanged. This leaves 90 primary works dated 2026.
 
 ## The headline numbers
 

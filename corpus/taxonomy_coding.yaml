@@ -595,3 +595,81 @@ coding:
     instruments: [model_judge]
     basis: 'Evaluates speech LLMs and an ASR+GPT-4o pipeline on recorded Chinese multi-turn task-oriented dialogues, scoring intent classification, slot filling and GPT-4o-mini-judged chat under disfluency, speaker age/accent and cross-modal conditions.'
   # END acl-search records
+  # BEGIN acl-backfill records
+  addlesee2020incremental:
+    role: evaluation
+    axes: [timing, multiparty]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Evaluates three commercial incremental ASR services (latency, stability, disfluency fidelity) and two diarization services (robustness to speech overlap) for use in spoken dialogue systems, on recorded human telephone conversations (Switchboard) and a four-speaker corpus (AVDIAR).'
+  komma2023dqa:
+    role: meta_evaluation
+    axes: [component]
+    conditions: [real_speech]
+    instruments: [human_reference]
+    basis: 'Introduces Dialog Quality Annotation (DQA), an expert-annotator workflow judging whole large-scale voice-assistant dialogs (not just turns) for quality and goal completion, and trains a model to predict dialog-level quality; compares it against turn-level aggregation and end-user satisfaction baselines.'
+  kubis2023backtranscription:
+    role: meta_evaluation
+    axes: [component]
+    conditions: []
+    instruments: []
+    basis: 'Proposes and validates a back-transcription method (TTS then ASR) for injecting realistic speech-recognition errors into NLU evaluation data, and checks whether using synthesized speech instead of recorded audio changes which error categories matter for NLU robustness.'
+  ma2022dorothie:
+    role: evaluation
+    axes: [grounded, recovery]
+    conditions: [real_speech]
+    instruments: [state_verification, simulation]
+    basis: 'Introduces a CARLA-based simulation platform and the SDN benchmark where a driving agent must replan navigation goals from free-form human spoken dialogue after unexpected events the simulator injects on the fly; task success is scored as move/action accuracy against the simulator''s ground-truth state.'
+  spithourakis2022evi:
+    role: evaluation
+    axes: [grounded]
+    conditions: [non_english, real_speech]
+    instruments: [state_verification]
+    basis: 'Crowdsourced speakers phoned a spoken dialogue system to enrol, verify or be identified against a knowledge-base profile in English, Polish or French; models are scored on whether the predicted profile match is correct against the true KB record.'
+  # END acl-backfill records
+  # BEGIN ieee-backfill records
+  fatan2024threeM:
+    role: evaluation
+    axes: [timing, multiparty]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Evaluates a multimodal transformer predicting who speaks next (host or either of two other participants) on EgoCom, a real multi-perspective egocentric recording of three-person conversations, against prior turn-taking baselines.'
+  kim2021howrobust:
+    role: evaluation
+    axes: [component]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Introduces a spoken task-oriented dialogue benchmark (the DSTC10 validation set) with recorded human conversations, and shows that dialogue state tracking and knowledge-grounded dialogue models trained on written conversations perform worse on this spoken data, with n-best ASR hypothesis fusion recovering some of the gap.'
+  # END ieee-backfill records
+  # BEGIN isca-backfill records
+  chen2021ftad:
+    role: evaluation
+    axes: [timing, recovery]
+    conditions: [non_english, real_speech]
+    instruments: []
+    basis: 'Builds FTAD by automatically annotating fine-grained turn-taking actions in recorded human-to-human telephone dialogues (Switchboard, FTAD-sw, released; Alibaba Alime-Hotline customer-service calls, FTAD-zh, in-house), defines four supervised tasks (end-of-turn, respond time, break, backchannel prediction) and reports baseline accuracies on both.'
+  ekstedt2023automatic:
+    role: evaluation
+    axes: [timing]
+    conditions: []
+    instruments: [model_judge]
+    basis: 'Uses the Voice Activity Projection (VAP) model to automatically score turn-hold and turn-yield cues produced by three commercial and two open-source TTS systems over simulated turns, varying stimuli and prosody.'
+  fujie2021timing:
+    role: evaluation
+    axes: [timing, multiparty]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Evaluates a neural turn-taking timing model on recorded three-party human conversations (participants paired with a friend, mediated by a robot platform), comparing precise turn-taking timing prediction against a hard-decision VAD-based baseline.'
+  jin2021duplex:
+    role: evaluation
+    axes: [recovery]
+    conditions: [real_speech]
+    instruments: []
+    basis: 'Deployed full-duplex outbound call agent (Ant Group) adds semantic interruption and discontinuous-expression detection to its interruption policy; evaluated with a production turn-on/turn-off comparison measuring intention recognition rate and dialogue completion rate.'
+  shangguan2021latency:
+    role: evaluation
+    axes: [timing, component]
+    conditions: [real_speech]
+    instruments: [human_reference]
+    basis: 'Measures first-token delay and user-perceived latency (end of user speech to mic close, split into endpointer lag and decoder catchup lag) of on-device streaming RNN-T/Emformer ASR on Android, running 100 recorded smart-speaker utterances with human-annotated endpoints, and relates it to WER and to proxy measures (model size, FLOPS, RTF, stride/chunk) across architectures, losses and three endpointers.'
+  # END isca-backfill records

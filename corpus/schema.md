@@ -1,8 +1,8 @@
 # Corpus schema
 
 One row per source in `voice_agent_corpus.csv` / `.json`. The current corpus
-(cutoff 2026-10-02) has 128 rows. It has not been published as a
-new release.
+(cutoff 2026-10-02) has 140 rows: 136 primary, 3 positioning and 1 method.
+This schema accompanies release v1.2.0.
 
 | Field | Type | Description |
 |---|---|---|
@@ -14,7 +14,7 @@ new release.
 | `identifier` | string | Namespaced identifier: `arXiv:NNNN.NNNNNvN`, `doi:...`, or `aclanthology:...`. New arXiv records pin the analysed version. |
 | `url` | string | Landing page, where recorded. May be empty; `identifier` is the reliable field. |
 | `category` | enum | Legacy artifact-type group (see below), or `not_applicable` for non-primary roles. |
-| `corpus_role` | enum | `primary` (71), `positioning` (3), `method` (1). See `reconciliation.md`. |
+| `corpus_role` | enum | `primary` (136), `positioning` (3), `method` (1). See `reconciliation.md`. |
 | `evidence_role` | enum | `evaluation`, `meta_evaluation`, `system`, `data`, `analysis`, `positioning`, `method`. |
 | `capability_axes` | `;`-list | Axis A: `component`, `timing`, `recovery`, `grounded`, `multiparty`. Empty for positioning and method sources. |
 | `conditions` | `;`-list | Axis B, evaluation works only: `non_english`, `real_speech`, `acoustic_variation`, `long_session`. |
@@ -33,8 +33,8 @@ new release.
 | `end_to_end_s2s` | 10 |
 | `cascaded_hybrid` | 6 |
 | `turn_taking_vap` | 13 |
-| `conversational_benchmarks` | 22 |
-| `agentic_evaluation` | 14 |
+| `conversational_benchmarks` | 82 |
+| `agentic_evaluation` | 19 |
 | `streaming_synthesis_codecs` | 6 |
 | `not_applicable` | 4 |
 
@@ -50,12 +50,12 @@ evaluation conditions and grading instruments. A code is set only when the
 analysed PDF states it, so an empty field means "not reported", not "absent".
 Codes are nonexclusive and must not be summed across columns.
 `build_corpus.py` fails if any record is uncoded or uses an unknown value, and
-generates the manuscript coverage table (`taslp/coverage_table.tex`) from it.
+generates the manuscript coverage table (`arr/coverage_table.tex`) from it.
 The `revision` block records reviewed totals and the cutoff used by CI.
 
 ## `corpus_role` values
 
-- **`primary`** (71) - substantive evidence, including evaluator-reliability studies.
+- **`primary`** (136) - substantive evidence, including evaluator-reliability studies.
 - **`positioning`** (3) - closely related surveys, cited to situate this work.
 - **`method`** (1) - cited in the methodological note only.
 

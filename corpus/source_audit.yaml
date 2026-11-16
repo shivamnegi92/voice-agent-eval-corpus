@@ -1,0 +1,1419 @@
+cutoff: '2026-10-02'
+retrieval_date: '2026-10-02'
+search_scope: supplied candidates plus targeted primary-source snowballing
+discovery:
+- method: supplied source audit and URLs
+  date: '2026-10-02'
+- method: official project citation resolution
+  urls:
+  - https://audio2tool.github.io/
+  - https://github.com/ASLP-lab/HumDial-FDBench
+  - https://github.com/MM-Speech/DuplexSurvey
+- method: arXiv exact acronym search
+  queries:
+  - IRAF
+  - HEAR demographic bias
+  date: '2026-10-02'
+limitations: No exhaustive multi-database search or independent replication of reviewed
+  results.
+sources:
+- paper_id: lu2026duplexsurvey
+  identifier: arXiv:2606.19453
+  pdf_filename: full-duplex-survey-architecture-ontology-state-machine.pdf
+  category: not_applicable
+  corpus_role: positioning
+  title: 'A Survey of Full-Duplex Spoken Dialogue Systems: Architectural Hierarchy,
+    Interaction Ontology, and Decision State Machine'
+  authors:
+  - Jingyu Lu
+  - Yuhan Wang
+  - Jianming Luo
+  - Yifu Chen
+  - Tianle Liang
+  - Shengpeng Ji
+  - Ziyue Jiang
+  - Xiaoda Yang
+  - Yu Zhang
+  - Xize Cheng
+  - Chenyuhao Wen
+  - Changhao Pan
+  - Haoxiao Wang
+  - Chen Ye
+  - Jian Wu
+  - Xiaoxi Jiang
+  - Guanjun Jiang
+  - Zhou Zhao
+  abstract: 'More than a dozen spoken dialogue systems have recently claimed to be
+    "full-duplex," yet the term has been used to describe substantially different
+    capabilities. Existing surveys collapse them onto a single axis (cascaded/end-to-end,
+    or engineered/learned) and miss the distinctions that matter most for builders.
+    We argue that much of this ambiguity is taxonomical: current terminology does
+    not specify where duplex decisions are made, which interaction types are supported,
+    or how a system behaves moment by moment. This paper introduces three complementary
+    frameworks: (i) an L0-L3 Architectural Hierarchy that locates where duplex decisions
+    are made; (ii) a $T\times I\times R$ Interaction Ontology that specifies the temporal
+    relation, user intent, and required system response for each interaction; and
+    (iii) a Decision State Machine (IDLE/LISTEN/SPEAK/WAIT/DUAL) that describes how
+    systems move between states. Across published systems and benchmarks, our audit
+    documents a realization gap: although many architectures can in principle operate
+    in full-duplex states, their observed behavior remains constrained by the interaction
+    patterns represented in training and evaluation. We point to the limited public
+    training-data coverage relative to the (largely undisclosed) industrial corpora,
+    together with the still-unrealized goal of L3 representation-level modeling, as
+    the key frontiers for future research on full-duplex dialogue. The related material
+    is available at https://github.com/DuplexLM/DuplexSurvey.'
+  published: '2026-06-17T18:00:08Z'
+  updated: '2026-06-17T18:00:08Z'
+  publication_comment: '34 pages, 5 figures, 7 tables. Project page and interactive
+    demo: https://github.com/DuplexLM/DuplexSurvey'
+  analysed_identifier: arXiv:2606.19453v1
+  pdf_url: https://arxiv.org/pdf/2606.19453v1
+  url: https://arxiv.org/abs/2606.19453
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 04d73c1464fe92b2819faab53f1fe6ec17748addd6cdbf227fb8bff3d76631eb
+- paper_id: bogavelli2026evabench
+  identifier: arXiv:2605.13841
+  pdf_filename: eva-bench-evaluating-voice-agents.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: 'EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents'
+  authors:
+  - Tara Bogavelli
+  - Gabrielle Gauthier Melançon
+  - Katrina Stankiewicz
+  - Oluwanifemi Bamgbose
+  - Fanny Riols
+  - Hoang H. Nguyen
+  - Raghav Mehndiratta
+  - Lindsay Devon Brin
+  - Joseph Marinier
+  - Hari Subramani
+  - Anil Madamala
+  - Sridhar Krishna Nemala
+  - Srinivas Sunkara
+  abstract: 'Voice agents are increasingly deployed across enterprise applications.
+    However, no existing benchmark jointly addresses realistic conversation simulation
+    and comprehensive voice-specific evaluation. We present EVA-Bench, an end-to-end
+    evaluation framework that addresses both. On the simulation side, EVA-Bench orchestrates
+    dynamic bot-to-bot audio conversations with automatic simulation validation that
+    detects user simulator error and appropriately regenerates conversations before
+    scoring. On the measurement side, EVA-Bench introduces two composite metrics:
+    EVA-A (Accuracy) and EVA-X (Experience). EVA-Bench includes 213 scenarios across
+    three enterprise domains, a controlled perturbation suite for accent and noise
+    robustness, and multi-trial measurements that distinguish peak from reliable capability.
+    Across 12 systems spanning all three architectures, we find: (1) no system simultaneously
+    exceeds 0.5 on both EVA-A pass@1 and EVA-X pass@1; (2) peak and reliable performance
+    diverge substantially (median pass@k--pass^k gap of 0.44 on EVA-A); and (3) accent
+    and noise perturbations expose substantial robustness gaps, with effects varying
+    across architectures, systems, and metrics (mean $Δ$ up to 0.314). We release
+    EVA-Bench under an open-source license.'
+  published: '2026-05-13T17:58:52Z'
+  updated: '2026-09-09T17:57:23Z'
+  publication_comment: Accepted to EMNLP 2026 (Findings)
+  analysed_identifier: arXiv:2605.13841v3
+  pdf_url: https://arxiv.org/pdf/2605.13841v3
+  url: https://arxiv.org/abs/2605.13841
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 5afbebfa9df496a216a4a9d61141b9b46d072a45d9595f1c1b8b19abc868c38f
+- paper_id: pahwa2026audio2tool
+  identifier: arXiv:2604.22821
+  pdf_filename: audio2tool-speech-tool-use.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: 'Audio2Tool: Speak, Call, Act -- A Dataset for Benchmarking Speech Tool Use'
+  authors:
+  - Ramit Pahwa
+  - Apoorva Beedu
+  - Parivesh Priye
+  - Rutu Gandhi
+  - Saloni Takawale
+  - Aruna Baijal
+  - Zengli Yang
+  abstract: 'Voice assistants increasingly rely on Speech Language Models (SpeechLMs)
+    to interpret spoken queries and execute complex tasks, yet existing benchmarks
+    lack domain breadth, acoustic diversity, and compositional reasoning complexity
+    to evaluate tool-calling performance. We introduce Audio2Tool, a large-scale dataset
+    comprising approximately 30,000 queries designed to assess tool-calling capabilities
+    of SpeechLMs across three primary domains: Smart Car, Smart Home, and Wearables.
+    Our benchmark features a multi-tier complexity hierarchy, ranging from simple
+    direct commands to complex multi-intent and needle-in-a-haystack extraction to
+    isolate distinct failure modes. To ensure realism, we employ zero-shot voice cloning
+    text-to-speech synthesis and diverse noise profiles to simulate in-the-wild conditions.
+    Evaluations of state-of-the-art SpeechLMs and ASR-LLM pipelines show strong performance
+    on simple commands but significant degradation under compositional and acoustic
+    challenges. Code and dataset are publicly available on the project page: https://audio2tool.github.io/.'
+  published: '2026-04-17T16:41:25Z'
+  updated: '2026-04-28T17:29:55Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2604.22821v2
+  pdf_url: https://arxiv.org/pdf/2604.22821v2
+  url: https://arxiv.org/abs/2604.22821
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: c3365e5474f0da450a3d4acaccd985bb8c5a3c169c5bb98dceb96a135669f4c0
+- paper_id: jain2025voiceagentbench
+  identifier: arXiv:2510.07978
+  pdf_filename: voiceagentbench-agentic-tasks.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: 'VoiceAgentBench: Are Voice Assistants ready for agentic tasks?'
+  authors:
+  - Dhruv Jain
+  - Harshit Shukla
+  - Gautam Rajeev
+  - Ashish Kulkarni
+  - Chandra Khatri
+  - Shubham Agarwal
+  abstract: Large scale Speech Language Models have enabled voice assistants capable
+    of understanding natural spoken queries and performing complex tasks. However,
+    existing speech benchmarks largely focus on isolated capabilities such as transcription
+    or question answering and do not systematically evaluate agentic behavior or adversarial
+    robustness. To address this, we introduce VoiceAgentBench, a comprehensive benchmark
+    for evaluating SpeechLMs in realistic spoken agentic settings, comprising 6,000+
+    synthetic spoken queries spanning single-tool invocations, multi-tool workflows,
+    multi-turn dialogue, and safety evaluations across English and six Indic languages.
+    To ensure speaker diversity, we further simulate speaker variability using a novel
+    sampling strategy that selects audios for TTS voice conversion based on speaker
+    embeddings to maximize acoustic diversity. Our evaluation measures tool selection
+    accuracy, structural consistency, and the correctness of tool invocations, including
+    adversarial robustness. Across agentic tasks, ASR-LLM pipelines outperform end-to-end
+    SpeechLMs, achieving up to 60.6% average parameter-filling accuracy on English,
+    while SpeechLMs exhibit lower performance and sharper degradation on Indic languages.
+    All models struggle in sequential workflows and safety evaluations, highlighting
+    persistent limitations in tool orchestration, multilingual generalization, and
+    safety robustness. VoiceAgentBench is publicly available on Hugging Face at https://huggingface.co/datasets/krutrim-ai-labs/VoiceAgentBench,
+    and the codebase is released at https://github.com/ola-krutrim/VoiceAgentBench.
+  published: '2025-10-09T09:11:38Z'
+  updated: '2026-02-13T12:58:41Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2510.07978v3
+  pdf_url: https://arxiv.org/pdf/2510.07978v3
+  url: https://arxiv.org/abs/2510.07978
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: d9a6310f274080b586c83722791da432e73059c0ba63757c61fe0fde8c63bc14
+- paper_id: xia2026sid
+  identifier: arXiv:2603.24144
+  pdf_filename: semantic-aware-interruption-detection.pdf
+  category: turn_taking_vap
+  corpus_role: primary
+  title: 'Semantic-Aware Interruption Detection in Spoken Dialogue Systems: Benchmark,
+    Metric, and Model'
+  authors:
+  - Kangxiang Xia
+  - Bingshen Mu
+  - Xian Shi
+  - Jin Xu
+  - Lei Xie
+  abstract: 'Achieving natural full-duplex interaction in spoken dialogue systems
+    (SDS) remains a challenge due to the difficulty of accurately detecting user interruptions.
+    Current solutions are polarized between "trigger-happy" VAD-based methods that
+    misinterpret backchannels and robust end-to-end models that exhibit unacceptable
+    response delays. Moreover, the absence of real-world benchmarks and holistic metrics
+    hinders progress in the field. This paper presents a comprehensive frame-work
+    to overcome these limitations. We first introduce SID-Bench, the first benchmark
+    for semantic-aware interruption detection built entirely from real-world human
+    dialogues. To provide a rigorous assessment of the responsiveness-robustness trade-off,
+    we propose the Average Penalty Time (APT) metric, which assigns a temporal cost
+    to both false alarms and late responses. Building on this framework, we design
+    an LLM-based detection model optimized through a novel training paradigm to capture
+    subtle semantic cues of intent. Experimental results show that our model significantly
+    outperforms mainstream baselines, achieving a nearly threefold reduction in APT.
+    By successfully resolving the long-standing tension between speed and stability,
+    our work establishes a new state-of-the-art for intelligent interruption handling
+    in SDS. To facilitate future research, SID-Bench and the associated code are available
+    at: https://github.com/xkx-hub/SID-bench.'
+  published: '2026-03-25T10:11:33Z'
+  updated: '2026-03-25T10:11:33Z'
+  publication_comment: Accepted by ICME 2026
+  analysed_identifier: arXiv:2603.24144v1
+  pdf_url: https://arxiv.org/pdf/2603.24144v1
+  url: https://arxiv.org/abs/2603.24144
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 925d820ff2dbfb007e1b24a58396f37358f0c4174bf7fd8cf86678b2ace5b40e
+- paper_id: wang2026humdialfd
+  identifier: arXiv:2604.21406
+  pdf_filename: humdial-full-duplex-interaction-study.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'Full-Duplex Interaction in Spoken Dialogue Systems: A Comprehensive Study
+    from the ICASSP 2026 HumDial Challenge'
+  authors:
+  - Chengyou Wang
+  - Hongfei Xue
+  - Guojian Li
+  - Zhixian Zhao
+  - Shuiyuan Wang
+  - Shuai Wang
+  - Xin Xu
+  - Hui Bu
+  - Lei Xie
+  abstract: Full-duplex interaction, where speakers and listeners converse simultaneously,
+    is a key element of human communication often missing from traditional spoken
+    dialogue systems. These systems, based on rigid turn-taking paradigms, struggle
+    to respond naturally in dynamic conversations. The Full-Duplex Interaction Track
+    of ICASSP 2026 Human-like Spoken Dialogue Systems Challenge (HumDial Challenge)
+    aims to advance the evaluation of full-duplex systems by offering a framework
+    for handling real-time interruptions, speech overlap, and dynamic turn negotiation.
+    We introduce a comprehensive benchmark for full-duplex spoken dialogue systems,
+    built from the HumDial Challenge. We release a high-quality dual-channel dataset
+    of real human-recorded conversations, capturing interruptions, overlapping speech,
+    and feedback mechanisms. This dataset forms the basis for the HumDial-FDBench
+    benchmark, which assesses a system's ability to handle interruptions while maintaining
+    conversational flow. Additionally, we create a public leaderboard to compare the
+    performance of open-source and proprietary models, promoting transparent, reproducible
+    evaluation. These resources support the development of more responsive, adaptive,
+    and human-like dialogue systems.
+  published: '2026-04-23T08:21:52Z'
+  updated: '2026-04-24T04:15:19Z'
+  publication_comment: 5 pages, 1 figures
+  analysed_identifier: arXiv:2604.21406v2
+  pdf_url: https://arxiv.org/pdf/2604.21406v2
+  url: https://arxiv.org/abs/2604.21406
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: e0808bdddddcae5d4aa0289280bbb3313f61b774f96a576ca26fe533242e3ea7
+- paper_id: zhao2026humdial
+  identifier: arXiv:2601.05564
+  pdf_filename: humdial-challenge-spoken-dialogue.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'The ICASSP 2026 HumDial Challenge: Benchmarking Human-like Spoken Dialogue
+    Systems in the LLM Era'
+  authors:
+  - Zhixian Zhao
+  - Shuiyuan Wang
+  - Guojian Li
+  - Hongfei Xue
+  - Chengyou Wang
+  - Shuai Wang
+  - Longshuai Xiao
+  - Zihan Zhang
+  - Hui Bu
+  - Xin Xu
+  - Xinsheng Wang
+  - Hexin Liu
+  - Eng Siong Chng
+  - Hung-yi Lee
+  - Lei Xie
+  abstract: 'Driven by the rapid advancement of Large Language Models (LLMs), particularly
+    Audio-LLMs and Omni-models, spoken dialogue systems have evolved significantly,
+    progressively narrowing the gap between human-machine and human-human interactions.
+    Achieving truly ``human-like'''' communication necessitates a dual capability:
+    emotional intelligence to perceive and resonate with users'' emotional states,
+    and robust interaction mechanisms to navigate the dynamic, natural flow of conversation,
+    such as real-time turn-taking. Therefore, we launched the first Human-like Spoken
+    Dialogue Systems Challenge (HumDial) at ICASSP 2026 to benchmark these dual capabilities.
+    Anchored by a sizable dataset derived from authentic human conversations, this
+    initiative establishes a fair evaluation platform across two tracks: (1) Emotional
+    Intelligence, targeting long-term emotion understanding and empathetic generation;
+    and (2) Full-Duplex Interaction, systematically evaluating real-time decision-making
+    under `` listening-while-speaking'''' conditions. This paper summarizes the dataset,
+    track configurations, and the final results.'
+  published: '2026-01-09T06:32:30Z'
+  updated: '2026-02-04T05:49:59Z'
+  publication_comment: Official summary paper for the ICASSP 2026 HumDial Challenge
+  analysed_identifier: arXiv:2601.05564v2
+  pdf_url: https://arxiv.org/pdf/2601.05564v2
+  url: https://arxiv.org/abs/2601.05564
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 8486a6262040ec52ff5f88ed1f7f429247c9976d6cf0bdf21ea88e82b2fa24fd
+- paper_id: rajaa2026dualturn
+  identifier: arXiv:2603.08216
+  pdf_filename: dualturn-generative-speech-pretraining.pdf
+  category: turn_taking_vap
+  corpus_role: primary
+  title: 'DualTurn: Learning Turn-Taking from Dual-Channel Generative Speech Pretraining'
+  authors:
+  - Shangeth Rajaa
+  abstract: Speech-to-speech models handle turn-taking naturally but offer limited
+    support for tool-calling or complex reasoning, while production ASR-LLM-TTS voice
+    pipelines offer these capabilities but rely on silence timeouts, which lead to
+    unnatural turn-taking. We present DualTurn, which narrows this gap through generative
+    pretraining on dual-channel conversational audio. The model generates both speakers'
+    future audio autoregressively, implicitly learning conversational dynamics without
+    any labels, and is then fine-tuned to predict interpretable turn-taking signals
+    that map directly to agent actions. DualTurn monitors both channels continuously,
+    anticipating turn boundaries and producing five agent actions. On standard benchmarks,
+    DualTurn (0.5B) outperforms both VAP on agent action prediction (wF1 0.633 vs.
+    0.389) and a 3.1B audio-text model on word-level turn prediction (AUC 0.930 vs.
+    0.880), while anticipating turn boundaries earlier with fewer interruptions.
+  published: '2026-03-09T10:48:37Z'
+  updated: '2026-03-09T10:48:37Z'
+  publication_comment: Submitted to Interspeech 2026
+  analysed_identifier: arXiv:2603.08216v1
+  pdf_url: https://arxiv.org/pdf/2603.08216v1
+  url: https://arxiv.org/abs/2603.08216
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 288056d790f72a0ea0f47e31ca29ad8d743566154e4ec5f5c68419daedc8edaa
+- paper_id: endpoint2026anticipation
+  identifier: arXiv:2606.13450
+  pdf_filename: endpoint-anticipation-low-latency-dialogue.pdf
+  category: turn_taking_vap
+  corpus_role: primary
+  title: Endpoint Anticipation for Low-Latency Spoken Dialogue
+  authors:
+  - Sathvik Udupa
+  - Shinji Watanabe
+  - Petr Schwarz
+  - Jan Cernocky
+  abstract: While low-latency interaction is critical for spoken dialogue, cascaded
+    architectures are often bottlenecked by reactive turn-completion detection. We
+    propose Endpoint Anticipation, shifting from reactive detection to proactive forecasting
+    of end-of-turn signals. Our speech-based model anticipates endpoints upto 2.56
+    seconds in advance, enabling speculative execution of LLM and TTS pipelines on
+    partial context. We introduce metrics to quantify the trade-off between realized
+    latency reduction and computational redundancy. Evaluation across conversational
+    and task-oriented datasets shows our model consistently outperforms competitive
+    VAP-based baselines. Integration with the Unmute framework demonstrates a 505
+    ms average latency reduction with a 28.4% increase in speculative computation,
+    effectively masking sequential bottlenecks to enable complex reasoning in real-time
+    speech-to-speech interaction.
+  published: '2026-06-11T15:09:45Z'
+  updated: '2026-06-11T15:09:45Z'
+  publication_comment: Accepted at Interspeech 2026
+  analysed_identifier: arXiv:2606.13450v1
+  pdf_url: https://arxiv.org/pdf/2606.13450v1
+  url: https://arxiv.org/abs/2606.13450
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 1e6174f5feb96acc6a760ad072ffca1d877b1ff145635c4276e82c7aec9016c4
+- paper_id: tau2026multilingual
+  identifier: arXiv:2609.35820
+  pdf_filename: tau-multilingual-voice-agents.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: '$τ$-Multilingual: Benchmarking Voice Agents Across Languages'
+  authors:
+  - Soham Ray
+  - Edgard dos Santos Paiva
+  - Ruben Valenzuela
+  - Karthik Narasimhan
+  - Keshav Dhandhania
+  - Victor Barres
+  abstract: 'English-only benchmarks expose only a narrow slice of voice-agent behavior.
+    We introduce $τ$-Multilingual, extending $τ$-Voice to Spanish, Brazilian Portuguese,
+    Hindi, Korean, and Mandarin with native-speaker review and evaluation of generated
+    language and spoken output. Across 4,500 full-duplex calls and five voice configurations,
+    Spanish, Portuguese, and Hindi remain within 3.2 task-completion points of English,
+    but Korean and Mandarin fall by 14.7 and 8.4 points. The failure modes also vary:
+    Korean systems miss more responses, Mandarin systems interrupt more often, and
+    both struggle with tools and entities. Grok leads task completion but scores lowest
+    on generation quality, motivating separate task, interaction, and generation reporting.
+    We release language packs, validated judges, and tools for community-built multilingual
+    voice-agent evaluation.'
+  published: '2026-09-21T18:32:01Z'
+  updated: '2026-09-21T18:32:01Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.35820v1
+  pdf_url: https://arxiv.org/pdf/2609.35820v1
+  url: https://arxiv.org/abs/2609.35820
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: e3a9fc29e2faf80ac79d5376e0a2bf8ad49c81aa3891837588a78aab40b90ebf
+- paper_id: duplex2026mpe
+  identifier: arXiv:2609.31948
+  pdf_filename: duplex-mpe-multi-party-interaction.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'Duplex-MPE: Benchmarking Multi-Party Interaction in Full-Duplex Dialogue'
+  authors:
+  - Chengqian Ma
+  - Wenhao Feng
+  - Weixuan Jin
+  - Gaole Dai
+  - Tianyu Xie
+  - Yuexiao Ma
+  - Zhaolu Kang
+  - Xiangyu Zhao
+  - Xiawu Zheng
+  - Fei Chao
+  abstract: 'Real-time full-duplex speech models can listen while speaking, enabling
+    natural interaction without rigid turn boundaries. Existing benchmarks evaluate
+    turn-taking, interruption handling and multi-round dialogue, but largely centre
+    on a designated user rather than an assistant participating in a shared conversation
+    among several people. We introduce Duplex-MPE to evaluate when such an assistant
+    should answer, remain silent or stop speaking. The benchmark contains 2,000 scenarios
+    with three or four human speakers and one assistant, each paired across explicit
+    and implicit addressing of the same request. Models receive continuous conversation
+    audio without transcripts or supplied turn boundaries. Four scores measure fresh
+    response initiation, answer accuracy, silence preservation and stopping when a
+    human resolves a request. We evaluate five open-weight speech systems: MiniCPM-o
+    4.5, Moshi, FLM-Audio, Voila and Freeze-Omni. MiniCPM-o 4.5 leads on three scored
+    capabilities, while frequent speech from other systems can coexist with inaccurate
+    answers or failures to remain silent. A transcript-based Gemini 3.1 Pro reference
+    responds 64.3 percentage points more often to explicit than implicit requests;
+    paired tests detect no significant response-rate difference for the speech systems.'
+  published: '2026-09-25T19:53:52Z'
+  updated: '2026-09-25T19:53:52Z'
+  publication_comment: '27 pages, 3 figures. Project page: https://step-out.github.io/Duplex-MPE-Page/'
+  analysed_identifier: arXiv:2609.31948v1
+  pdf_url: https://arxiv.org/pdf/2609.31948v1
+  url: https://arxiv.org/abs/2609.31948
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 125f7c66e2d7b1c6d7e60051abb4028ce5535cc03362d53c4f263c49c7ca265d
+- paper_id: turnbench2026
+  identifier: arXiv:2608.25218
+  pdf_filename: turnbench-turn-taking-dynamics.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'TurnBench: A Multi-Domain Benchmark for Turn-Taking Dynamics in Spoken Dialogue'
+  authors:
+  - Freeman Jiang
+  - Ramon Sanabria
+  - Soham Deshmukh
+  - Bandhav Veluri
+  - Simon Michael Vuch Williams
+  - Elliott K. Suen
+  - Garreth Lee
+  - Kevin Yoonho Choi
+  - Takuya Umeki
+  - Riku Kubo
+  - Sathvik Udupa
+  - Chien-yu Huang
+  - Shih-Yun Shan Kuan
+  - Zhuoyan Tao
+  - Satyapriya Krishna
+  - Sefik Emre Eskimez
+  - Yu Tsao
+  - Hung-yi Lee
+  - Shinji Watanabe
+  abstract: Speakers in natural conversation take turns speaking and listening, deciding
+    in real time when to take, hold, or yield the floor. However, turn-taking evaluation
+    remains limited due to the lack of a consistent, linguistically grounded evaluation
+    protocol and hand-annotated data covering diverse conversation types. To address
+    this, we present TurnBench, a multi-domain benchmark that pairs a 30-hour, hand-labeled
+    corpus of dyadic human conversation with a standardized evaluation protocol for
+    end-of-turn and interruption detection. We set conversation type as a controllable
+    experimental variable, covering six distinct interaction styles, and triple-annotate
+    each conversation. Benchmarking 14 heterogeneous turn-taking systems, we find
+    end-of-turn recall stable across types, while interruption false positives are
+    strongly type-dependent and concentrated in backchannel-dense interaction styles.
+    Although in smooth floor transfers human listeners begin speaking a median 151
+    ms before the current turn ends, no current system performs equivalently without
+    incurring excessive false positives. We release our corpus, a 104-hour training
+    set, and a public leaderboard with an interactive dataset viewer at https://turnbench.sesame.com.
+  published: '2026-08-25T23:14:36Z'
+  updated: '2026-09-16T15:38:15Z'
+  publication_comment: '8 pages, 2 figures. Accepted to IEEE SLT 2026. v2: camera-ready
+    version'
+  analysed_identifier: arXiv:2608.25218v2
+  pdf_url: https://arxiv.org/pdf/2608.25218v2
+  url: https://arxiv.org/abs/2608.25218
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 673cd7d6b5680140b36cbdf7fbc3daffe807e4146fd297d9359dde3dc84b05c3
+- paper_id: chen2025mmedfd
+  identifier: arXiv:2509.19817
+  pdf_filename: mmedfd-healthcare-full-duplex-asr.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'MMedFD: A Real-world Healthcare Benchmark for Multi-turn Full-Duplex Automatic
+    Speech Recognition'
+  authors:
+  - Hongzhao Chen
+  - XiaoYang Wang
+  - Jing Lan
+  - Hexiao Ding
+  - Yufeng Jiang
+  - MingHui Yang
+  - DanHui Xu
+  - Jun Luo
+  - Nga-Chun Ng
+  - Gerald W. Y. Cheng
+  - Yunlin Mao
+  - Jung Sun Yoo
+  abstract: Automatic speech recognition (ASR) in clinical dialogue demands robustness
+    to full-duplex interaction, speaker overlap, and low-latency constraints, yet
+    open benchmarks remain scarce. We present MMedFD, the first real-world Chinese
+    healthcare ASR corpus designed for multi-turn, full-duplex settings. Captured
+    from a deployed AI assistant, the dataset comprises 5,805 annotated sessions with
+    synchronized user and mixed-channel views, RTTM/CTM timing, and role labels. We
+    introduce a model-agnostic pipeline for streaming segmentation, speaker attribution,
+    and dialogue memory, and fine-tune Whisper-small on role-concatenated audio for
+    long-context recognition. ASR evaluation includes WER, CER, and HC-WER, which
+    measures concept-level accuracy across healthcare settings. LLM-generated responses
+    are assessed using rubric-based and pairwise protocols. MMedFD establishes a reproducible
+    framework for benchmarking streaming ASR and end-to-end duplex agents in healthcare
+    deployment. The dataset and related resources are publicly available at https://github.com/Kinetics-JOJO/MMedFD
+  published: '2025-09-24T06:56:26Z'
+  updated: '2026-07-29T06:28:54Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2509.19817v3
+  pdf_url: https://arxiv.org/pdf/2509.19817v3
+  url: https://arxiv.org/abs/2509.19817
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 5262ccc332d538dab43deeea60b657b1ea259678b6a99a7d672a639d52c143b7
+- paper_id: purwar2026judges
+  identifier: arXiv:2608.24314
+  pdf_filename: llm-judges-voice-agent-evaluation.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: 'Benchmarking LLM Judges for Voice-Agent Evaluation: Reliability, Calibration,
+    and Human Oversight'
+  authors:
+  - Anupam Purwar
+  - Shashank Singh
+  - Kritika Srivastava
+  abstract: Evaluating conversational voice agents at scale re- quires reliable assessment
+    methods that capture both observ- able interaction quality and the contextual
+    judgment typically provided by human evaluators. We investigate LLM-as-a-Judge
+    evaluation by comparing human judgments with GPT-4.1 and GPT-5 on telecom and
+    retail voice-agent conversations, across conversational quality and safety dimensions.
+    The same interac- tions are scored under three evaluation configurations, p0,
+    p1, and p2, to test whether automated judgments are sensitive to the evaluation
+    setup and whether observed patterns generalize across configurations and judge
+    models. Beyond aggregate agreement, we examine metric-level correlations, evaluator
+    consistency, and systematic human-LLM disagreement to identify which conver- sational
+    attributes can be judged reliably by automation and which remain sensitive to
+    interpretation and context. Effective voice-agent evaluation is also shaped by
+    pipeline-level factors such as speech generation, streaming, and error propagation
+    across ASR, reasoning, and tool-calling stages, motivating our focus on comparing
+    how human and LLM judges score the same interactions end to end. Our results show
+    that LLM- based evaluation can serve as an effective component of large- scale
+    voice-agent assessment, but that its reliability is metric- and configuration-dependent
+    rather than uniform. This pro- vides an empirical framework for identifying which
+    metrics suit automated evaluation and supports hybrid pipelines in which LLM judges
+    handle scalable assessment while human evaluators remain engaged for metrics that
+    demand contextual interpretation and higher-confidence judgment.
+  published: '2026-08-25T09:44:36Z'
+  updated: '2026-09-16T17:42:31Z'
+  publication_comment: Extends LLM-as-a-Judge to voice agents across telecom and retail,
+    testing GPT-4.1, GPT-5 and Claude against human raters across 10 safety and efficiency
+    metrics. A correlation-based calibration analysis reveals domain-dependent reliability
+    and identifies Recovery Turn Count and safety-recall metrics as unreliable for
+    fully automated judging
+  analysed_identifier: arXiv:2608.24314v2
+  pdf_url: https://arxiv.org/pdf/2608.24314v2
+  url: https://arxiv.org/abs/2608.24314
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 5ae4b3c29209d4ba8125572c18107a9fb0e93c18a981bd7392bb7c575fcc1438
+- paper_id: lee2026hear
+  identifier: arXiv:2608.29120
+  pdf_filename: hear-speaker-attributed-reasoning.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'HEAR Who Said What: Unlocking Speaker-Attributed Reasoning via Counterfactual
+    Voice Grounding'
+  authors:
+  - Dongwook Lee
+  - Sangkwon Park
+  - Eunwoo Song
+  - Che Hyun Lee
+  - Youngho Cho
+  - Junho Kim
+  - June Young Yi
+  - Heeseung Kim
+  - Sungroh Yoon
+  abstract: Speech Language Models (SLMs) are increasingly deployed in multi-speaker
+    environments, yet their ability to attribute speech to the correct speaker and
+    reason over speaker identities remains unclear. Hence, we introduce HEAR, a conceptually
+    hierarchical benchmark diagnosing the foundational capabilities of speaker-attributed
+    reasoning, comprising 2.4K human-verified samples from 887 diverse multi-party
+    audio clips. Evaluating 20 leading SLMs on HEAR reveals they struggle with these
+    foundational tasks, often relying on semantic priors rather than actual vocal
+    cues. To address this, we present A2R, a 30B model optimized on Counterfactual
+    Audio with Speaker-level Hard negatives (CASH), a dataset designed to guide the
+    model to prioritize acoustic vocal cues over linguistic signals. A2R achieves
+    strong performance on HEAR and exhibits zero-shot generalization to diverse multi-speaker
+    downstream tasks, demonstrating that learned speaker attribution unlocks the model's
+    latent capacity for speaker-aware reasoning. All resources are available at https://attributetoreason.github.io/AttributeToReason/
+  published: '2026-08-29T08:01:20Z'
+  updated: '2026-08-29T08:01:20Z'
+  publication_comment: EMNLP2026 Main Conference
+  analysed_identifier: arXiv:2608.29120v1
+  pdf_url: https://arxiv.org/pdf/2608.29120v1
+  url: https://arxiv.org/abs/2608.29120
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: ba98d412c64bac28c8cae83809bdcac7bd7a568da11a55f1d6ec9b629c56cfe6
+- paper_id: mitra2026adaptive
+  identifier: arXiv:2606.13544
+  pdf_filename: adaptive-turn-taking-multi-party-agents.pdf
+  category: turn_taking_vap
+  corpus_role: primary
+  title: Adaptive Turn-Taking for Real-time Multi-Party Voice Agents
+  authors:
+  - Soumyajit Mitra
+  - Prabhat Pandey
+  - Abhinav Jain
+  - Shanmukha Sahith
+  - K V Vijay Girish
+  abstract: Turn-taking in multi-party spoken conversations remains a fundamental
+    challenge for voice-based agents, particularly under dynamic floor competition
+    and varying user expectations. We propose ModeratorLM, a role-playing voice agent
+    that conditions turn-taking behavior on an explicitly assigned role in multi-party
+    settings. The system is built on a speech large language model operating in chunk-wise
+    streaming manner. We further introduce a reasoning-augmented variant that incorporates
+    chain-of-thought reasoning over conversational context and the assigned role.
+    We construct RolePlayConv, a large-scale synthetic dataset of spoken multi-party
+    conversations with diverse assistant roles. Experiments on real-world meeting
+    data and RolePlayConv show improved turn-taking precision by over 40% and recall
+    by more than 70%, while substantially reducing false-positive interruptions compared
+    to non-role-conditioned baselines.
+  published: '2026-06-11T16:27:45Z'
+  updated: '2026-06-26T09:33:27Z'
+  publication_comment: Accepted for publication at Interspeech 2026
+  analysed_identifier: arXiv:2606.13544v3
+  pdf_url: https://arxiv.org/pdf/2606.13544v3
+  url: https://arxiv.org/abs/2606.13544
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: f53641eb11981cf0fbc6636a80fb7ca89f340fad924f42aee1ca0a4d00ad7380
+- paper_id: ceccatelli2026speechjbb
+  identifier: arXiv:2606.06037
+  pdf_filename: speechjbb-safety-code-switched-speech.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: 'SpeechJBB: Probing Safety Alignment and Comprehension in Large Audio Language
+    Models under Code-Switched Speech'
+  authors:
+  - Virginia Ceccatelli
+  - Yejin Jeon
+  - David Ifeoluwa Adelani
+  abstract: 'Large audio language models (LALMs) are increasingly deployed in real-world
+    applications, yet their safety alignment is still primarily evaluated on monolingual,
+    text-based harmful prompts. This leaves their generalizability under multilingual
+    and spoken settings, particularly code-switched speech, largely underexplored.
+    To address this gap, we introduce SpeechJBB, an audio jailbreak dataset for benchmarking
+    state-of-the-art LALMs across five European languages: English, French, German,
+    Italian, and Spanish, as well as code-switched variants combining pairs of these
+    languages. The extent of safety weaknesses is further probed by introducing an
+    augmented setting where phonologically plausible pseudo-words are inserted around
+    safety-critical terms to simulate localized obfuscation. Across models, code-switched
+    harmful audio yields substantially high jailbreak success rates (JSR), with non-English
+    monolingual and non-English code-switched pairs exhibiting the highest attack
+    success. Pseudo-word insertion monotonically reduces refusal as insertion density
+    increases, even though models rarely attribute harmful meaning to the inserted
+    tokens. Comprehension benchmarks show that these failures are not reducible to
+    multilingual misunderstanding, as several models with strong ASR, spoken language
+    understanding, and spoken reasoning performance are among the most vulnerable.'
+  published: '2026-06-04T11:31:38Z'
+  updated: '2026-08-29T18:05:24Z'
+  publication_comment: Accepted to Findings of EMNLP 2026
+  analysed_identifier: arXiv:2606.06037v3
+  pdf_url: https://arxiv.org/pdf/2606.06037v3
+  url: https://arxiv.org/abs/2606.06037
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 0c138b1cf233cacd36747fb5f5e9cf5d6d47bc5e78317e155d06200df40eb8d4
+- paper_id: braun2026voicelight
+  identifier: arXiv:2609.20995
+  pdf_filename: voice-light-cascaded-speculative-generation.pdf
+  category: cascaded_hybrid
+  corpus_role: primary
+  title: 'Voice-Light: A Full-Duplex Cascaded Voice Agent with Causal Turn-Taking
+    and Speculative Generation'
+  authors:
+  - Bertil Braun
+  abstract: 'Natural spoken interaction requires more than streaming ASR, language
+    generation, and speech synthesis: a system must react to overlap without canceling
+    on every acknowledgment, prepare a response before a turn is certain, and ensure
+    canceled audio cannot enter conversation history. We present Voice-Light, a full-duplex
+    cascaded voice agent that combines immediate acoustic onset, a causal adapter
+    sharing a streaming ASR encoder, reversible playback control, and private speculative
+    response generation. Structured tool calls execute concurrently with audible bridge
+    speech, while browser acknowledgments make rendered audio authoritative for durable
+    history. Locked evaluation on 1,673 real-conversation silence candidates found
+    that an earlier learned completion checkpoint preserved a 2.70% false-cutoff rate
+    but reached only 12.53% end-of-turn recall, compared with 95.60% for a Silero
+    timing policy. The deployed system therefore retains a hybrid controller rather
+    than claiming a learned-policy replacement. Across three unscripted operator-run
+    microphone sessions, 36 measured response turns had a 758 ms median from final
+    VAD endpoint to first server audio; 21 turns were below 800 ms. These sessions
+    are an instrumented case study, not a controlled user evaluation. We release the
+    synthetic data, model artifacts, evaluation code and summaries, source code, and
+    deployment configuration supporting the result.'
+  published: '2026-09-17T18:49:48Z'
+  updated: '2026-09-17T18:49:48Z'
+  publication_comment: '9 pages, 4 figures, 6 tables. Code, datasets, and model artifacts:
+    https://github.com/BertilBraun/Voice-Light ; live demo: https://voice.bertil-braun.de'
+  analysed_identifier: arXiv:2609.20995v1
+  pdf_url: https://arxiv.org/pdf/2609.20995v1
+  url: https://arxiv.org/abs/2609.20995
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 73951bb3e3c4eba37cc83e11e3aed04e44000fd72b2b62cecf54448e8f9b1b3b
+- paper_id: shamsaie2026tact
+  identifier: arXiv:2609.27372
+  pdf_filename: intent-conditioned-turn-taking-tact.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'Neither Silence nor Overlap Is Failure: Intent-Conditioned Evaluation of
+    Turn-Taking in Full-Duplex Spoken Dialogue Models'
+  authors:
+  - Kian Shamsaie
+  - Iman Modarressi
+  abstract: Benchmarks for full-duplex spoken dialogue models score turn-taking with
+    binary fixed-window rules that reward immediate response or silence by completeness
+    of the prior turn. We argue that the appropriateness of a response offset, whether
+    delayed silence or anticipatory overlap, is conditional on the speaker's latent
+    intent, identifiable only from that speaker's behavior. We introduce TACT, a benchmark
+    of 9,728 episodes and 73.2 hours from five dyadic corpora; each episode carries
+    dialogue history, a per-speaker memory profile, and an annotator-derived posterior
+    over six intent classes. Scoring replaces binary windows with a strictly proper
+    threshold-weighted continuous ranked probability score whose weights are intent-conditioned
+    timing kernels fitted to human floor-transfer-offset distributions, proving boundedness,
+    consistency, and binary reduction. Across eleven systems the best model reaches
+    0.47 against a human topline of 0.86, is nearly invariant to speaker profiles,
+    and TACT agrees with human judgments at Spearman 0.81 versus 0.46 for binary metrics.
+  published: '2026-09-23T05:21:10Z'
+  updated: '2026-09-23T05:21:10Z'
+  publication_comment: Accepted to IEEE SLT 2026
+  analysed_identifier: arXiv:2609.27372v1
+  pdf_url: https://arxiv.org/pdf/2609.27372v1
+  url: https://arxiv.org/abs/2609.27372
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 73147de353cd5718d0f2eeab8b859ad11953af1aa905a378f513aac3e91b6ebc
+- paper_id: zhang2026vgbench
+  identifier: arXiv:2609.32536
+  pdf_filename: acoustic-context-gating-voice-agents.pdf
+  category: agentic_evaluation
+  corpus_role: primary
+  title: Do Audio LLMs Listen Before They Act? Diagnosing Acoustic-Context Gating
+    in Voice Agents
+  authors:
+  - Yanjie Zhang
+  - Nanchen Hu
+  - Yushi Sun
+  abstract: Audio language models can recognize spoken commands and invoke tools,
+    but an agent must first decide whether the acoustic and conversational context
+    warrants action. We introduce VGBench, a 1,018-item diagnostic benchmark for action-level
+    addressedness across side-talk, self-talk, and speaker-switch scenarios. Each
+    item uses a shared action space comprising silence, a tool call, and a natural-language
+    answer. Speaker-switch pairs hold the specified words fixed while source, distance
+    rendering, and a temporal boundary define a controlled wearer-to-bystander shift.
+    Six raw Audio LLMs and three training-free adaptations often identify the target
+    tool yet rarely withhold action under this shift; the highest raw switch mute
+    rate is 14%. We then use VoxGate as a post-training case study. Supervised training
+    mutes 91.3% of switched commands while choosing the correct tool for all nearby
+    wearer commands and text-only controls. An exploratory GRPO stage has similar
+    switch performance; side-talk accuracy rises from 68.4% to 70.9%, and self-talk
+    muting from 52.0% to 60.0%. Factorized controls identify an independent source-change
+    effect, while sensitivity to the far-field manipulation varies across acoustic
+    renderings. The benchmark therefore measures multi-cue acoustic-context gating
+    rather than isolated speaker identity.
+  published: '2026-09-26T12:16:00Z'
+  updated: '2026-09-26T12:16:00Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.32536v1
+  pdf_url: https://arxiv.org/pdf/2609.32536v1
+  url: https://arxiv.org/abs/2609.32536
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 71658ea5beea1cf5f9485d825f57b8a545e7645a5ff5bbe79fe9a45e30a8d6db
+- paper_id: indic2026fdb
+  identifier: arXiv:2609.31967
+  pdf_filename: indicfdb-indian-languages.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'IndicFDB: Benchmarking Full-Duplex Voice Agents across Indian Languages'
+  authors:
+  - Rajarshi Roy
+  - Shobhit Banga
+  - Jonathan Raiman
+  - Supriya Paul
+  - Bhaskar Singh
+  - Manmeet Kaur
+  - Sagar Jain
+  - Hanuman Sidh
+  - Pranav Sharma
+  - Aditya Singh
+  - Aaditya Pareek
+  - Manas Dhir
+  - Adi Margolin
+  - Niket Agarwal
+  - Bryan Catanzaro
+  abstract: 'Full-duplex voice agents must handle pauses, take turns, backchannel,
+    and respond to user interruptions in real time. Full-Duplex-Bench evaluates these
+    behaviors, but its English-only corpus and reliance on word-timestamped ASR and
+    an English-prompted LLM judge make it difficult to extend to Indian languages.
+    We introduce IndicFDB, which extends it to ten languages spoken in India with
+    12,350 samples, nearly 17 times as many as the original. We address three challenges:
+    finding conversational events in multilingual speech, evaluating their timing
+    without reliable word-level alignment, and judging responses across languages.
+    We mine pause handling, turn taking, and backchanneling samples from roughly 50,000
+    hours of channel-separated conversations using voice activity detection (VAD),
+    and construct human-validated synthetic user interruption samples. Language-independent
+    VAD heuristics evaluate timing, while an open-weight transcription and translation
+    pipeline converts responses to English for LLM ratings of relevance and quality.
+    Across seven voice agents, commercial APIs show unexpectedly consistent behavior
+    across languages but are either fast or robust to pauses, never both, while monolingual
+    open full-duplex models expose further tradeoffs among backchanneling, response
+    quality, and latency.'
+  published: '2026-09-25T20:11:18Z'
+  updated: '2026-09-25T20:11:18Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.31967v1
+  pdf_url: https://arxiv.org/pdf/2609.31967v1
+  url: https://arxiv.org/abs/2609.31967
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 6ae1aec9f56a429efe9d37236cd6f2b64bbfb308efa05a6139dd5afe41bd5a91
+- paper_id: french2026fdb
+  identifier: arXiv:2609.10765
+  pdf_filename: french-full-duplex-benchmark.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'From Metrics to Natural Dialogue: French Full-Duplex Benchmark for Spoken
+    Dialogue Models'
+  authors:
+  - Hamid Soltani
+  - Gilles Boulianne
+  abstract: Full-duplex spoken dialogue models aim to make voice agents more natural
+    by allowing them to listen, speak, pause, and respond during ongoing conversation.
+    However, it is not clear whether full-duplex benchmarks behave the same way when
+    models are evaluated in a different language. To investigate this, we introduce
+    a French full-duplex benchmark (FDB) with two variants, CALLFC-FDB for Canadian
+    French and MEDIA-FDB for European French, and compare them with an English FDB.
+    Built from real spoken resources, these benchmarks evaluate key full-duplex skills,
+    including pause handling, turn-taking, backchannels, and interruptions. Beyond
+    introducing French FDBs, we evaluate human--human conversations with FDB metrics
+    to better understand the values these metrics take in real-world dialogue. Our
+    analysis reveals that most timing-based metrics behave similarly across languages,
+    while content-based evaluation degrades under language mismatch. We also find
+    a trade-off between optimizing benchmark metrics and preserving conversational
+    naturalness.
+  published: '2026-09-09T19:10:43Z'
+  updated: '2026-09-09T19:10:43Z'
+  publication_comment: '9 pages, 0 figures. Accepted for publication in Proceedings
+    of the Conference on Empirical Methods in Natural Language Processing (EMNLP):
+    Industry Track, 2026'
+  analysed_identifier: arXiv:2609.10765v1
+  pdf_url: https://arxiv.org/pdf/2609.10765v1
+  url: https://arxiv.org/abs/2609.10765
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 09de86078ed9848e3618dfa0b003d2939fe7c62f8a84ac634429cf33dc7a1af8
+- paper_id: floor2026necessity
+  identifier: arXiv:2609.19596
+  pdf_filename: full-duplex-take-floor-asked-needed.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: Full-Duplex Speech Models Take the Floor When Asked, Not When Needed
+  authors:
+  - Linkai Peng
+  - Baorian Nuchged
+  - Kaiqi Fu
+  - Yuyang Yao
+  abstract: Full-duplex speech models listen and speak at once, promising always-on
+    assistants. Yet they must also decide when they should speak. Human listeners
+    speak when addressed or when the speaker stops, but also self-select to correct
+    a false claim, supply a missing word, or warn of danger. We ask whether full-duplex
+    models do the same. To separate the reason to speak from the opportunity, we construct
+    context-matched English monologues in which only the trigger utterance varies
+    within a topic, define 10 conditions from turn-allocation rules, and compress
+    inter-word pauses to limit opportunities created by silence. Across five model
+    families, being addressed and silence are far more reliable triggers than false
+    facts or hazards. Frame-level text-token probabilities in Moshi and PersonaPlex
+    are lower for false facts than for Neutral when averaged over the first 2\,s after
+    trigger end. Pauses or permission to interrupt do not close this gap either. Given
+    the floor, Moshi and PersonaPlex answer most direct questions, yet the proportion
+    of non-empty false-fact replies that challenge the claim is only .14--.15, and
+    the proportion of hazard replies that warn of danger is .04--.07. This paper thus
+    identifies a gap in both speech initiation and response content. Closing it requires
+    genuine content understanding and intervention decisions grounded in it.
+  published: '2026-09-17T02:21:39Z'
+  updated: '2026-09-17T02:21:39Z'
+  publication_comment: 5 pages
+  analysed_identifier: arXiv:2609.19596v1
+  pdf_url: https://arxiv.org/pdf/2609.19596v1
+  url: https://arxiv.org/abs/2609.19596
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 86f52ee419f03a7e1284472fe9b46cf85b7278adf2282877a0cee2e384798eba
+- paper_id: zhao2026echo
+  identifier: arXiv:2609.17360
+  pdf_filename: paired-turn-taking-dialogue-contexts-echo.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'Same Words, Different Actions: Paired Turn-Taking Evaluation under Rewritten
+    Dialogue Contexts'
+  authors:
+  - Shuofeng Zhao
+  - Hongwei Cai
+  - Wenke Fan
+  - Qingxiang Guo
+  - Zhou Wang
+  - Dawei Yang
+  - Zhiyang Zhou
+  - Yingxin Shang
+  - Weixu Wang
+  - Lin Yang
+  - Shuran Zhou
+  - Yang Song
+  abstract: 'Real-time spoken dialogue systems must distinguish interruptions that
+    require yielding the floor from backchannels that permit continued speaking. Existing
+    benchmarks typically score events independently and may therefore assign high
+    scores to systems with fixed action preferences rather than context-sensitive
+    decision policies. We introduce ECHO, a paired diagnostic benchmark for Chinese
+    turn-taking evaluation. ECHO pairs examples with the same overlap transcript but
+    contrasting preceding multi-turn dialogue contexts, with one requiring Yield and
+    the other Keep. It additionally includes off-talk examples for diagnosing unnecessary
+    yielding. We introduce pair accuracy, which requires correct decisions on both
+    members of a pair and assigns no credit to constant-action policies. Experiments
+    on four speech systems show that three exhibit a severe over-yielding bias: they
+    correctly keep the floor on fewer than 13% of backchannels, resulting in near-zero
+    pairwise success rates equal or less than 4%. While the remaining system remains
+    comparatively balanced across contexts, these findings broadly demonstrate that
+    interruption-only evaluation can severely overestimate practical turn-taking reliability.'
+  published: '2026-09-15T15:58:48Z'
+  updated: '2026-09-24T14:25:30Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.17360v2
+  pdf_url: https://arxiv.org/pdf/2609.17360v2
+  url: https://arxiv.org/abs/2609.17360
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: e19b36a70b7cd7c468487eed89acaf094181cdb508e8244bcb196aa3352ff167
+- paper_id: mathur2026dsbifeval
+  identifier: arXiv:2609.03423
+  pdf_filename: duplexspeechbench-implicit-instruction-following.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'DuplexSpeechBench-IFEval: Evaluating Implicit Instruction Following in Full-Duplex
+    Voice Agents'
+  authors:
+  - Puneet Mathur
+  - Dinesh Manocha
+  abstract: 'Full-duplex voice agents must continuously decide when to speak, listen,
+    backchannel, interrupt, overlap, and yield the conversational floor. Existing
+    benchmarks evaluate these behaviors through explicit turn-management instructions,
+    whereas voice agents are often configured through roles or personas from which
+    appropriate conversational behavior must be inferred. We introduce DuplexSpeechBench-IFEval
+    (DSB-IFEval), a benchmark for evaluating implicit instruction following in real-time
+    spoken interaction. DSB-IFEval comprises 1,038 test cases derived from 240 controlled
+    conversations spanning eight behaviorally contrastive assistant roles and five
+    conditioning protocols: default behavior, explicit behavioral instructions, persona-implied
+    behavior, combined persona-rule conditioning, and instruction conflict. We measure
+    real-time floor management using the deterministic Instruction Adherence Score
+    (IAS) and persona-consistent response content using the LLM-judged Persona Adherence
+    Score (PAS). Across eleven real-time speech models, we find that executing an
+    explicit floor-management policy does not reliably imply the ability to infer
+    the same policy from a persona. Moreover, even frontier models such as GPT-Live-1
+    and Gemini-3.8-Live adapt their dialogue language to the assigned persona without
+    consistently translating that persona into the appropriate full-duplex floor-management
+    behavior. Finally, models that successfully resolve benign instruction conflicts
+    often fail when safety-relevant role behavior should override an explicit directive.
+    These results show that inferring role-implied behavior, executing it in real
+    time, and resolving instruction conflicts remain distinct challenges for full-duplex
+    voice agents.'
+  published: '2026-09-03T06:28:02Z'
+  updated: '2026-09-28T11:43:24Z'
+  publication_comment: Under Submission at ICLR 2027
+  analysed_identifier: arXiv:2609.03423v2
+  pdf_url: https://arxiv.org/pdf/2609.03423v2
+  url: https://arxiv.org/abs/2609.03423
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: e6c0ecae82ab1058585130e445b952c5e797533d76c70e3a0fee4b077e7da1f7
+- paper_id: hu2025vcb
+  identifier: arXiv:2510.11098
+  pdf_filename: vcb-bench-audio-grounded-conversational-agents.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'VCB Bench: An Evaluation Benchmark for Audio-Grounded Large Language Model
+    Conversational Agents'
+  authors:
+  - Jiliang Hu
+  - Wenfu Wang
+  - Zuchao Li
+  - Chenxing Li
+  - Yiyang Zhao
+  - Hanzhao Li
+  - Liqiang Zhang
+  - Meng Yu
+  - Dong Yu
+  abstract: 'Recent advances in large audio language models (LALMs) have greatly enhanced
+    multimodal conversational systems. However, existing benchmarks remain limited
+    -- they are mainly English-centric, rely on synthetic speech, and lack comprehensive,
+    discriminative evaluation across multiple dimensions. To address these gaps, we
+    present Voice Chat Bot Bench (VCB Bench) -- a high-quality Chinese benchmark built
+    entirely on real human speech. VCB Bench evaluates LALMs from three complementary
+    perspectives: instruction following (including speech-level control beyond text
+    commands), knowledge understanding (general knowledge, reasoning, and daily dialogue),
+    and robustness (stability under perturbations in content, environment, and speaker
+    traits). Experiments on representative LALMs reveal notable performance gaps and
+    highlight future directions for improvement. VCB Bench provides a reproducible
+    and fine-grained evaluation framework, offering standardized methodology and practical
+    insights for advancing Chinese voice conversational models.'
+  published: '2025-10-13T07:45:52Z'
+  updated: '2026-07-06T08:06:32Z'
+  publication_comment: 25 pages, 9 figures, accepted by ACL 2026 Findings
+  analysed_identifier: arXiv:2510.11098v5
+  pdf_url: https://arxiv.org/pdf/2510.11098v5
+  url: https://arxiv.org/abs/2510.11098
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: fbc38c4f5b8e99fb8de6795aaeea44fe01e36a3c492594459e685276cdc63f03
+- paper_id: sharon2026less
+  identifier: arXiv:2609.11066
+  pdf_filename: speech-aspects-end-of-turn-detection.pdf
+  category: turn_taking_vap
+  corpus_role: primary
+  title: 'Less can be More: What Aspects of Speech Drive End-of-Turn Detection'
+  authors:
+  - Rini Sharon
+  - Manickavela A
+  - Kadri Hacioglu
+  - Andreas Stolcke
+  abstract: In conversational AI, detecting when a speaker has finished talking is
+    crucial for natural turn taking. While recent work incorporates semantics, the
+    relative contribution of different modalities remains unclear. We present a controlled
+    ablation of acoustic, prosodic, and semantic signals for streaming end of turn
+    detection using a lightweight trimodal classifier. Under identical training conditions,
+    the acoustic prosodic combination achieves the best balance of accuracy and latency,
+    achieving utterance F1 of 0.93 with 7.8% false alarms at 400ms median latency.
+    Adding text increases premature detections without improving performance. Feature
+    space analysis confirms that prosodic features have the strongest class separability,
+    while text representations overlap substantially. These findings suggest that
+    turn-taking is primarily conveyed through intonation and silence patterns rather
+    than semantic completeness, enabling faster and more reliable systems without
+    expensive text inference.
+  published: '2026-09-10T04:12:18Z'
+  updated: '2026-09-10T04:12:18Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.11066v1
+  pdf_url: https://arxiv.org/pdf/2609.11066v1
+  url: https://arxiv.org/abs/2609.11066
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 334d0e56da5215e3761d8d77dca7f21f83c185a59ccfe852b5c6a0b4e762bfdf
+- paper_id: hu2026frontendbackend
+  identifier: arXiv:2609.19334
+  pdf_filename: frontend-backend-tool-calls-full-duplex.pdf
+  category: cascaded_hybrid
+  corpus_role: primary
+  title: A frontend-backend architecture for tool calls in full-duplex speech models
+  authors:
+  - Ke Hu
+  - Slyne Deng
+  - Chen Chen
+  - Elena Rastorgueva
+  - Edresson Casanova
+  - Punit Kumar
+  - Dharmendra Choudhary
+  - Nikhil Srihari
+  - Ameya Sunil Mahabaleshwarkar
+  - Viet Anh Trinh
+  - Slim Essid
+  - Oluwatobi Olabiyi
+  - Zhehuai Chen
+  abstract: Full-duplex speech-to-speech (S2S) models provide natural, low-latency
+    conversational interaction and would benefit from the ability to use external
+    tools and complete voice-agent tasks. We propose a frontend-backend architecture
+    where a duplex speech-to-text frontend learns to emit a delegation token and forwards
+    streaming ASR transcripts to a text-based backend LLM for tool calls. Tool-call
+    results from the backend are injected back into the frontend through a lightweight
+    prefill-and-repeat mechanism and then synthesized using streaming TTS to the user.
+    Our approach largely preserves regular duplex turn-taking, interruption handling,
+    and low-latency interaction as it requires minimal modifications to the frontend
+    model. In a single-turn tool-call evaluation, our system achieves 92-97% tool-call
+    recall, competitive tool-call prediction performance, and 81.2% accuracy in rejecting
+    irrelevant calls. When equipped with a larger backend (e.g., Qwen3-235B-A22B),
+    our system achieves competitive results on Full-Duplex-Bench-V3 compared to open
+    and closed source models, and significantly outperforms GPT-realtime-mini and
+    Qwen3-Omni-30B-A3B-Instruct on EVA-Bench. These results demonstrate that backend
+    delegation is an effective and modular approach for combining natural duplex speech
+    interaction with strong agentic tool-call capabilities.
+  published: '2026-09-16T19:01:15Z'
+  updated: '2026-09-18T21:59:47Z'
+  publication_comment: To be submitted to ICASSP'27
+  analysed_identifier: arXiv:2609.19334v2
+  pdf_url: https://arxiv.org/pdf/2609.19334v2
+  url: https://arxiv.org/abs/2609.19334
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 6d5fc1902b580e219ddb567e1a95463589a635d633f599bd9a992f9b5cb40cac
+- paper_id: hu2026transcription
+  identifier: arXiv:2609.15759
+  pdf_filename: streaming-user-transcription-full-duplex.pdf
+  category: end_to_end_s2s
+  corpus_role: primary
+  title: Enabling Streaming User Transcription in Full-Duplex Speech-to-Speech Models
+  authors:
+  - Ke Hu
+  - Nourchene Ferchichi
+  - Edresson Casanova
+  - Ankita Pasad
+  - Elena Rastorgueva
+  - Chen Chen
+  - Nithin Rao Koluguri
+  - Piotr Zelasko
+  - Yifan Peng
+  - Hainan Xu
+  - Zhehuai Chen
+  - Boris Ginsburg
+  abstract: Full-duplex speech-to-speech (S2S) models enable natural conversational
+    AI by allowing simultaneous listening and speaking. However, these models typically
+    lack inherent user speech transcription, which is essential for applications such
+    as conversation logging, accessibility features, and quality monitoring. In this
+    work, we propose an efficient method to add streaming ASR capabilities to an existing
+    duplex S2S model by introducing a lightweight ASR head in parallel to the agent
+    text head. Our approach requires minimal additional parameters and no significant
+    architectural changes to the base S2S model, enabling real-time user transcription
+    while preserving full-duplex conversational capabilities including turn-taking
+    and barge-in handling. Experimental results demonstrate that our method achieves
+    streaming average WER of 10.21% on the HuggingFace Open ASR Leaderboard within
+    the duplex S2S framework. Additionally, we show that the same architecture trained
+    as a standalone streaming ASR model achieves competitive results (7.73% WER) compared
+    to current SOTA models. We will open-source our training and inference code to
+    facilitate further research in joint streaming ASR and S2S modeling.
+  published: '2026-09-14T15:44:18Z'
+  updated: '2026-09-14T15:44:18Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.15759v1
+  pdf_url: https://arxiv.org/pdf/2609.15759v1
+  url: https://arxiv.org/abs/2609.15759
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 6d2886cf2b2e5dcd53f2e9cf9a0758b607b5f632e9810b43b006406428e10346
+- paper_id: zhong2026iraf
+  identifier: arXiv:2606.06559
+  pdf_filename: iraf-interference-resilient-adaptive-fusion.pdf
+  category: end_to_end_s2s
+  corpus_role: primary
+  title: 'IRAF: Interference-Resilient Adaptive Fusion for Noise-Robust End-to-End
+    Full-Duplex Spoken Dialogue Systems'
+  authors:
+  - Tao Zhong
+  - Jiajun Deng
+  - Nikita Kuzmin
+  - Yinke Zhu
+  - Tianxiang Cao
+  - Tristan Tsoi
+  - Zhili Tan
+  - Simon Lui
+  - Xunying Liu
+  abstract: 'Full-duplex spoken dialogue models allow voice agents to listen and speak
+    concurrently, enabling natural interaction with real-time overlap. However, end-to-end
+    dual-channel models that jointly encode user and agent streams may degrade in
+    realistic acoustic environments: interfering speakers leaking into the user microphone
+    can be encoded as part of the user query, corrupting the LLM''s conditioning and
+    causing unstable turn-taking and reduced response quality. We propose Interference-Resilient
+    Adaptive Fusion (IRAF), a lightweight, streaming-compatible module that modulates
+    the contribution of user audio to the LLM frame by frame. IRAF predicts a scalar
+    reliability gate from target-speaker and user audio embeddings and rescales user
+    representations before fusion with agent embeddings. Experiments on MS-MARCO and
+    InstructS2S-200K show consistent gains in response quality and full-duplex interaction
+    under interfering-speaker conditions.'
+  published: '2026-06-04T12:39:44Z'
+  updated: '2026-06-04T12:39:44Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2606.06559v1
+  pdf_url: https://arxiv.org/pdf/2606.06559v1
+  url: https://arxiv.org/abs/2606.06559
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 23159fc079cbba86eea4807368b7d44556510ea826ab3b9473b6600fa55bb671
+- paper_id: tyagi2026steerduplex
+  identifier: arXiv:2609.12623
+  pdf_filename: steerduplex-steerable-dialogue-models.pdf
+  category: end_to_end_s2s
+  corpus_role: primary
+  title: 'SteerDuplex: Steerable Duplex Speech Dialogue Models'
+  authors:
+  - Utkarsh Tyagi
+  - Ramaneswaran Selvakumar
+  - Advait Gosai
+  - Sonal Kumar
+  - Nikhil Barhate
+  - Isabell Sagar
+  - Steven Li
+  - Miheer Bavare
+  - Daniel Quigley
+  - Fabiola Tapia Carrillo
+  - Jose M Patron E
+  - Diego Macías Gutiérrez
+  - Paul Song
+  - Ramani Duraiswami
+  - Dinesh Manocha
+  - Yunzhong He
+  abstract: 'Full-duplex spoken dialogue models support low-latency turn taking, interruption
+    handling, and backchanneling, yet a key capability remains underexplored: steerability,
+    the ability to reliably shift conversational behavior along attributes such as
+    tone, persona, speaking rate, and voice style in response to user instructions.
+    We introduce a taxonomy of text- and audio-based steerability that identifies
+    substantial gaps in current full-duplex models. To address this gap, we introduce
+    SteerDuplex, a Moshi-based full-duplex speech model fine-tuned on natural conversations
+    and synthetic dialogues targeting instruction following, vocal delivery, reasoning,
+    and duplex interaction. We further apply two-stage reinforcement learning (RL)
+    with hybrid rewards, combining verifiable interaction checks and judge-based semantic
+    feedback to improve timing and response continuity. To evaluate full-duplex spoken
+    steerability, we introduce SteerBench, a benchmark with 390 spoken prompts and
+    1,067 human-authored binary audio and text rubrics spanning tone, persona, style/accent,
+    and speed/length. On SteerBench, supervised training improves audio-steering average
+    pass rate by 44.5 percentage points over the strongest evaluated open baseline.
+    On Audio MultiChallenge, task average pass rate improves by 7 points over its
+    strongest evaluated open baseline. RL further raises source-clean interruption
+    response from 72.5% to 82.5% and reduces synthetic pause barge-in from 26.5% to
+    9%. Steering and aggregate task scores remain comparable or higher, while reward
+    probes reveal reward hacking through incomplete responses. Our model and benchmark
+    support systematic research on spoken steerability, with reward analysis showing
+    why timing gains must be evaluated alongside response completeness.'
+  published: '2026-09-11T09:22:46Z'
+  updated: '2026-09-11T09:22:46Z'
+  publication_comment: 24 pages, 7 figures
+  analysed_identifier: arXiv:2609.12623v1
+  pdf_url: https://arxiv.org/pdf/2609.12623v1
+  url: https://arxiv.org/abs/2609.12623
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: c29d2b1042dfa6281f07c114740f989dc68cdc53d1e6aaef3709e6806984e375
+- paper_id: he2026conversationalvoice
+  identifier: arXiv:2609.08147
+  pdf_filename: conversationalvoice-full-duplex-speech-data.pdf
+  category: end_to_end_s2s
+  corpus_role: primary
+  title: 'ConversationalVoice: Full-Duplex Speech Data from Real Conversations through
+    Source-Faithful Reconstruction and Conversation-Grounded Expansion'
+  authors:
+  - Richard Yucheng He
+  - Baodong Cao
+  - Chen Xu
+  - Yihang Liu
+  - Tairan Chen
+  abstract: Full-duplex speech models require training data that preserves turn-taking,
+    overlap, interruption, and backchannel behavior, yet these signals are entangled
+    across speakers in noisy real-world recordings. We present Conversational Voice,
+    a pipeline that converts real two-speaker excerpts into three complementary training-data
+    artifacts. (1) Separation recovers speaker-specific tracks with stable speaker
+    assignments, a canonical transcript, and naturally observed interaction timing.
+    (2) Reconstruction generates speech in matched voices from a fixed source transcript,
+    reconstructs the source turn order, pauses, and overlaps, and adds word-level
+    alignment and delivery instructions. (3) Expansion generates new dialogue constrained
+    by the source context, speakers, and observed interaction pattern. Automatic speaker-verification
+    metrics remain strong across stages, with same-speaker similarity of 0.983-0.991
+    and positive discrimination margins of 0.199-0.209. Predicted speech quality (NISQA
+    MOS) is 3.56 for separation, 4.41 for reconstruction, and 4.61 for expansion.
+    A Gemini-based automatic evaluator assigns expansion mean scores of 4.94/5 for
+    contextual coherence and 4.80/5 for dialogue naturalness. Expansion and reconstruction
+    exhibit broadly similar interaction profiles; expansion's turn, overlap-event,
+    backchannel, and interruption rates are 4.6%, 8.0%, 13.2%, and 16.0% lower, respectively.
+    We evaluate data properties only; downstream gains in full-duplex model training
+    remain for future work.
+  published: '2026-09-08T02:28:43Z'
+  updated: '2026-09-08T02:28:43Z'
+  publication_comment: 12 pages, 3 figures, 1 table, preprint
+  analysed_identifier: arXiv:2609.08147v1
+  pdf_url: https://arxiv.org/pdf/2609.08147v1
+  url: https://arxiv.org/abs/2609.08147
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 36f8866f409d626018bd12ea31cffcc7bcc1dc11c6bf7f71daf49097cd7c2fd2
+- paper_id: deng2026qwenagent
+  identifier: arXiv:2609.25195
+  pdf_filename: qwen-audio-agent-technical-report.pdf
+  category: cascaded_hybrid
+  corpus_role: primary
+  title: Qwen-Audio-Agent Technical Report
+  authors:
+  - Chong Deng
+  - Yunjie Ji
+  - Yuxiang Kong
+  - Xiangang Li
+  - Xu Li
+  - Binbin Zhang
+  - Haina Zhu
+  - Jianheng Zhuo
+  abstract: We present Qwen-Audio-Agent, a harness that combines full-duplex voice
+    interaction with asynchronous task execution through a foreground-background architecture.
+    A Frontend Agent manages dialogue and selects between direct tool use and delegation,
+    while a Backend Agent carries out delegated tasks in a separate context. An Orchestration
+    Runtime maintains task state, coordinates requests for user input and authorization,
+    and schedules the return of results to the conversation. The runtime separates
+    speech interruption from task cancellation and execution completion from result
+    delivery, allowing conversation to continue while delegated work proceeds. Environmental
+    events and persistent memory provide context within and across sessions. Independent
+    adapters support integration with different frontend models, backend agents, and
+    clients. We instantiate the architecture in desktop assistance, intelligent cockpits,
+    and voice customer service. On an in-house cockpit benchmark of 134 cases, mixed
+    execution achieves a task success rate of 91.04%, compared with 72.39% and 80.60%
+    for the direct and all delegated configurations, respectively. In a separate latency
+    evaluation on matched successful turns, mixed execution reduces mean task execution
+    latency by 26.73% and 30.91% relative to these baselines, respectively. These
+    results support the complementary use of direct tool calls for immediate operations
+    and backend delegation for multi-step tasks.
+  published: '2026-09-21T17:40:55Z'
+  updated: '2026-09-21T17:40:55Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.25195v1
+  pdf_url: https://arxiv.org/pdf/2609.25195v1
+  url: https://arxiv.org/abs/2609.25195
+  verified: true
+  verification_evidence: title and exact version agree; institutional first-page attribution
+  verified_date: '2026-10-02'
+  pdf_sha256: bec103d47eee627b8d9c47d90da101f00dc694e3c0775b16bcb92b396034341c
+- paper_id: yan2026hearbias
+  identifier: arXiv:2609.35952
+  pdf_filename: hear-real-voices-demographic-bias.pdf
+  category: conversational_benchmarks
+  corpus_role: primary
+  title: 'HEAR: Real Voices, Real Bias: A Large-Scale Human-Recorded, Demographically
+    Diverse Benchmark for Audio Language Models'
+  authors:
+  - Shen Yan
+  - Duc Le
+  - Irina-Elena Veliche
+  abstract: We introduce HEAR (Human-recorded Evaluation of Audio-LLM bias by Real
+    speakers), a large-scale, ecologically valid benchmark comprising 87k real human
+    audio samples from 843 demographically diverse participants. HEAR enables comprehensive
+    evaluation through Multiple Choice Question Answering (MCQA) and open-ended long-form
+    tasks. To our knowledge, this is the first large-scale voice benchmark grounded
+    entirely in authentic human speech. We evaluate model behavior across both real-time
+    speech-to-speech and speech-to-text architectures. Our results reveal that voice-conditioned
+    bias is a model-specific property. Furthermore, we demonstrate that personalization
+    instructions consistently exacerbate demographic disparities. Our findings establish
+    that voice bias is a controllable model characteristic, providing a foundational
+    framework for future bias mitigation and evaluation in Audio-LLM development.
+  published: '2026-09-28T17:30:33Z'
+  updated: '2026-09-28T17:30:33Z'
+  publication_comment: ''
+  analysed_identifier: arXiv:2609.35952v1
+  pdf_url: https://arxiv.org/pdf/2609.35952v1
+  url: https://arxiv.org/abs/2609.35952
+  verified: true
+  verification_evidence: title, first author and available printed identifier agree
+  verified_date: '2026-10-02'
+  pdf_sha256: 7f0d121621fdeda82e090ee73f909bece0b3a0f2872ad8c718203f0113aa8ba2

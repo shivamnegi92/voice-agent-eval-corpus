@@ -1,0 +1,136 @@
+# Systematic search protocol for the corpus (voice-agent evaluation survey).
+# Fixed before screening. Edit only by adding a dated amendment below, never
+# by changing an existing query; scripts/search_arxiv.py logs every run.
+
+version: 1
+fixed_on: "2026-10-05"
+window: {from: "2024-01-01", to: "2026-10-02"}   # submission dates; to = paper cutoff
+sources:
+  - id: arxiv
+    endpoint: "https://export.arxiv.org/api/query"
+    categories: [cs.CL, cs.SD, eess.AS, cs.AI, cs.HC, cs.LG]
+  - id: acl_anthology    # planned: bibliography export, keyword filter on title/abstract
+  - id: isca_archive     # planned: Interspeech and SSW proceedings
+  - id: snowball         # planned: backward/forward citations of every included evaluation work
+
+# Queries use arXiv API syntax. O1-O8 are the eight API queries listed in the
+# paper's appendix, kept verbatim; N01-N14 extend coverage to the paper's capability axes.
+queries:
+  O1: 'ti:"Voice Activity Projection"'
+  O2: 'abs:"voice agent" AND abs:"benchmark"'
+  O3: 'abs:"full-duplex" AND abs:"spoken dialogue"'
+  O4: 'abs:"speech-to-speech" AND abs:"end-to-end"'
+  O5: 'abs:"neural audio codec" AND abs:"speech"'
+  O6: 'abs:"barge-in" OR abs:"interruption handling"'
+  O7: 'abs:"streaming" AND abs:"text-to-speech" AND abs:"latency"'
+  O8: 'all:"Full-Duplex-Bench"'
+  N01: 'abs:"full-duplex" AND (abs:speech OR abs:spoken OR abs:dialogue OR abs:voice)'
+  N02: 'abs:"voice agent" OR abs:"voice agents" OR abs:"voice assistant" OR abs:"voice assistants"'
+  N03: 'abs:"spoken dialogue" AND (abs:benchmark OR abs:evaluation)'
+  N04: 'abs:"turn-taking" AND (abs:speech OR abs:spoken OR abs:dialogue OR abs:conversation)'
+  N05: 'abs:"end-of-turn" OR abs:endpointing OR abs:"turn completion"'
+  N06: 'abs:interruption AND (abs:spoken OR abs:voice OR abs:"speech model")'
+  N07: '(abs:"tool calling" OR abs:"function calling" OR abs:"tool use") AND (abs:speech OR abs:spoken OR abs:voice)'
+  N08: 'abs:"speech-to-speech" AND (abs:dialogue OR abs:conversation OR abs:agent)'
+  N09: '(abs:"spoken language model" OR abs:"speech language model") AND (abs:dialogue OR abs:conversation OR abs:interactive)'
+  N10: '(abs:"multi-party" OR abs:multiparty OR abs:addressee) AND (abs:speech OR abs:spoken OR abs:voice)'
+  N11: 'abs:backchannel OR abs:backchannels OR abs:backchanneling'
+  N12: '(abs:"audio language model" OR abs:"speech LLM" OR abs:"large audio language model") AND abs:benchmark'
+  N13: '(abs:"LLM-as-a-judge" OR abs:"LLM judge" OR abs:"model judge") AND (abs:speech OR abs:spoken OR abs:voice)'
+  N14: 'abs:"user simulator" AND (abs:voice OR abs:spoken OR abs:speech)'
+
+inclusion:
+  - Primary contribution bears on real-time or interactive spoken interaction - architecture, temporal control, recovery, tool use or task outcomes, multiparty conduct, robustness, or evaluation validity.
+  - Training-data and ASR/TTS component studies only where they expose assumptions of interactive or duplex evaluation.
+  - Accessible full text in English; preprint and proceedings versions count as one work.
+exclusion_reasons:
+  E1: out of scope (not interactive spoken interaction)
+  E2: component-only speech study with no interactive or evaluation implication
+  E3: not a research paper (vendor article, web page, slides, thesis without paper)
+  E4: duplicate or superseded version
+  E5: full text unavailable
+  E6: outside date window
+screening:
+  stage_1: title and abstract; include if uncertain
+  stage_2: full text against inclusion criteria
+  second_screener_sample: 0.10
+stopping_rule: stop snowballing when a round adds fewer than 5% new included works
+recall_check: every retained primary work dated in the window and indexed by arXiv should be retrieved by at least one query; misses are reported and any added query is logged as an amendment
+
+# Amendments are added after the recall check. Report recall before amendment
+# (an unbiased estimate) and after (no longer unbiased: queries saw the misses).
+amendments:
+  - id: A1
+    date: "2026-10-05"
+    query: '(ti:"audio language models" OR abs:"Audio-LLM" OR abs:"Audio-LLMs") AND (abs:benchmark OR abs:bias)'
+    reason: "recall miss yan2026hearbias (abstract says Audio-LLM; plural title not matched by N12)"
+  - id: A2
+    date: "2026-10-05"
+    query: 'abs:"simultaneous speech translation" OR abs:"simultaneous speech-to-speech"'
+    reason: "recall miss labiausse2026hibikizero (real-time speech generation outside agent vocabulary)"
+  - id: A3
+    date: "2026-10-05"
+    query: '(abs:Mimi OR abs:Moshi) AND (abs:codec OR abs:tokens OR abs:codebook)'
+    reason: "recall miss saloev2026mimi (codec analysis without neural audio codec phrase)"
+  - id: A4
+    date: "2026-10-05"
+    change: "Evaluation-focused search. Pool = logged arXiv queries + backward snowball (arXiv ids in reference lists of the corpus evaluation works, scripts/snowball_refs.py) + forward snowball (Semantic Scholar citations of those works, scripts/snowball_forward.py). Candidates are ordered by a transparent keyword score (scripts/rank_candidates.py) and screened in rank order; the score never includes or excludes a work. Included evaluation and benchmark works are coded; other includes are recorded but not coded. The ranker's recall on the corpus's own evaluation works is reported with the screening depth."
+    reason: "time-bounded evaluation-focused search; rank-ordered screening with disclosed depth and calibration recall"
+recall_before_amendment: {retrieved: 63, testable: 66, run: "2026-10-05"}
+
+# Deviations from the plan above, recorded after the search.
+deviations:
+  - date: "2026-10-06"
+    item: sources.acl_anthology
+    note: "Searched on 2026-10-06 (scripts/search_acl_anthology.py): regex equivalents of O2-O6 and N01-N14 on title and abstract over 2024-2026 ACL, EMNLP, NAACL, EACL, Findings, TACL, CL, COLING, AACL/IJCNLP, LREC, SIGDIAL and IWSDS; 24,307 papers, 170 matches, 6 included."
+  - date: "2026-10-06"
+    item: sources.isca_archive
+    note: "Not searched."
+  - date: "2026-10-07"
+    item: sources.isca_archive
+    note: "Searched on 2026-10-07 (scripts/search_isca_archive.py), superseding the entry above: the same regex set as the Anthology search on titles and abstracts of Interspeech 2024, Interspeech 2025 and SSW 2025; 2,283 papers, 48 matches, 3 already in the corpus, 6 already screened in the arXiv pool's top 500, 39 screened by title and abstract (5 at full text), 0 included. Interspeech 2026 was not searched because the archive's robots.txt disallows it. Four corpus works found in the archive now cite their Interspeech versions. Record: screening/isca_screening.yaml."
+  - date: "2026-10-06"
+    item: second_screener_sample
+    note: "No second human screener. Screening and coding were proposed by the AI assistant and accepted by one author."
+  - date: "2026-10-06"
+    item: stopping_rule
+    note: "Not applied; one backward and one forward snowball round were run."
+  - date: "2026-10-08"
+    item: sources.arxiv
+    note: "O1-O8 (the eight queries in the paper appendix) re-run verbatim with a run date and hit count recorded, closing the earlier gap: O1=11, O2=40, O3=61, O4=71, O5=143, O6=215, O7=61, O8=19 total results. Log: search_runs/2026-10-08-O1-O8-redate/log.csv."
+  - date: "2026-10-08"
+    item: sources.acl_anthology
+    note: "Backfilled 2019-2023 (scripts/search_acl_anthology.py --years 2019-2023), same venues and query set as the 2026-10-06 run: 18,058 papers, 74 matches, 1 already in the corpus, 73 screened by title and abstract, 5 sent to full text; all 5 accepted after Arpit's review on 2026-10-08. Record: screening/acl_backfill_includes.yaml; coding: screening/coding_drafts/acl_backfill.yaml."
+  - date: "2026-10-08"
+    item: sources.isca_archive
+    note: "Backfilled 2019-2023 (Interspeech 2019-2023, SSW 2019/2021/2023; scripts/search_isca_archive.py): 5,403 papers, 108 matches (1 already in corpus, 1 in arXiv pool), 106 new. Three were screened at full text and accepted after Arpit's review on 2026-10-08; the remaining 103 were screened by title and abstract only, with several plausible candidates flagged for future full-text review. Record: search_runs/2026-10-08-backfill/isca_candidates.csv; inclusions/coding: screening/isca_backfill_includes.yaml and screening/coding_drafts/isca_backfill.yaml."
+  - date: "2026-10-08"
+    item: sources.ieee
+    note: "IEEE speech venues (ICASSP, SLT, ASRU, Odyssey) searched via the free Semantic Scholar bulk API (scripts/search_semanticscholar_ieee.py), title/abstract metadata only: 231 candidates, 115 query-matched, 79 new. IEEE Xplore has no free full-text API; the 2 papers with an arXiv mirror were screened at full text and accepted after Arpit's review on 2026-10-08. The other 77 new candidates remain unscreened beyond metadata. Record: search_runs/2026-10-08-ieee/ieee_candidates.csv; inclusions/coding: screening/ieee_backfill_includes.yaml and screening/coding_drafts/ieee_backfill.yaml."
+  - date: "2026-10-08"
+    item: historical_query_vocabulary
+    note: "The 2019-2023 ACL, ISCA and IEEE backfills reused the 2024-2026 regex set (O2-O6, N01-N14) unchanged. Probes show it misses older phrasings such as 'spoken dialog system evaluation', 'task success in spoken dialogue systems', 'user satisfaction' and PARADISE-style titles; no years before 2019 were searched. The pre-2026 subset is therefore under-sampled and supports no temporal trend (stated in both papers' Limitations)."
+  - date: "2026-10-09"
+    item: historical_query_vocabulary
+    note: "Supplementary title/abstract probes E01-E17 over cached 2019-2023 ACL/ISCA sources matched 370 source records (210 not found in earlier corpus/search records). Among the 92 ACL and 118 ISCA not-found records, provisional triage flagged 15+4 possible_eval and 8+12 uncertain, respectively. These leads fall in 2019-2023, the same period as the accepted ACL/ISCA/IEEE backfills, so the date window does not exclude them; they were not screened for inclusion and lie outside the corpus; they demonstrate additional recall but do not establish completeness. IEEE fresh recall remained blocked; cached IEEE records were prefiltered by old terms. Details and candidates: search_runs/2026-10-09-era-vocabulary/."
+  - date: "2026-10-09"
+    item: stopping_rule
+    note: "Second backward/forward snowball round harvested from all 91 current evaluation works. Backward: 519 unique arXiv references (365 in-window by parser; 311 new IDs; 302 with title/abstract metadata); provisional triage: 55 possible_eval, 35 uncertain. Forward: 77/77 seed citation queries succeeded (1,171 citing records, 492 unique arXiv IDs); official arXiv metadata placed 457 within the exact cutoff, 355 already known, 102 new; provisional triage: 26 possible_eval, 6 uncertain. The <5% stopping rule is defined using newly included works, not provisional AI labels; it has not been evaluated or met. All candidates require author decisions; see search_runs/2026-10-09-snowball-round2/requested-91-eval-seeds/."
+
+  - date: "2026-10-09"
+    item: evaluation_focused_rank_cutoff
+    note: "Exploratory title/abstract screening and provisional full-text review extended ranks 501-1000 (500 records, 53 initially surfaced; 53 PDFs retrieved and read). Provisional full-text triage: 36 possible_eval, 16 possible_other, 1 exclude; not screened for inclusion and outside the corpus. The rank-500 completeness limitation stands, and this does not establish coverage beyond rank 1000. See search_runs/2026-10-09-rank501-1000/."
+  - date: "2026-10-09"
+    item: sources.isca_archive
+    note: "Supersedes the title/abstract-only status of the 103 remaining ISCA 2019-2023 candidates: full text was acquired for 102 (mevawalla20 returned HTTP 404) and screened by AI model instances with a blind second pass on all proposed inclusions plus seeded exclusions . 2 include_eval works accepted after author review (shangguan2021latency, chen2021ftad); 27 include_other recorded but not coded. Record: search_runs/2026-10-08-backfill/fulltext/."
+
+  - date: "2026-10-09"
+    item: sources.ieee
+    note: "Full text attempted for the 77 remaining IEEE candidates: 40 open copies read, none accepted; 37 have no open copy (36 need library access, 1 invalid PMC response) and remain screened on metadata only. Record: search_runs/2026-10-08-backfill/fulltext/."
+
+  - date: "2026-10-09"
+    item: sources.isca_archive
+    note: "Interspeech 2026 probed via public indexes only; the ISCA Archive robots.txt disallows /interspeech_2026/ and was not crawled. Crossref, OpenAlex, Semantic Scholar, arXiv API, and arXiv OAI-PMH (cs.CL, cs.SD, eess.AS comment field) gave 574 unique Interspeech-2026 records; protocol regexes matched 42 (all in window), 39 already known, 3 new. Provisional title/abstract triage: 2 exclude (ASR-only), 1 uncertain (citation record only). Not screened for inclusion; outside the corpus. Index coverage is partial, so the Interspeech 2026 gap is narrowed, not closed. DBLP served a bot challenge and was not circumvented. Record: search_runs/2026-10-09-access-gaps/."
+  - date: "2026-10-09"
+    item: sources.ieee
+    note: "Open-copy retry (OpenAlex, Unpaywall, Semantic Scholar DOI/title, arXiv title) for the 37 IEEE candidates without full text found none; 16 lookups were rate-limited on the Semantic Scholar title search. They remain metadata-only. Record: search_runs/2026-10-09-access-gaps/ieee_retry_discovery.json."

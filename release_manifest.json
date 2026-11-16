@@ -1,0 +1,39 @@
+{
+  "version": "1.2.0",
+  "date": "2026-11-16",
+  "cutoff": "2026-10-02",
+  "corpus": {
+    "total": 140,
+    "roles": {
+      "primary": 136,
+      "positioning": 3,
+      "method": 1
+    },
+    "evaluation": 91,
+    "meta_evaluation": 11,
+    "paper_scoped_grants": 2
+  },
+  "reporting_version": 2,
+  "reference_protocol": "trg-ref-0.1",
+  "empirical_agent_results": false,
+  "sha256": {
+    "CITATION.cff": "a5ae9969a24bae851a6b9f9b3ce11f662dc5baa152159783f0c34fc2ddc628b2",
+    "corpus/SEARCH_STRATEGY.md": "662b632a948b507eed6909a7d440ac808a282c03d0764771b6b5ee09dcbe6297",
+    "corpus/benchmark_outcomes.yaml": "5e33a1b49e000666a9dc7735dedb4052e1981a655b6c7870009d3974a237ed5a",
+    "corpus/evidence_ledger.md": "61b478c5fe65c1dfcb480faaa6f936349a40c4e58df1a25a1f5eabfba37073eb",
+    "corpus/join_overrides.yaml": "34286fbfc65a665599a9c634be8afd6f3895bd54b6d97b093140d61b9597d277",
+    "corpus/leaderboard.csv": "0a6b8ce298e0136e29d403e8bd5f9876b0ed6f5f23b431b9f357c15bf90be94a",
+    "corpus/leaderboard.md": "8c97ff32cd674c4178bc1cb9df7a5ae7f5ed09d8040cd01e34c4369118e5b645",
+    "corpus/licence_audit.csv": "3daad4e77522f66c1e7cf2b8cbeda168d870d85e1847314a4070de57fba8bb37",
+    "corpus/published_versions.csv": "e283efa1f9bc7953eab35a3a1d41b869a972b64007df1bd92be1595b22e71aa5",
+    "corpus/reconciliation.md": "527a6f9d8413e70f901d8de09e0cc4f9e8f9931e26d7bb24a7e69cc9253eda6b",
+    "corpus/schema.md": "904b0a0bc28cc77f3f63996d8986208e597316c5e0ea5b3e14e73951f15e3624",
+    "corpus/search_protocol.yaml": "49b8293e558ec0ec040d45000909c78707ff39d9edc38ad7d67bcef26c33916e",
+    "corpus/source_audit.yaml": "298e4ec6ac0b4be7831d475ee1ed04a65bcc5cd56066f3592097b7e98e964677",
+    "corpus/taxonomy_coding.yaml": "6ede7aa74fcecddf47b0f6e1c491f7237b863a862a274e8a4cb36e469d69c3af",
+    "corpus/voice_agent_corpus.csv": "d1af0bfa2d3e3f21cfcb8b1acf0eb63bf146c7438d2b0abcb8b52dc7c0757722",
+    "corpus/voice_agent_corpus.json": "95f1e8561a4bf2ce20667eeb97b8f9ffe03b991ca1aa11f5d72652b46cef5def",
+    "pyproject.toml": "39a14688cfc6c8f1b7b32baff998915fadb208d5f7082a3597e5c53fd2555f8c",
+    "trg_eval/__init__.py": "fc25da7451980ed8ffe89e1b1fffd53da73fed1f0bce31e6d743deb31ad7724f"
+  }
+}

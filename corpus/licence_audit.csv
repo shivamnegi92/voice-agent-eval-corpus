@@ -24,6 +24,18 @@ duplexcascade2026,duplexcascade-full-duplex-s2s-dialogue.pdf,unspecified-in-PDF,
 hu2026frontendbackend,frontend-backend-tool-calls-full-duplex.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 qiu2026enterprise,building-enterprise-realtime-voice-agents-tutorial.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 zou2026lts,lts-voiceagent-listen-think-speak-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+addlesee2020incremental,addlesee2020-incremental-asr-diarization.pdf,CC-BY-4.0,true,"tureanditsconstituenttokenssuchaseditterms(e.g.“sorry”,“imean”)areoftenremovedorrewrittenbytheasrsystem.thisworkislicensedunderacreativecommonsattribution4.0internationallicence.licencedetails:http://creativecommons.org/licenses/by/4.0/.1wedonotusecaheretoavoidconfusionwiththecommonacronymforconvers"
+chen2021ftad,chen21n_interspeech.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+fujie2021timing,fujie21_interspeech.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+jin2021duplex,jin21b_interspeech.pdf,unknown,false,no paper-scoped licence statement found
+kim2021howrobust,2109.13489.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+shangguan2021latency,shangguan21_interspeech.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ma2022dorothie,2022.findings-emnlp.354.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+spithourakis2022evi,2022.findings-naacl.124.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+ekstedt2023automatic,ekstedt23_interspeech.pdf,unknown,false,no paper-scoped licence statement found
+komma2023dqa,2023.acl-industry.19.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+kubis2023backtranscription,2023.emnlp-main.724.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+fatan2024threeM,fatan2024-3m-transformer-turn-taking.pdf,unknown,false,no paper-scoped licence statement found
 inoue2024userbehaviors,2401.04867-analysis-user-behaviors-objectively-evaluating.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 umair2024whentospeak,2024.findings-emnlp.909.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 arora2025talkingturns,2503.01174-talking-turns-turn-benchmarking-audio.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
@@ -38,6 +50,7 @@ kim2025contextdialog,2025.findings-acl.470.pdf,unspecified-in-PDF,false,"Licence
 li2025mindthegap,2502.15919-mind-static-interactive-evaluations-large.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 li2025televal,2507.18061-televal-benchmark-designed-spoken-language.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 lin2025fdbench,full-duplex-bench-turn-taking-capabilities.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
+lin2026wearvox,2601.02391-wearvox-egocentric-multichannel-voice-assistant.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 liu2025vocalbench,2505.15727-vocalbench-vocal-benchmarking-conversational-abilities.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 ma2025c3,2507.22968-bilingual-benchmark-spoken-dialogue-models.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 peng2025fdbench,2507.19040-bench-full-duplex-benchmarking-pipeline.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
@@ -63,7 +76,6 @@ kubo2026binaryturn,2026.sigdial-1.2.pdf,unknown,false,no paper-scoped licence st
 kwon2025m3slu,2510.19358-evaluating-speaker-attributed-reasoning-multimodal.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 lee2026hear,hear-speaker-attributed-reasoning.pdf,unspecified-in-PDF,false,"Licence mention lacks an explicit paper-scoped grant: valuationunitratherthanastwoindividualclips.ilicensesandintendeduseweuseallassetsinaccordancewiththeirstatedterms.ami(carlettaetal.,2005),icsi(janinetal.,2003),andvoxmm(kwaketal.,2"
 lee2026tpibench,2604.17358-still-between-evaluating-improving-voice.pdf,unspecified-in-PDF,false,Licence mention lacks an explicit paper-scoped grant: kesmethinkofgrandma’scooking.icouldgoforherlasagnarightnow.jlicensesthemultilinguallibrispeech(mls)datasetusedinthisworkisderivedfromlibrivoxaudiobooksandreleasedunderthecreativeco
-lin2026wearvox,2601.02391-wearvox-egocentric-multichannel-voice-assistant.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 lu2026omniinteract,2605.26485-omniinteract-benchmarking-real-world-streaming.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 maruf2026banglaturn,2609.29371-banglaturn-bangla-turn-benchmark-whisper.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined
 mathur2026dsbdg,2610.00316-duplexspeechbench-document-grounding-benchmarking-hallucinations.pdf,unspecified-in-PDF,false,No explicit paper-scoped grant in PDF; host licence not determined

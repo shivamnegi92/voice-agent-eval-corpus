@@ -1,4 +1,10 @@
-# Search strategy and corpus provenance
+# Historical seed-search strategy
+
+**Historical scope only:** this document describes the original 41-artifact
+seed collection, not the v1.2.0 total of 140 artifacts. For the full search and
+screening record use [search_protocol.yaml](search_protocol.yaml) and
+[reconciliation.md](reconciliation.md). Query dates and limitations are retained;
+no claim of exhaustive coverage is made.
 
 This file records how the corpus was assembled, so the review built on it can
 be reproduced and its coverage assessed. The paper cites this file rather than

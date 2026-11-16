@@ -8,7 +8,7 @@ authors:
     email: negi.sh@northeastern.edu
     affiliation: Northeastern University
 abstract: >-
-  A verified metadata corpus of 128 sources (124 primary, cutoff 2026-10-02)
+  A verified metadata corpus of 140 sources (136 primary, cutoff 2026-10-02)
   on real-time voice agents, covering end-to-end speech-to-speech
   architectures, cascaded pipelines, turn-taking and voice activity
   projection, conversational benchmarks, agentic evaluation, and streaming
@@ -16,7 +16,9 @@ abstract: >-
   hashes rather than PDFs, so the corpus is auditable without redistributing
   copyrighted material. Includes TRG (Timing-Recovery-Grounded), a minimum
   reporting standard for real-time voice agent evaluation, with a fillable
-  template (report version 2) and a compliance validator.
+  template (report version 2), a compliance validator and an optional
+  TRG-Ref 0.1 matched-episode analysis protocol. No fresh agent measurements
+  are included.
 keywords:
   - voice agents
   - spoken dialogue systems
@@ -55,5 +57,5 @@ identifiers:
     description: "Zenodo concept DOI (resolves to the latest version)"
 repository-code: "https://github.com/shivamnegi92/voice-agent-eval-corpus"
 url: "https://github.com/shivamnegi92/voice-agent-eval-corpus"
-version: 1.1.1
-date-released: "2026-10-08"
+version: 1.2.0
+date-released: "2026-11-16"

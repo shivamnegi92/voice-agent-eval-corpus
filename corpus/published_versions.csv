@@ -1,0 +1,117 @@
+paper_id,arxiv,s2_venue,s2_journal,s2_types,peer_reviewed_lead
+jain2025voiceagentbench,2510.07978,arXiv.org,ArXiv,JournalArticle,
+bhosale2026duplexworld,2608.10716,,,,
+bogavelli2026evabench,2605.13841,arXiv.org,ArXiv,JournalArticle,
+ceccatelli2026speechjbb,2606.06037,arXiv.org,ArXiv,JournalArticle,
+chiba2026talk2agent,2609.38867,,,,
+laskar2026texttovoice,2605.15104,arXiv.org,ArXiv,JournalArticle,
+lin2026fdbv3,2604.04847,arXiv.org,ArXiv,JournalArticle,
+mathur2026apexvoice,2609.34973,,,,
+meyer2026vamos,2607.27453,arXiv.org,ArXiv,JournalArticle,
+mishra2026mtva,2609.20152,,,Review,
+nemotron2026voicechat,2609.21967,,,,
+pahwa2026audio2tool,2604.22821,arXiv.org,ArXiv,JournalArticle,
+purwar2026judges,2608.24314,,,,
+ray2026tauelicitation,2609.13602,,,,
+ray2026tauvoice,2603.13686,arXiv.org,ArXiv,JournalArticle,
+salimi2026ihbench,2606.19595,arXiv.org,ArXiv,JournalArticle,
+speechgym2026,2608.26432,,,,
+tau2026multilingual,2609.35820,,,Review,
+zhang2026vgbench,2609.32536,,,,
+braun2026voicelight,2609.20995,,,,
+deng2026qwenagent,2609.25195,,,,
+duplexcascade2026,2603.09180,arXiv.org,ArXiv,JournalArticle,
+hu2026frontendbackend,2609.19334,,,,
+qiu2026enterprise,2603.05413,arXiv.org,ArXiv,JournalArticle;Review,
+zou2026lts,2601.19952,arXiv.org,ArXiv,JournalArticle,
+inoue2024userbehaviors,2401.04867,arXiv.org,ArXiv,JournalArticle,
+arora2025talkingturns,2503.01174,International Conference on Learning Representations,ArXiv,JournalArticle,yes
+chang2025gametime,2509.26388,"IEEE International Conference on Acoustics, Speech, and Signal Processing",ArXiv,JournalArticle;Conference,yes
+chen2025mmedfd,2509.19817,,,,
+du2025mtalkbench,2508.18240,arXiv.org,ArXiv,JournalArticle,
+fdbench15,2507.23159,"IEEE International Conference on Acoustics, Speech, and Signal Processing","ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",Conference,yes
+fdbench2,2510.07838,Annual Meeting of the Association for Computational Linguistics,,JournalArticle;Conference,yes
+flexi2025,2509.22243,arXiv.org,ArXiv,JournalArticle,
+gosai2025audiomultichallenge,2512.14865,Annual Meeting of the Association for Computational Linguistics,,JournalArticle;Conference;Review,yes
+hou2025sovabench,2506.02457,Interspeech,ArXiv,JournalArticle,yes
+hu2025vcb,2510.11098,Annual Meeting of the Association for Computational Linguistics,,JournalArticle;Conference,yes
+inoue2025addressee,2501.16643,International Workshop on Spoken Dialogue Systems Technology,ArXiv,JournalArticle,yes
+kwon2025m3slu,2510.19358,International Conference on Language Resources and Evaluation,,JournalArticle,yes
+li2025mindthegap,2502.15919,arXiv.org,ArXiv,JournalArticle,
+li2025televal,2507.18061,,,,
+lin2025fdbench,2503.04721,Automatic Speech Recognition & Understanding,2025 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU),JournalArticle,yes
+liu2025vocalbench,2505.15727,arXiv.org,ArXiv,JournalArticle,
+ma2025c3,2507.22968,Conference on Empirical Methods in Natural Language Processing,,JournalArticle;Conference,yes
+peng2025fdbench,2507.19040,Interspeech,ArXiv,JournalArticle,yes
+yan2025urobench,2502.17810,Conference on Empirical Methods in Natural Language Processing,,JournalArticle;Conference,yes
+zhang2025wildspeech,2506.21875,,,,
+bokkahallisatish2026cds,2609.31719,,,,
+chen2024voicebench,2410.17196,Transactions of the Association for Computational Linguistics,ArXiv,JournalArticle,yes
+cheng2026voxinfinity,2609.22452,,,,
+duplex2026mpe,2609.31948,,,,
+floor2026necessity,2609.19596,,,,
+french2026fdb,2609.10765,,,,
+fukuda2026m3duplexbench,2607.29125,arXiv.org,ArXiv,JournalArticle,
+fukuda2026meetingturntaking,2606.17542,arXiv.org,ArXiv,JournalArticle,
+hallur2026prosodyref,2606.31055,arXiv.org,ArXiv,JournalArticle,
+huang2026pardon,2601.12973,Annual Meeting of the Association for Computational Linguistics,ArXiv,JournalArticle;Conference,yes
+huo2026speechjudgeaudit,2609.36979,,,,
+indic2026fdb,2609.31967,,,,
+ivry2026lalmasajudge,2602.04796,arXiv.org,ArXiv,JournalArticle,
+lee2026hear,2608.29120,,,,
+lee2026tpibench,2604.17358,Annual Meeting of the Association for Computational Linguistics,,JournalArticle;Conference,yes
+lin2026wearvox,2601.02391,arXiv.org,ArXiv,JournalArticle,
+lu2026omniinteract,2605.26485,arXiv.org,ArXiv,JournalArticle,
+maruf2026banglaturn,2609.29371,,,,
+mathur2026dsbdg,2610.00316,,,,
+mathur2026dsbifeval,2609.03423,,,,
+mazumdar2026videofdb,2605.30256,arXiv.org,ArXiv,JournalArticle,
+modi2026echochain,2604.16456,arXiv.org,ArXiv,JournalArticle,
+sayyad2026lalmjudges,2607.07985,arXiv.org,ArXiv,JournalArticle,
+shamsaie2026tact,2609.27372,,,,
+shen2026codett,2603.25434,arXiv.org,ArXiv,JournalArticle,
+shih2026mpbench,2609.13076,,,,
+sun2026msubench,2606.22868,,,,
+tang2026instructfd,2607.20460,arXiv.org,ArXiv,JournalArticle,
+thebaud2026spearbench,2607.05365,arXiv.org,ArXiv,JournalArticle,
+turnbench2026,2608.25218,,,,
+vesessook2026scb,2609.40198,,,,
+wang2026humdialfd,2604.21406,,,,
+wang2026rolebreak,2609.16614,,,,
+xiao2026lateintent,2610.00272,,,,
+xie2026socialomni,2603.16859,arXiv.org,ArXiv,JournalArticle,
+xing2026duplexactbench,2609.39446,,,,
+xiong2026msibench,2609.24812,,,,
+xu2026provoicebench,2604.15037,arXiv.org,ArXiv,JournalArticle,
+yan2026hearbias,2609.35952,,,,
+zhang2026mtrduplex,2511.10262,Annual Meeting of the Association for Computational Linguistics,ArXiv,JournalArticle;Conference,yes
+zhang2026turnnat,2607.01345,arXiv.org,ArXiv,JournalArticle,
+zhao2026echo,2609.17360,,,,
+zhao2026humdial,2601.05564,"IEEE International Conference on Acoustics, Speech, and Signal Processing",ArXiv,JournalArticle;Conference,yes
+defossez2024moshi,2410.00037,arXiv.org,ArXiv,JournalArticle,
+omniflatten2024,2410.17799,Annual Meeting of the Association for Computational Linguistics,,JournalArticle;Conference,yes
+veluri2024synchronous,2409.15594,Conference on Empirical Methods in Natural Language Processing,ArXiv,JournalArticle;Conference,yes
+mossspeech2025,2510.00499,arXiv.org,ArXiv,JournalArticle,
+duplexchat2026,2607.04941,arXiv.org,ArXiv,JournalArticle,
+he2026conversationalvoice,2609.08147,,,,
+hu2026transcription,2609.15759,,,,
+labiausse2026hibikizero,2602.11072,arXiv.org,ArXiv,JournalArticle,
+tyagi2026steerduplex,2609.12623,,,,
+zhong2026iraf,2606.06559,arXiv.org,ArXiv,JournalArticle,
+dekel2023speak,2309.11210,"IEEE International Conference on Acoustics, Speech, and Signal Processing","ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",JournalArticle;Conference,yes
+livespeech2024,2406.02897,Interspeech,ArXiv,JournalArticle,yes
+ctctts2026,2602.19574,arXiv.org,ArXiv,JournalArticle,
+saloev2026mimi,2608.15799,,,,
+voicechattts2026,2608.13831,,,,
+ekstedt2022prosody,2209.05161,SIGDIAL Conferences,,JournalArticle,yes
+ekstedt2022vap,2205.09812,Interspeech,,JournalArticle,yes
+inoue2024multilingual,2403.06487,International Conference on Language Resources and Evaluation,,JournalArticle,yes
+inoue2024realtime,2401.04868,arXiv.org,ArXiv,JournalArticle,
+elmers2025triadic,2507.07518,Interspeech,ArXiv,JournalArticle,yes
+vapmultimodal2025,2506.03980,arXiv.org,ArXiv,JournalArticle,
+endpoint2026anticipation,2606.13450,arXiv.org,ArXiv,JournalArticle,
+mitra2026adaptive,2606.13544,arXiv.org,ArXiv,JournalArticle,
+qi2026muvap,2606.16731,arXiv.org,ArXiv,JournalArticle,
+rajaa2026dualturn,2603.08216,arXiv.org,ArXiv,JournalArticle,
+sharon2026less,2609.11066,,,,
+xia2026sid,2603.24144,arXiv.org,ArXiv,JournalArticle,

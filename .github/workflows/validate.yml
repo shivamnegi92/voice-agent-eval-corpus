@@ -74,6 +74,11 @@ jobs:
           sys.exit(1 if fail else 0)
           PY
 
+      - name: Release metadata and manifest
+        run: |
+          python3 scripts/check_zh_readme.py
+          python3 scripts/verify_release.py
+
       - name: Reference protocol regression and synthetic smoke checks
         run: |
           python3 -m unittest discover -s tests -v

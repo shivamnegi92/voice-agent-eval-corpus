@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">TRG dimensions for real-time voice-agent evaluation</title>
+  <desc id="desc">Four cards show Timing, Recovery, Grounded outcome, and conditional Multiparty dimensions. Together they describe latency and floor behavior, recovery after disruption, externally verified authorized outcomes, and multi-participant handling when applicable.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101a35"/><stop offset="1" stop-color="#243f69"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#63e2c1"/><stop offset="1" stop-color="#8cb7ff"/></linearGradient>
+    <filter id="shadow" x="-.15" y="-.15" width="1.3" height="1.4"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#071023" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="1200" height="440" rx="26" fill="url(#bg)"/>
+  <circle cx="1120" cy="20" r="180" fill="#72e0c0" opacity=".07"/>
+  <text x="54" y="57" fill="#91f0d4" font-family="system-ui,sans-serif" font-size="14" font-weight="750" letter-spacing="3">TIMING · RECOVERY · GROUNDED</text>
+  <text x="54" y="109" fill="#fff" font-family="system-ui,sans-serif" font-size="34" font-weight="800">Report the whole interaction, not the flattering slice.</text>
+  <text x="56" y="141" fill="#cad8ef" font-family="system-ui,sans-serif" font-size="16">TRG specifies reporting dimensions; it does not invent scores or prescribe a single metric.</text>
+  <g filter="url(#shadow)">
+    <rect x="54" y="184" width="252" height="190" rx="18" fill="#f7f9fd"/>
+    <rect x="350" y="184" width="252" height="190" rx="18" fill="#f7f9fd"/>
+    <rect x="646" y="184" width="252" height="190" rx="18" fill="#f7f9fd"/>
+    <rect x="942" y="184" width="204" height="190" rx="18" fill="#f7f9fd"/>
+  </g>
+  <circle cx="88" cy="220" r="20" fill="#17866d"/><text x="81" y="228" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="800">T</text>
+  <text x="120" y="225" fill="#17866d" font-family="system-ui,sans-serif" font-size="15" font-weight="800">TIMING</text>
+  <text x="78" y="272" fill="#263954" font-family="system-ui,sans-serif" font-size="17" font-weight="750">When does it speak?</text>
+  <text x="78" y="302" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">Latency, clock anchors, units,</text>
+  <text x="78" y="324" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">statistics, and floor fit.</text>
+  <circle cx="384" cy="220" r="20" fill="#4e73c7"/><text x="377" y="228" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="800">R</text>
+  <text x="416" y="225" fill="#4e73c7" font-family="system-ui,sans-serif" font-size="15" font-weight="800">RECOVERY</text>
+  <text x="374" y="272" fill="#263954" font-family="system-ui,sans-serif" font-size="17" font-weight="750">Can it recover?</text>
+  <text x="374" y="302" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">Restore conversation and task</text>
+  <text x="374" y="324" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">state after a disruption.</text>
+  <circle cx="680" cy="220" r="20" fill="#8a5db8"/><text x="673" y="228" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="800">G</text>
+  <text x="712" y="225" fill="#8a5db8" font-family="system-ui,sans-serif" font-size="15" font-weight="800">GROUNDED OUTCOME</text>
+  <text x="670" y="272" fill="#263954" font-family="system-ui,sans-serif" font-size="17" font-weight="750">Did it do the right thing?</text>
+  <text x="670" y="302" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">Verify authorized outcomes and</text>
+  <text x="670" y="324" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">justified no-action externally.</text>
+  <circle cx="976" cy="220" r="20" fill="#d18a3a"/><text x="969" y="228" fill="#fff" font-family="system-ui,sans-serif" font-size="22" font-weight="800">M</text>
+  <text x="1008" y="225" fill="#a86827" font-family="system-ui,sans-serif" font-size="15" font-weight="800">MULTIPARTY*</text>
+  <text x="966" y="272" fill="#263954" font-family="system-ui,sans-serif" font-size="17" font-weight="750">Who is involved?</text>
+  <text x="966" y="302" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">Speech, silence, intervention,</text>
+  <text x="966" y="324" fill="#61728b" font-family="system-ui,sans-serif" font-size="13">and authority where relevant.</text>
+  <text x="56" y="412" fill="#9eb4d1" font-family="system-ui,sans-serif" font-size="13">* Conditional: report Multiparty when multiple participants are legitimate in the evaluated setting.</text>
+</svg>
