@@ -20,8 +20,9 @@
 - Reporting schema stays **TRG v2**; existing four legacy reports and their
   published measurements remain unchanged.
 - Optional **TRG-Ref 0.1** specification, starter sandbox tasks, offline analyzer,
-  matched case-cluster bootstrap uncertainty and 19 regression tests (including
-  release-integrity checks).
+  matched case-cluster bootstrap uncertainty and 20 regression tests (including
+  release-integrity checks). ISCA Archive identifiers are checked against
+  their canonical source URLs and accepted by CI.
 - Synthetic smoke fixture is software-test data only: no fresh live-agent results,
   performance improvement or independent adoption is claimed.
 - Contribution/adoption evidence checklist and release-status documentation.

@@ -16,6 +16,17 @@ class ReleaseTests(unittest.TestCase):
     def test_release_manifest_matches(self):
         module.verify(ROOT)
 
+    def test_isca_identifier_requires_matching_canonical_url(self):
+        row = {"identifier": "isca:interspeech_2021/chen21n_interspeech",
+               "url": "https://www.isca-archive.org/interspeech_2021/chen21n_interspeech.html"}
+        module.validate_identifiers([row])
+        with self.assertRaisesRegex(ValueError, "canonical URL"):
+            module.validate_identifiers([{**row, "url": "https://example.com/paper"}])
+        with self.assertRaisesRegex(ValueError, "Malformed ISCA"):
+            module.validate_identifiers([{**row, "identifier": "isca:../../secret"}])
+        with self.assertRaisesRegex(ValueError, "Unknown source"):
+            module.validate_identifiers([{**row, "identifier": "unknown:paper"}])
+
     def test_changed_metadata_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

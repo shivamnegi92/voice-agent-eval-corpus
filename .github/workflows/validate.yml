@@ -62,7 +62,7 @@ jobs:
           if len(set(hashes)) != len(hashes):
               fail.append("duplicate pdf_sha256 values")
 
-          prefixes = ("arXiv:", "doi:", "aclanthology:")
+          prefixes = ("arXiv:", "doi:", "aclanthology:", "isca:")
           bad = [r["paper_id"] for r in rows
                  if not r["identifier"].startswith(prefixes)]
           if bad:

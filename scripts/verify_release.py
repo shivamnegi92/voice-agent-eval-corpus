@@ -13,6 +13,20 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def validate_identifiers(rows):
+    """Recognize source IDs; ISCA records must resolve to their canonical host."""
+    for row in rows:
+        identifier = row["identifier"]
+        if identifier.startswith("isca:"):
+            slug = identifier.removeprefix("isca:")
+            if not re.fullmatch(r"[a-zA-Z0-9_]+/[a-zA-Z0-9_]+", slug):
+                raise ValueError("Malformed ISCA identifier")
+            if row["url"] != f"https://www.isca-archive.org/{slug}.html":
+                raise ValueError("ISCA identifier and canonical URL disagree")
+        elif not identifier.startswith(("arXiv:", "doi:", "aclanthology:")):
+            raise ValueError(f"Unknown source identifier: {identifier}")
+
+
 def verify(root=ROOT):
     manifest = json.loads((root / "release_manifest.json").read_text())
     version = manifest["version"]
@@ -32,6 +46,7 @@ def verify(root=ROOT):
     rows = list(csv.DictReader(io.StringIO((root / "corpus/voice_agent_corpus.csv").read_text())))
     if rows != json.loads((root / "corpus/voice_agent_corpus.json").read_text()):
         raise ValueError("CSV/JSON mismatch")
+    validate_identifiers(rows)
     roles = Counter(row["corpus_role"] for row in rows)
     if len(rows) != manifest["corpus"]["total"] or dict(roles) != manifest["corpus"]["roles"]:
         raise ValueError("Manifest corpus totals disagree")
