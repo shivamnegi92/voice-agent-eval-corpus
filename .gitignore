@@ -1,5 +1,5 @@
-# Never commit papers. Of 41 corpus sources only 1 is redistributable,
-# so this is a hard guard, not a tidiness preference.
+# Never commit third-party papers, irrespective of individual licences.
+# This is a redistribution guard, not a tidiness preference.
 *.pdf
 pdfs/
 

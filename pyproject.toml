@@ -18,6 +18,7 @@ Paper = "https://arxiv.org/abs/2609.30798"
 [project.scripts]
 trg-validate = "trg_eval.cli:validate_main"
 trg-leaderboard = "trg_eval.cli:leaderboard_main"
+trg-analyze = "trg_eval.protocol:main"
 
 [tool.setuptools]
 packages = ["trg_eval"]

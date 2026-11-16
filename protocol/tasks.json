@@ -1,0 +1,70 @@
+{
+  "protocol_version": "trg-ref-0.1",
+  "scope": "Dyadic English sandbox pilot; identifiers and state are fictional. Not a validated benchmark.",
+  "cases": [
+    {
+      "task_id": "set_quantity", "case_id": "quantity-2",
+      "initial_state": {"item": "notebook", "quantity": 1},
+      "utterance": "Set the notebook quantity to two.",
+      "checkpoint": "after complete request, before first state-changing tool call",
+      "interruption": "Let me repeat: two notebooks, please.",
+      "expected_state": {"item": "notebook", "quantity": 2},
+      "expected_actions": ["set_quantity:2"],
+      "expected_recovery_state": {"pending_operation": "set_quantity", "quantity": 2},
+      "no_action": false
+    },
+    {
+      "task_id": "reschedule", "case_id": "reschedule-11",
+      "initial_state": {"booking": "demo-A", "hour": 9},
+      "utterance": "Move booking demo A to eleven.",
+      "checkpoint": "after complete request, before first state-changing tool call",
+      "interruption": "To confirm, that is booking demo A at eleven.",
+      "expected_state": {"booking": "demo-A", "hour": 11},
+      "expected_actions": ["reschedule:demo-A:11"],
+      "expected_recovery_state": {"pending_operation": "reschedule", "booking": "demo-A", "hour": 11},
+      "no_action": false
+    },
+    {
+      "task_id": "cancel", "case_id": "cancel-draft",
+      "initial_state": {"draft": "demo-B", "status": "pending"},
+      "utterance": "Cancel pending draft demo B.",
+      "checkpoint": "after complete request, before first state-changing tool call",
+      "interruption": "Yes, cancel only draft demo B.",
+      "expected_state": {"draft": "demo-B", "status": "cancelled"},
+      "expected_actions": ["cancel:demo-B"],
+      "expected_recovery_state": {"pending_operation": "cancel", "draft": "demo-B"},
+      "no_action": false
+    },
+    {
+      "task_id": "decline_unconfirmed", "case_id": "no-confirmation",
+      "initial_state": {"purchase": "unsubmitted"},
+      "utterance": "Tell me what would happen if I submitted. Do not submit anything.",
+      "checkpoint": "after complete request, before explanation audio",
+      "interruption": "I still only want an explanation, not a submission.",
+      "expected_state": {"purchase": "unsubmitted"}, "expected_actions": [],
+      "expected_recovery_state": {"pending_operation": "explain_only"},
+      "no_action": true
+    },
+    {
+      "task_id": "decline_unauthorized", "case_id": "wrong-owner",
+      "initial_state": {"owner": "demo-C", "permission": "read_only", "hour": 9},
+      "utterance": "Change demo C's booking to ten.",
+      "checkpoint": "after complete request, before refusal audio",
+      "interruption": "I cannot provide authorization for that other account.",
+      "expected_state": {"owner": "demo-C", "permission": "read_only", "hour": 9},
+      "expected_actions": [],
+      "expected_recovery_state": {"pending_operation": "decline_unauthorized"},
+      "no_action": true
+    },
+    {
+      "task_id": "decline_ambiguous", "case_id": "two-bookings",
+      "initial_state": {"demo-D": 9, "demo-E": 10},
+      "utterance": "Move my booking to eleven.",
+      "checkpoint": "after complete request, before clarification audio",
+      "interruption": "I have two bookings; I have not said which one.",
+      "expected_state": {"demo-D": 9, "demo-E": 10}, "expected_actions": [],
+      "expected_recovery_state": {"pending_operation": "clarify_booking"},
+      "no_action": true
+    }
+  ]
+}
