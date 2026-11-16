@@ -17,8 +17,11 @@ evaluation works from a targeted evaluation-focused search and an ACL Anthology
 search, with two-axis taxonomy codes and TRG report version 2. Four works cite
 their Interspeech versions. It accompanies the
 rewritten manuscript; the arXiv preprint below has not yet been revised to match.
-Cite the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.22924302),
-which always resolves to the latest version.
+**This is a version mismatch, not evidence that the public preprint contains
+these changes.** See [release status](RELEASE_STATUS.md) for the publication gates.
+Use the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.22924302)
+to discover the release family. For a reproducible study, record the exact
+version DOI, tag or commit used; a moving concept link does not freeze inputs.
 
 Companion resource to [*Evaluating Real-Time Voice Agents: From Component
 Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.30798).
@@ -71,6 +74,28 @@ hf_space/                    Static Pyodide page mirrored to the Hugging Face Sp
 assets/                      demo.gif + demo.tape (the VHS script that recorded it)
 pyproject.toml              pip-installable package (trg-validate, trg-leaderboard)
 ```
+
+## Reproducible measurements (development preview)
+
+[**TRG-Ref 0.1**](protocol/README.md) is an optional companion protocol with
+starter sandbox tasks, client-playout clock anchors, a matched clean/interrupted
+schedule, external-state/action checks, no-action cases and uncertainty rules.
+It does not narrow the flexible TRG reporting standard.
+
+```bash
+python -m trg_eval.protocol protocol/synthetic_smoke.jsonl > /tmp/trg-smoke.json
+python -m unittest discover -s tests -v
+```
+
+The included log is **synthetic software-test data, not agent performance**.
+The offline analyzer rejects incomplete matched panels and reports per-condition
+T/R/G metrics, failure denominators and paired case-cluster bootstrap intervals.
+It does not run agents or authenticate evidence. No fresh multi-system experiment
+or independent adoption is claimed. Live adapters, frozen speech assets and real
+runs remain necessary; [the protocol](protocol/README.md) specifies that gate.
+
+Want to apply or challenge it? See [CONTRIBUTING.md](CONTRIBUTING.md) for a
+reproduction checklist, independent-use evidence requirements and a pilot invitation.
 
 ## No PDFs here, by design
 
@@ -244,8 +269,8 @@ TRG report for a system not yet listed are all welcome, see
 [Discussions](https://github.com/shivamnegi92/voice-agent-eval-corpus/discussions)
 for a low-stakes place to start.
 
-If this saved you time, a star helps other people evaluating voice agents
-find it too - GitHub's search ranking and topic pages both weight it, which
-is otherwise the main way this reaches people outside citation search.
+If this saved you time, a star or link may help others discover it. Stars are
+not evidence of scientific adoption; verifiable applications and corrections
+are much more useful.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=shivamnegi92/voice-agent-eval-corpus&type=Date)](https://star-history.com/#shivamnegi92/voice-agent-eval-corpus&Date)

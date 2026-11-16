@@ -74,6 +74,18 @@ jobs:
           sys.exit(1 if fail else 0)
           PY
 
+      - name: Reference protocol regression and synthetic smoke checks
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 -m trg_eval.protocol protocol/synthetic_smoke.jsonl > /tmp/trg-smoke.json
+          python3 - <<'PY'
+          import json
+          result = json.load(open('/tmp/trg-smoke.json'))
+          assert result['evidence_kind'] == 'synthetic'
+          assert result['empirical_evidence'] is False
+          assert len(result['groups']) == 4
+          PY
+
       - name: TRG validator behaves correctly
         run: |
           # blank template must be rejected
