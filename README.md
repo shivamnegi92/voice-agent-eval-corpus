@@ -9,7 +9,7 @@
 [![License: CC BY 4.0 (data) / MIT (code)](https://img.shields.io/badge/license-CC--BY--4.0%20%2F%20MIT-lightgrey)](#licence)
 [![GitHub stars](https://img.shields.io/github/stars/shivamnegi92/voice-agent-eval-corpus?style=social)](https://github.com/shivamnegi92/voice-agent-eval-corpus/stargazers)
 
-A verified, reproducible metadata corpus of **128 sources** on real-time voice
+A verified, reproducible metadata corpus of **140 sources** on real-time voice
 agents, plus **TRG** (Timing-Recovery-Grounded): a minimum reporting standard,
 a compliance checker, and a baseline leaderboard for evaluating them.
 
@@ -28,8 +28,17 @@ Use the concept DOI [10.5281/zenodo.22924302](https://doi.org/10.5281/zenodo.229
 to discover the release family. For a reproducible study, record the exact
 version DOI, tag or commit used; a moving concept link does not freeze inputs.
 
-Companion resource to [*Evaluating Real-Time Voice Agents: From Component
-Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.30798).
+Companion resource to [*Evaluating Real-Time Voice Agents: A Survey from
+Component Quality to Grounded Outcomes*](https://arxiv.org/abs/2609.30798) (arXiv:2609.30798).
+
+**Start here**
+
+| I want to... | Go to |
+|---|---|
+| See which voice-agent benchmarks measure timing, recovery, grounded outcomes or multiparty conduct, and with what evidence | [`BENCHMARKS.md`](BENCHMARKS.md): all 91 evaluation and 11 meta-evaluation works, one row each |
+| Add a reporting checklist to my own paper or benchmark | [`trg/TRG_CHECKLIST.md`](trg/TRG_CHECKLIST.md): Markdown and LaTeX blocks to paste in |
+| Check a filled-in report automatically | [`trg/trg_report_template.yaml`](trg/trg_report_template.yaml) + `python3 scripts/validate_trg.py` |
+| Cite this work | [Citing](#citing) |
 
 **Try it without installing anything:** [Hugging Face Space](https://huggingface.co/spaces/shivamnegi92/trg-voice-agent-eval)
 
@@ -54,6 +63,7 @@ This repo addresses both: a structured corpus for (1), and TRG for (2).
 ## What ships here
 
 ```
+BENCHMARKS.md                generated benchmark map (scripts/build_benchmark_map.py)
 corpus/
   voice_agent_corpus.csv     140 artifacts, 19 fields
   voice_agent_corpus.json    same data, machine-readable
@@ -69,7 +79,9 @@ scripts/
   fetch_corpus.py            rebuild your local PDF set, hash-verified
   validate_trg.py            check a TRG report for compliance (CLI wrapper)
   build_leaderboard.py       regenerate corpus/leaderboard.md + .csv
+  build_benchmark_map.py     regenerate BENCHMARKS.md from the corpus CSV
 trg/
+  TRG_CHECKLIST.md                 copy-paste checklist (Markdown + LaTeX)
   trg_report_template.yaml         fill this in for your own system
   trg_example_nemotron.yaml        worked example, self-reported figures
   trg_example_openai_realtime.yaml worked example, third-party benchmarked
@@ -199,15 +211,15 @@ instead of trusting whichever axis a vendor chose to publish.
 
 ## Corpus at a glance
 
-**124 primary sources** across six stable legacy categories, plus 4 positioning/method
-references:
+**136 primary sources** across six stable legacy categories, plus 3 positioning
+surveys and 1 methodological source:
 
 | Category | n |
 |---|---|
 | End-to-end speech-to-speech | 10 |
 | Cascaded and hybrid pipelines | 6 |
 | Turn-taking and voice activity projection | 13 |
-| Conversational benchmarks | 70 |
+| Conversational benchmarks | 82 |
 | Agentic and tool-use evaluation | 19 |
 | Streaming synthesis and neural codecs | 6 |
 
@@ -216,9 +228,9 @@ repo's own bookkeeping had gaps.
 
 ## Provenance and integrity
 
-- 128/128 PDFs passed first-page identity verification, confirming each file
+- 140/140 PDFs passed first-page identity verification, confirming each file
   contains the paper it claims to.
-- 128/128 carry a SHA-256; no duplicates.
+- 140/140 carry a SHA-256; no duplicates.
 - Filename-to-BibTeX pairings that were not unambiguous were confirmed by
   reading page 1 of each PDF, recorded in `join_overrides.yaml`.
 
@@ -245,8 +257,8 @@ and when it appears in a venue.
 
 ```bibtex
 @misc{negi2026voiceagents,
-  title         = {Evaluating Real-Time Voice Agents: From Component Quality
-                   to Grounded Outcomes},
+  title         = {Evaluating Real-Time Voice Agents: A Survey from Component
+                   Quality to Grounded Outcomes},
   author        = {Negi, Shivam and Rawat, Arpit and Jain, Rashi},
   year          = {2026},
   eprint        = {2609.30798},
@@ -256,8 +268,32 @@ and when it appears in a venue.
 }
 ```
 
-To cite the corpus or TRG tooling specifically, use the metadata in
-`CITATION.cff` (GitHub's "Cite this repository" button renders it for you).
+Plain text:
+
+> S. Negi, A. Rawat, and R. Jain. 2026. Evaluating Real-Time Voice Agents: A
+> Survey from Component Quality to Grounded Outcomes. arXiv:2609.30798.
+> Preprint, not yet peer reviewed.
+
+If you use TRG in a paper, cite the paper above and paste the
+[TRG checklist](trg/TRG_CHECKLIST.md) into an appendix.
+
+To cite the corpus or TRG tooling specifically, cite the Zenodo archive and
+record the exact version you used:
+
+```bibtex
+@misc{negi2026voiceagentcorpus,
+  title     = {Voice Agent Evaluation Corpus and the {TRG} Reporting Standard},
+  author    = {Negi, Shivam},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22924302},
+  note      = {Concept DOI; cite the version DOI for a frozen release}
+}
+```
+
+`CITATION.cff` carries the same metadata (GitHub's "Cite this repository"
+button renders it). Its paper title will change to the "A Survey" form at
+the next tagged release, because the file is checksummed in the v1.2.0 manifest.
 
 ## Licence
 

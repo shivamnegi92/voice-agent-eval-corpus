@@ -110,3 +110,6 @@ jobs:
           python3 scripts/build_leaderboard.py
           git diff --exit-code corpus/leaderboard.md corpus/leaderboard.csv || \
             (echo "::error::corpus/leaderboard.{md,csv} is stale - run scripts/build_leaderboard.py and commit the result" && exit 1)
+
+      - name: Benchmark map regenerates cleanly
+        run: python3 scripts/build_benchmark_map.py --check
